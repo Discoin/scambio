@@ -9,15 +9,16 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/thisiscfanoulis?label=Follow%20@thisiscfanoulis&logo=twitter&colorB=1DA1F2&style=flat-square)](https://twitter.com/thisiscfanoulis/follow)
 [![Twitter Follow](https://img.shields.io/github/stars/cfanoulis/scambio?style=flat-sqaure&logo=github)](https://twitter.com/thisiscfanoulis/follow)
 
-Scambio (which means `exchange` in Italian) is a TypeScript wrapper for Discoin
+Scambio (which means `exchange` in Italian) is a TypeScript wrapper for Discoin.
 
 # Installation
 
 Installation is simple. Just use:
 ```bash
+# Yarn
 yarn add scambio
 
-# Or, if you'd fancy npm
+# or NPM
 
 npm install scambio
 
@@ -56,18 +57,18 @@ const completedTransaction = await transaction.process()
 # About
 
 ## Contributing
-Pull requests are issues are always welcome! Please use the issue tracker for bug requests and feature submissions
+Pull requests are issues are always welcome! Please use the issue tracker for bug requests and feature submissions.
 
 ## Legal
 Copyright 2019-Present ©  [Charalampos Fanoulis](https://enkiel.cloud). Distributed under the [MIT licence](LICENCE).
 
 ## Credits and honorable mentions
-This project is based on the original [Discoin Wrapper](https://github.com/Discoin/nodejs-wrapper)
+This project is based on the original [Discoin JavaScript wrapper](https://github.com/Discoin/nodejs-wrapper) which doesn't support the new API.
 
-And of course, this project wouldn't be possible without the aid of the following amazing patrons:
+This project wouldn't be possible without the aid of the following amazing patrons:
 - Brianna
 
-Check out how you can support me below
+Check out how you can support me below!
 
 ## Buy me a coffee/tea/donut
 
