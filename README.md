@@ -2,14 +2,14 @@
 
 **Project Status**
 
-[![GitHub](https://img.shields.io/github/license/cfanoulis/scambio?logo=github&style=flat-square)](https://github.com/cfanoulis/scambio/blob/master/LICENSE.md)
+[![GitHub](https://img.shields.io/github/license/discoin/scambio?logo=github&style=flat-square)](https://github.com/discoin/scambio/blob/master/LICENSE.md)
 
 **Social**
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/thisiscfanoulis?label=Follow%20@thisiscfanoulis&logo=twitter&colorB=1DA1F2&style=flat-square)](https://twitter.com/thisiscfanoulis/follow)
-[![Twitter Follow](https://img.shields.io/github/stars/cfanoulis/scambio?style=flat-sqaure&logo=github)](https://twitter.com/thisiscfanoulis/follow)
+[![Star us on GitHub](https://img.shields.io/github/stars/discoin/scambio?style=flat-sqaure&logo=github)]()
 
-Scambio (which means `exchange` in Italian) is a TypeScript wrapper for Discoin.
+Scambio (which means `exchange` in Italian) is the official TypeScript wrapper for Discoin V3.
 
 # Installation
 
@@ -60,19 +60,11 @@ const completedTransaction = await transaction.process()
 Pull requests are issues are always welcome! Please use the issue tracker for bug requests and feature submissions.
 
 ## Legal
-Copyright 2019-Present ©  [Charalampos Fanoulis](https://enkiel.cloud). Distributed under the [MIT licence](LICENCE).
+Copyright 2019-Present ©  [Charalampos Fanoulis](https://enkiel.cloud) and the Discoin Association. Distributed under the [MIT licence](LICENCE.md).
 
-## Credits and honorable mentions
-This project is based on the original [Discoin JavaScript wrapper](https://github.com/Discoin/nodejs-wrapper) which doesn't support the new API.
+## Buy the maintainer a coffee/tea/donut
 
-This project wouldn't be possible without the aid of the following amazing patrons:
-- Brianna
-
-Check out how you can support me below!
-
-## Buy me a coffee/tea/donut
-
-Most of my projects are open-source, and they will stay so even if I run out of funds. However, should you want to fund this project, as well as my thirst for Spotify Premium, feel free to donate using the following ways:
+Most of the maintiner's projects are open-source, and they will stay so even if they run out of funds. However, should you want to fund this project, as well as his thirst for Spotify Premium, feel free to donate using the following ways:
 
 | Method | Address | Notes |
 |:------:|:-------:|:------|
