@@ -56,7 +56,7 @@ export class ScambioTransaction {
 	 * Marks this transaction as processed, which means the amount has been paid out
 	 * @async
 	 */
-	public async handle(): Promise<this> {
+	public async process(): Promise<this> {
 		if (this.handled) {
 			throw new Error('This transaction has been handled before.');
 		}
