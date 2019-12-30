@@ -60,11 +60,11 @@ const completedTransaction = await transaction.process()
 Pull requests are issues are always welcome! Please use the issue tracker for bug requests and feature submissions.
 
 ## Legal
-Copyright 2019-Present ©  [Charalampos Fanoulis](https://enkiel.cloud) and the Discoin Association. Distributed under the [MIT licence](LICENCE.md).
+Copyright 2019-Present ©  [Charalampos Fanoulis](https://enkiel.cloud) and [Discoin Association](https://discoin.gitbook.io). Distributed under the [MIT licence](LICENCE.md).
 
 ## Buy the maintainer a coffee/tea/donut
 
-Most of the maintiner's projects are open-source, and they will stay so even if they run out of funds. However, should you want to fund this project, as well as his thirst for Spotify Premium, feel free to donate using the following ways:
+Most of the maintainer's projects are open-source, and they will stay so even if they run out of funds. However, should you want to fund this project, as well as his thirst for Spotify Premium, feel free to donate using the following ways:
 
 | Method | Address | Notes |
 |:------:|:-------:|:------|
@@ -72,3 +72,5 @@ Most of the maintiner's projects are open-source, and they will stay so even if 
 |[![Donate using PayPal](https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/9_bdg_secured_by_pp_2line.png)](https://cfanoulis.page.link/donate-paypal) | [Donate using PayPal](https://cfanoulis.page.link/donate-paypal)
 |[![Donate using bitcoin](.github/readme-assets/btc.png)](bitcoin:bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr?message=Donation%20to%20Charalampos%27s%20OSS%20projects&time=1577294923)|`bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr`| [Here's a premade request](bitcoin:bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr?message=Donation%20to%20Charalampos%27s%20OSS%20projects&time=1577294923)|
 |![Donate using Stellar](.github/readme-assets/stellar.png)| `cfanoulis*keybase.io`| If your wallet or network doesn't support federation, use `GCVAESPQ3OSXZQCTLJNEXD35GA5CWXPQ6FG6JVBFIDNRRJIG77OKUB4I` as the address
+
+Also consider [supporting Discoin](https://discoin.gitbook.io/docs/users-guide#credits-aka-how-can-i-support-discoin-as-a-non-developer)!
