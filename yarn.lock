@@ -355,10 +355,22 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
+"@types/node-fetch@^2.5.4":
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.5.4.tgz#5245b6d8841fc3a6208b82291119bc11c4e0ce44"
+  integrity sha512-Oz6id++2qAOFuOlE1j0ouk1dzl3mmI1+qINPNBhi9nt/gVOz0G+13Ao6qjhdF0Ys+eOkhu6JnFmt38bR3H0POQ==
+  dependencies:
+    "@types/node" "*"
+
 "@types/node@*":
   version "13.1.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.0.tgz#225cbaac5fdb2b9ac651b02c070d8aa3c37cc812"
   integrity sha512-zwrxviZS08kRX40nqBrmERElF2vpw4IUTd5khkhBTfFH8AOaeoLVx48EC4+ZzS2/Iga7NevncqnsUSYjM4OWYA==
+
+"@types/node@^13.1.2":
+  version "13.1.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.2.tgz#fe94285bf5e0782e1a9e5a8c482b1c34465fa385"
+  integrity sha512-B8emQA1qeKerqd1dmIsQYnXi+mmAzTB7flExjmy5X1aVAKFNNNDubkavwR13kR6JnpeLp3aLoJhwn9trWPAyFQ==
 
 "@typescript-eslint/eslint-plugin@^2.13.0":
   version "2.13.0"
@@ -1165,10 +1177,15 @@ escape-string-regexp@^2.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
   integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
 
-eslint-config-bamboo@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-bamboo/-/eslint-config-bamboo-3.0.0.tgz#26d013e5b575b9608cecb53cc7410be32e1f0471"
-  integrity sha512-OyY6aVXQ3RrSNtTDpLf6V426ZUV28JerCizGisLuXQco319ZpxyCtMKonJ04l6faYurdFmV6giDHhXmw7Fe9Lg==
+eslint-config-xo-typescript@^0.24.1:
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-xo-typescript/-/eslint-config-xo-typescript-0.24.1.tgz#5de303feb5d27fa19d813163b6e904eb9f861368"
+  integrity sha512-/o1e6tE/vy1semBCSa46SHmznt7mUD5Mdd6RlWSvt18clWXl0tWcl/FybwJ6ROhOHV3bFq5Y8Y5ySIWsE0fRjg==
+
+eslint-config-xo@^0.27.2:
+  version "0.27.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-xo/-/eslint-config-xo-0.27.2.tgz#71aff3d5b5554e9e5b5e1853e21da7799bb53f1f"
+  integrity sha512-qEuZP0zNQkWpOdNZvWnfY2GNp1AZ33uXgeOXl4DN5YVLHFvekHbeSM2FFZ8A489fp1rCCColVRlJsYMf28o4DA==
 
 eslint-scope@^5.0.0:
   version "5.0.0"
@@ -2211,6 +2228,11 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+
+node-fetch@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
+  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
 
 normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
   version "2.5.0"

@@ -1,3 +1,6 @@
 {
-	"extends": "eslint-config-bamboo"
+	"extends": [
+		"xo",
+		"xo-typescript"
+	]
 }

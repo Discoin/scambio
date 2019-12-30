@@ -1,20 +1,24 @@
 {
-  "name": "typescript-template",
+  "name": "scambio",
   "version": "1.0.0",
-  "description": "AtemplateformyTypescriptprojects",
+  "description": "A TypeScript client library for Discoin",
   "main": "dist/index.js",
   "repository": "https://github.com/cfanoulis/typescript-template.git",
-  "author": "CharalamposFanoulis<charalampos.fanoulis@gmail.com>",
+  "author": "Charalampos Fanoulis<charalampos.fanoulis@gmail.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-	"typescript": "^3.7.4",
-	"@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@types/node": "^13.1.2",
+    "@types/node-fetch": "^2.5.4",
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
     "@typescript-eslint/parser": "^2.13.0",
     "ava": "^2.4.0",
     "eslint": "^6.8.0",
-    "eslint-config-bamboo": "^3.0.0"
+    "eslint-config-xo": "^0.27.2",
+    "eslint-config-xo-typescript": "^0.24.1",
+    "typescript": "^3.7.4"
   }
 }
