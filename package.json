@@ -7,8 +7,8 @@
   "author": "Charalampos Fanoulis <charalampos.fanoulis@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "prepublish": "yarn build:src",
-    "build:src": "tsc -p .",
+    "prepublish": "yarn build",
+    "build": "tsc -p .",
     "test:lint": "eslint --ext ts src"
   },
   "dependencies": {
