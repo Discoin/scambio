@@ -1,1 +1,4 @@
-console.log('Vlad is a fucking furry');
+import {ScambioClient} from './structures/ScambioClient';
+import {ScambioTransaction} from './structures/Transaction';
+
+export {ScambioClient, ScambioTransaction};
