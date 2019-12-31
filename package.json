@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "A TypeScript client library for Discoin",
   "main": "dist/index.js",
-  "repository": "https://github.com/cfanoulis/typescript-template.git",
-  "author": "Charalampos Fanoulis<charalampos.fanoulis@gmail.com>",
+  "repository": "https://github.com/discoin/scambio.git",
+  "author": "Charalampos Fanoulis <charalampos.fanoulis@gmail.com>",
   "license": "MIT",
-  "private": false,
+  "scripts": {
+    "prepublish": "yarn build:src",
+    "build:src": "tsc -p .",
+    "test:lint": "eslint --ext ts src"
+  },
   "dependencies": {
     "node-fetch": "^2.6.0"
   },

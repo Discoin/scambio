@@ -9,4 +9,4 @@ node_js:
  - '10.18.0'
  - '12.14.0'
 script:
- - yarn test:lint
+ - yarn run test:lint
