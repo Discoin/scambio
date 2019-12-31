@@ -34,6 +34,10 @@ class ScambioClient {
 	 * @param endpoint The endpoit you want to use. Defaults to https://discoin.zws.im
 	 */
 	constructor(token: string, currencyCode: string, endpoint?: string) {
+		if (!token) {
+			throw new Error('No token was provided.');
+		}
+
 		this.token = token;
 		this.currencyCode = currencyCode;
 		this.endpoint = typeof endpoint === 'undefined' ? 'https://discoin.zws.im' : endpoint;
