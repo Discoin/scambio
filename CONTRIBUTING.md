@@ -1,6 +1,6 @@
-## Contributing
+# Contributing
 
-### Prequisites
+## Prequisites
 
 This project uses [Node.js](https://nodejs.org) 12 to run ideally, although most recent Node.js versions should also work without issue.
 
@@ -14,25 +14,16 @@ npm i
 pnpm install
 ```
 
-### Publishing
+## Publishing
 
-Run the build command:
+Publishing is automatically done with [semantic release](https://semantic-release.gitbook.io/semantic-release/).
+Configure semantic release in the `./.releaserc.json` file.
 
-```sh
-yarn build --build tsconfig.build.json
-```
-
-Then publish to npm with this command:
-
-```sh
-npm publish
-```
-
-### Building
+## Building
 
 Run the `build` script to compile the TypeScript into the `tsc_output` folder.
 
-### Style
+## Style
 
 This project uses [Prettier](https://prettier.io) and [XO](https://github.com/xojs/xo).
 
@@ -50,7 +41,7 @@ yarn run lint
 
 Note that XO will also error if you have TypeScript errors, not just if your formatting is incorrect.
 
-### Linting
+## Linting
 
 This project uses [XO](https://github.com/xojs/xo) (which uses [ESLint](https://eslint.org) and some plugins internally) to perform static analysis on the TypeScript.
 It reports things like unused variables or not following code conventions.
@@ -61,7 +52,7 @@ yarn run lint
 
 Note that XO will also error if you have incorrect formatting, not just if your TypeScript code has errors.
 
-### Testing
+## Testing
 
 Unit tests are stored alongside regular files.
 Ex. the file `index.ts` will have a corresponding test file called `index.test.ts` in the same directory.
@@ -71,7 +62,7 @@ You can run the tests with the `test` script:
 yarn run test
 ```
 
-#### Coverage
+### Coverage
 
 This will generate a `coverage` folder which has a breakdown of coverage of the project.
 The CI will upload the coverage information to [CodeCov](https://codecov.io) which can be [viewed here](https://codecov.io/gh/Discoin/scambio).
