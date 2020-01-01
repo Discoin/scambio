@@ -1,0 +1,24 @@
+{
+	"plugins": [
+		[
+			"@semantic-release/commit-analyzer",
+			{
+				"preset": "angular",
+				"releaseRules": [
+					{
+						"release": "patch",
+						"type": "refactor"
+					}
+				]
+			}
+		],
+		"@semantic-release/release-notes-generator",
+		[
+			"@semantic-release/github",
+			{
+				"assets": [{"label": "scambio_compiled", "path": "tsc_output"}]
+			}
+		],
+		"@semantic-release/npm"
+	]
+}

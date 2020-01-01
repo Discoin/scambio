@@ -1,4 +1,4 @@
-# @discoin/scambio
+# [@discoin/scambio](https://scambio.discoin.zws.im/)
 
 [![Build Status](https://github.com/Discoin/scambio/workflows/CI/badge.svg)](https://github.com/Discoin/scambio/actions)
 [![codecov](https://codecov.io/gh/Discoin/scambio/branch/merge/graph/badge.svg)](https://codecov.io/gh/Discoin/scambio)
