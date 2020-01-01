@@ -1,76 +1,133 @@
-# Scambio
+# @discoin/scambio
 
-**Project Status**
+[![Build Status](https://github.com/Discoin/scambio/workflows/CI/badge.svg)](https://github.com/Discoin/scambio/actions)
+[![codecov](https://codecov.io/gh/Discoin/scambio/branch/merge/graph/badge.svg)](https://codecov.io/gh/Discoin/scambio)
+[![MIT license](https://img.shields.io/badge/license-MIT-green)](https://github.com/Discoin/scambio/blob/merge/license)
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
+[![DeepScan grade](https://deepscan.io/api/teams/6595/projects/8606/branches/106731/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=6595&pid=8606&bid=106731)
 
-[![GitHub](https://img.shields.io/github/license/discoin/scambio?logo=github&style=flat-square)](https://github.com/discoin/scambio/blob/master/LICENSE.md)
+The official Node.js library for [Discoin](https://github.com/Discoin).
+Features async await syntax and first-class TypeScript support.
 
-**Social**
+## Usage
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/thisiscfanoulis?label=Follow%20@thisiscfanoulis&logo=twitter&colorB=1DA1F2&style=flat-square)](https://twitter.com/thisiscfanoulis/follow)
-[![Star us on GitHub](https://img.shields.io/github/stars/discoin/scambio?style=flat-sqaure&logo=github)]()
+### Install
 
-Scambio (which means `exchange` in Italian) is the official TypeScript wrapper for Discoin V3.
+```sh
+yarn add @discoin/scambio
 
-# Installation
+# Or for npm
 
-Installation is simple. Just use:
-```bash
-# Yarn
-yarn add scambio
+npm i @discoin/scambio
 
-# or NPM
+# Or for pnpm
 
-npm install scambio
-
+pnpm i @discoin/scambio
 ```
 
-# Documentation
-All the properties have TSDocs attached, so you should get documentation inside your IDE. Nevertheless, here's an example of what this wrapper can do:
+If you want to do more complex queries you may want to use the [@nestjsx/crud-request](https://github.com/nestjsx/crud/wiki/Requests#frontend-usage) package, which is specifically designed for the Discoin API.
+Most users won't need it but it is listed as a peer dependency.
+You can safely ignore any warnings about it if you aren't using it.
+
+### Examples
+
+#### Creating a new client
+
 ```ts
-import { ScambioClient } from 'scambio'
-// Or, if you use JavaScript: const { ScambioClient } = require('scambio')
+import {Client as Discoin} from '@discoin/scambio';
+// Or for CommonJS: const { Client: Discoin } = require('@discoin/scambio');
 
-const client = new ScambioClient('exampleToken', 'DIC')
-
-// Creating a transaction
-const transaction = await client.createTransaction(100, 'userID', 'DTS')
-
-// Getting a transaction by ID
-const transaction2 = await client.getTransaction('transactionId')
-
-// Getting all the unhandled transactions
-const unhandledTransactions = await client.getUnhandledTransactions()
-
-// Marking a transaction as complete
-const completedTransaction = await transaction.process()
-// `completedTransaction.handled` is now true
+const client = new Discoin('token', 'currencyCode');
 ```
 
-## API coverage
-[x] Getting transactions
+#### Creating a transaction
 
-[x] Creating transactions
+```ts
+// Get the currency
+const destinationCurrency = client.currencies.getOne('currencyCode');
 
-[ ] Getting currency lists
+// Create the transaction
+const newTransaction = client.transactions.create({
+  to: destinationCurrency
+  amount: 10
+  // Discord user ID
+  user: 'userID'
+});
+```
 
+#### Getting transactions
 
-# About
+```ts
+// Get a transaction by ID
+await client.transactions.getOne('transactionID');
+
+// Get all the transactions that match a filter
+// (this uses @nestjsx/crud-request)
+import {RequestQueryBuilder, CondOperator} from '@nestjsx/crud-request';
+
+const filter = RequestQueryBuilder.create()
+	// Only get transactions where the `amount` field > 10
+	.setFilter({
+		field: 'amount',
+		operator: CondOperator.GREATER_THAN,
+		value: 10
+	})
+	.query();
+
+await client.transactions.getMany(filter);
+
+// Get unhandled transactions for your bot
+// (this uses common queries)
+
+await client.transactions.getMany(client.commonQueries.UNHANDLED_TRANSACTIONS);
+```
+
+#### Processing transactions
+
+```ts
+// Get the unhandled transactions for your bot
+const unhandled = await client.transactions.getMany(client.commonQueries.UNHANDLED_TRANSACTIONS);
+
+// If there are no unhandled transactions, don't do anything
+if (!unhandled.length) return;
+
+// Iterate through the transactions
+for (const transaction of unhandled) {
+	// Add the amount of money the user needs to get
+	// WARNING: That amount is given on the `payout` property, **not** the `amount` property
+	console.log(`${transaction.user} got ${transaction.payout}$`);
+
+	// After you're done with that, mark it as completed
+	await transaction.update({handled: true});
+}
+```
 
 ## Contributing
-Pull requests are issues are always welcome! Please use the issue tracker for bug requests and feature submissions.
+
+Pull requests and issues are always welcome! Please, read our [Code of Conduct](CODE_OF_CONDUCT.md) and use the issue tracker for bug requests and feature submissions.
 
 ## Legal
-Copyright 2019-Present ©  [Charalampos Fanoulis](https://enkiel.cloud) and [Discoin Association](https://discoin.gitbook.io). Distributed under the [MIT licence](LICENCE.md).
 
-## Buy the maintainer a coffee/tea/donut
+Copyright 2019-Present © [Charalampos Fanoulis](https://enkiel.cloud) and [Jonah Snider](https://jonah.pw). Distributed under the [MIT licence](LICENCE.md).
 
-Most of the maintainer's projects are open-source, and they will stay so even if they run out of funds. However, should you want to fund this project, as well as his thirst for Spotify Premium, feel free to donate using the following ways:
+## Support our work
 
-| Method | Address | Notes |
-|:------:|:-------:|:------|
-|[![Pledge to me on Patreon](.github/readme-assets/patreon.jpg)](https://www.patreon.com/join/enkiel8029?)| [Pledge to me on Patreon](https://www.patreon.com/join/enkiel8029?) | Patrons get exclusive access to pre-release projects, discounts on comissions, behind-the-scenes posts and more!|
-|[![Donate using PayPal](https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/9_bdg_secured_by_pp_2line.png)](https://cfanoulis.page.link/donate-paypal) | [Donate using PayPal](https://cfanoulis.page.link/donate-paypal)
-|[![Donate using bitcoin](.github/readme-assets/btc.png)](bitcoin:bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr?message=Donation%20to%20Charalampos%27s%20OSS%20projects&time=1577294923)|`bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr`| [Here's a premade request](bitcoin:bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr?message=Donation%20to%20Charalampos%27s%20OSS%20projects&time=1577294923)|
-|![Donate using Stellar](.github/readme-assets/stellar.png)| `cfanoulis*keybase.io`| If your wallet or network doesn't support federation, use `GCVAESPQ3OSXZQCTLJNEXD35GA5CWXPQ6FG6JVBFIDNRRJIG77OKUB4I` as the address
+This project is open-source, thus we don't get any monetary compensation for our work. If you want to support our work, please feel free to donate to us:
 
-Also consider [supporting Discoin](https://discoin.gitbook.io/docs/users-guide#credits-aka-how-can-i-support-discoin-as-a-non-developer)!
+- Support [**Charalampos Fanoulis**](https://github.com/Discoin/scambio/commits?author=cfanoulis):
+
+| Method                                                                                                                                                                                | Address                                                             | Notes                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| [![Pledge using Patreon](.github/readme-assets/patreon.jpg)](https://www.patreon.com/join/enkiel8029?)                                                                                | [Pledge using on Patreon](https://www.patreon.com/join/enkiel8029?) | Patrons get exclusive access to pre-release projects, discounts on comissions, behind-the-scenes posts and more!                           |
+| [![Donate using PayPal](https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/9_bdg_secured_by_pp_2line.png)](https://cfanoulis.page.link/donate-paypal)  | [Donate using PayPal](https://cfanoulis.page.link/donate-paypal)    |
+| [![Donate using bitcoin](.github/readme-assets/btc.png)](bitcoin:bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr?message=Donation%20to%20Charalampos%27s%20OSS%20projects&time=1577294923) | `bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr`                        |
+| ![Donate using Stellar](.github/readme-assets/stellar.png)                                                                                                                            | `cfanoulis*keybase.io`                                              | If your wallet or network doesn't support federation, please use `GCVAESPQ3OSXZQCTLJNEXD35GA5CWXPQ6FG6JVBFIDNRRJIG77OKUB4I` as the address |
+
+- Support [**Jonah Snider**](https://github.com/Discoin/scambio/commits?author=pizzafox):
+
+| Method                                                                                              | Address                                                        | Notes                                                                                                                                      |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| [![Pledge using Patreon](.github/readme-assets/patreon.jpg)](https://www.patreon.com/join/pizzafox) | [Pledge using Patreon](https://www.patreon.com/join/pizzafox/) |                                                                                                                                            |
+| ![Donate with Zcash](.github/readme-assets/zcash.png)                                               | `t1NLnqT6h8BnvZ683GhQ2hBsv3GHsNtEkVE`                          |                                                                                                                                            |
+| ![Donate using bitcoin](.github/readme-assets/btc.png)                                              | `1754GdSYLzH7ukgZs3ZPSjk9EsK3qqK9xY`                           |                                                                                                                                            |
+| ![Donate using Stellar](.github/readme-assets/stellar.png)                                          | `pizzafox*keybase.io`                                          | If your wallet or network doesn't support federation, please use `GAOLRCYYNHBGZFYHT7PK2C4TRKEXTKPHJA6LS2MFWYHIVQHBDJVOIS23` as the address |

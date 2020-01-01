@@ -1,4 +1,3 @@
-import {ScambioClient} from './structures/ScambioClient';
-import {ScambioTransaction} from './structures/Transaction';
+import {Client} from './structures/client';
 
-export {ScambioClient, ScambioTransaction};
+export default Client;

@@ -1,28 +1,106 @@
 {
-  "name": "scambio",
-  "version": "1.0.0",
-  "description": "A TypeScript client library for Discoin",
-  "main": "dist/index.js",
-  "repository": "https://github.com/discoin/scambio.git",
-  "author": "Charalampos Fanoulis <charalampos.fanoulis@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "prepublish": "yarn build",
-    "build": "tsc -p .",
-    "test:lint": "eslint --ext ts src"
-  },
-  "dependencies": {
-    "node-fetch": "^2.6.0"
-  },
-  "devDependencies": {
-    "@types/node": "^13.1.2",
-    "@types/node-fetch": "^2.5.4",
-    "@typescript-eslint/eslint-plugin": "^2.14.0",
-    "@typescript-eslint/parser": "^2.14.0",
-    "ava": "^2.4.0",
-    "eslint": "^6.8.0",
-    "eslint-config-xo": "^0.27.2",
-    "eslint-config-xo-typescript": "^0.24.1",
-    "typescript": "^3.7.4"
-  }
+	"name": "@discoin/scambio",
+	"version": "3.0.0",
+	"main": "./tsc_output/src/index",
+	"author": {
+		"name": "The Discoin Association"
+	},
+	"license": "MIT",
+	"contributors": [
+		{
+			"email": "jonah@jonah.pw",
+			"name": "Jonah Snider",
+			"url": "https://jonah.pw"
+		},
+		{
+			"email": "charalampos.fanoulis@gmail.com",
+			"name": "Charalampos Fanoulis",
+			"url": "https://enkiel.cloud"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Discoin/scambio.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Discoin/scambio/issues"
+	},
+	"engines": {
+		"node": "12"
+	},
+	"keywords": [
+		"discoin",
+		"discord",
+		"discord-bot"
+	],
+	"scripts": {
+		"build": "tsc",
+		"docs": "typedoc --out docs_out src",
+		"lint": "xo",
+		"prebuild": "rimraf tsc_output",
+		"predocs": "rimraf docs_out",
+		"pretest": "rimraf coverage .nyc_output",
+		"style": "prettier --ignore-path .gitignore --check \"./**/*.{{j,t}{s,sx},flow,{sc,c,le}ss,json,m{d,dx},{y,ya}ml}\"",
+		"test": "nyc ava"
+	},
+	"dependencies": {
+		"node-fetch": "^2.6.0"
+	},
+	"devDependencies": {
+		"@istanbuljs/nyc-config-typescript": "^0.1.3",
+		"@types/node-fetch": "^2.5.4",
+		"@typescript-eslint/eslint-plugin": "^2.9.0",
+		"@typescript-eslint/parser": "^2.10.0",
+		"ava": "^2.4.0",
+		"eslint-config-xo-typescript": "^0.23.0",
+		"nock": "^11.7.0",
+		"nyc": "^14.1.1",
+		"prettier": "^1.19.1",
+		"rimraf": "^3.0.0",
+		"source-map-support": "^0.5.16",
+		"ts-node": "^8.5.4",
+		"typedoc": "^0.15.5",
+		"typescript": "^3.7.3",
+		"xo": "^0.25.3"
+	},
+	"peerDependencies": {
+		"@nestjsx/crud-request": "^4.3.3"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"ava": {
+		"compileEnhancements": false,
+		"extensions": [
+			"ts"
+		],
+		"files": [
+			"!tsc_output",
+			"!docs_out",
+			"!coverage",
+			"!.nyc_output"
+		],
+		"require": [
+			"ts-node/register",
+			"source-map-support/register"
+		]
+	},
+	"nyc": {
+		"all": true,
+		"extends": "@istanbuljs/nyc-config-typescript",
+		"include": [
+			"src/**/*.ts"
+		],
+		"reporter": [
+			"lcov",
+			"cobertura"
+		]
+	},
+	"xo": {
+		"extends": "xo-typescript",
+		"extensions": [
+			"ts"
+		],
+		"prettier": true
+	}
 }
