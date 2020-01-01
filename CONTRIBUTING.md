@@ -16,13 +16,17 @@ pnpm install
 
 ### Publishing
 
-Change directory to `tsc_output` after you run the build command:
+Run the build command:
 
 ```sh
 yarn build --build tsconfig.build.json
 ```
 
-Publish to npm from there.
+Then publish to npm with this command:
+
+```sh
+npm publish
+```
 
 ### Building
 
