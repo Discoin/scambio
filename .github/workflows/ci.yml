@@ -117,3 +117,25 @@ jobs:
         with:
           name: typedoc
           path: ./docs_out
+  publish:
+    name: Publish
+
+    runs-on: ubuntu-latest
+
+    needs: [built, lint, style, test]
+
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js for use with Actions
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.14.0'
+      - name: Install Yarn
+        run: curl -o- -L https://yarnpkg.com/install.sh | bash
+      - name: Install dependencies with Yarn
+        run: yarn install
+      - name: Run semantic release
+        run: yarn run semantic-release
