@@ -139,3 +139,7 @@ jobs:
         run: yarn install
       - name: Run semantic release
         run: yarn run semantic-release
+        env:
+          # Note that the secret name != the env variable name
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
