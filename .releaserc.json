@@ -13,7 +13,12 @@
 			}
 		],
 		"@semantic-release/release-notes-generator",
-		"@semantic-release/github",
+		[
+			"@semantic-release/github",
+			{
+				"assets": [{"label": "scambio_compiled", "path": "tsc_output"}]
+			}
+		],
 		"@semantic-release/npm"
 	]
 }
