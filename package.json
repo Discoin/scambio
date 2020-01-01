@@ -18,6 +18,7 @@
 			"url": "https://enkiel.cloud"
 		}
 	],
+	"homepage": "https://scambio.discoin.zws.im/",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/Discoin/scambio.git"
