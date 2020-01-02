@@ -18,7 +18,7 @@ export const botStore = {
 	 */
 	async getMany(query?: string): Promise<Bot[]> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const req = fetch(`${API_URL}/bots${query ? `?${encodeURIComponent(query)}` : ''}`, {
+		const req = fetch(`${API_URL}/bots${query ? `?${query}` : ''}`, {
 			headers: new Headers({'User-Agent': USER_AGENT})
 		});
 

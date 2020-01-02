@@ -33,7 +33,7 @@ test('Get many bots', async t => {
 
 	t.deepEqual(actualBots, [apiBotToBot(testBot)]);
 
-	const query = 'filter';
+	const query = 'filter=id||eq||388191157869477888';
 
 	nock(API_URL)
 		// We return the same thing regardless of the query

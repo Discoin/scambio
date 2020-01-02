@@ -52,7 +52,7 @@ test('Get many transactions', async t => {
 
 	t.deepEqual(actualTransactions, [new Transaction(client, testTransaction)]);
 
-	const query = 'filter';
+	const query = 'filter=to.id||eq||OAT&filter=handled||eq||false';
 
 	nock(API_URL)
 		// We return the same thing regardless of the query

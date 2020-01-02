@@ -30,7 +30,7 @@ test('Get many currencies', async t => {
 
 	t.deepEqual(actualCurrencies, [apiCurrencyToCurrency(testCurrency)]);
 
-	const query = 'filter';
+	const query = 'filter=value||$gte||0.4';
 
 	nock(API_URL)
 		// We return the same thing regardless of the query

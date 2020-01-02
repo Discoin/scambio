@@ -106,7 +106,7 @@ export class TransactionStore {
 	 */
 	async getMany(query?: string): Promise<Transaction[]> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const req = fetch(`${API_URL}/transactions${query ? `?${encodeURIComponent(query)}` : ''}`);
+		const req = fetch(`${API_URL}/transactions${query ? `?${query}` : ''}`);
 
 		const res = await req;
 

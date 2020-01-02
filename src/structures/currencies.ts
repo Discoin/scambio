@@ -17,7 +17,7 @@ export const currencyStore = {
 	 */
 	async getMany(query?: string): Promise<Currency[]> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const req = fetch(`${API_URL}/currencies${query ? `?${encodeURIComponent(query)}` : ''}`, {
+		const req = fetch(`${API_URL}/currencies${query ? `?${query}` : ''}`, {
 			headers: new Headers({'User-Agent': USER_AGENT})
 		});
 
