@@ -34,8 +34,8 @@ You can safely ignore any warnings about it if you aren't using it.
 #### Creating a new client
 
 ```ts
-import {Client as Discoin} from '@discoin/scambio';
-// Or for CommonJS: const { Client: Discoin } = require('@discoin/scambio');
+import Discoin from '@discoin/scambio';
+// Or for CommonJS: const Discoin = require('@discoin/scambio');
 
 const client = new Discoin('token', 'currencyCode');
 ```
@@ -66,13 +66,13 @@ await client.transactions.getOne('transactionID');
 import {RequestQueryBuilder, CondOperator} from '@nestjsx/crud-request';
 
 const filter = RequestQueryBuilder.create()
-	// Only get transactions where the `amount` field > 10
-	.setFilter({
-		field: 'amount',
-		operator: CondOperator.GREATER_THAN,
-		value: 10
-	})
-	.query();
+ // Only get transactions where the `amount` field > 10
+ .setFilter({
+  field: 'amount',
+  operator: CondOperator.GREATER_THAN,
+  value: 10
+ })
+ .query();
 
 await client.transactions.getMany(filter);
 
@@ -93,12 +93,12 @@ if (!unhandled.length) return;
 
 // Iterate through the transactions
 for (const transaction of unhandled) {
-	// Add the amount of money the user needs to get
-	// WARNING: That amount is given on the `payout` property, **not** the `amount` property
-	console.log(`${transaction.user} got ${transaction.payout}$`);
+ // Add the amount of money the user needs to get
+ // WARNING: That amount is given on the `payout` property, **not** the `amount` property
+ console.log(`${transaction.user} got ${transaction.payout}$`);
 
-	// After you're done with that, mark it as completed
-	await transaction.update({handled: true});
+ // After you're done with that, mark it as completed
+ await transaction.update({handled: true});
 }
 ```
 
