@@ -66,13 +66,13 @@ await client.transactions.getOne('transactionID');
 import {RequestQueryBuilder, CondOperator} from '@nestjsx/crud-request';
 
 const filter = RequestQueryBuilder.create()
- // Only get transactions where the `amount` field > 10
- .setFilter({
-  field: 'amount',
-  operator: CondOperator.GREATER_THAN,
-  value: 10
- })
- .query();
+	// Only get transactions where the `amount` field > 10
+	.setFilter({
+		field: 'amount',
+		operator: CondOperator.GREATER_THAN,
+		value: 10
+	})
+	.query();
 
 await client.transactions.getMany(filter);
 
@@ -93,12 +93,12 @@ if (!unhandled.length) return;
 
 // Iterate through the transactions
 for (const transaction of unhandled) {
- // Add the amount of money the user needs to get
- // WARNING: That amount is given on the `payout` property, **not** the `amount` property
- console.log(`${transaction.user} got ${transaction.payout}$`);
+	// Add the amount of money the user needs to get
+	// WARNING: That amount is given on the `payout` property, **not** the `amount` property
+	console.log(`${transaction.user} got ${transaction.payout}$`);
 
- // After you're done with that, mark it as completed
- await transaction.update({handled: true});
+	// After you're done with that, mark it as completed
+	await transaction.update({handled: true});
 }
 ```
 
@@ -116,17 +116,17 @@ This project is open-source, thus we don't get any monetary compensation for our
 
 - Support [**Charalampos Fanoulis**](https://github.com/Discoin/scambio/commits?author=cfanoulis):
 
-| Method                                                                                                                                                                                | Address                                                             | Notes                                                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Method                                                                                                                                                                                                                              | Address                                                             | Notes                                                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | [![Pledge using Patreon](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/patreon.jpg)](https://www.patreon.com/join/enkiel8029?)                                                                                | [Pledge using on Patreon](https://www.patreon.com/join/enkiel8029?) | Patrons get exclusive access to pre-release projects, discounts on comissions, behind-the-scenes posts and more!                           |
-| [![Donate using PayPal](https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/9_bdg_secured_by_pp_2line.png)](https://cfanoulis.page.link/donate-paypal)  | [Donate using PayPal](https://cfanoulis.page.link/donate-paypal)    |
+| [![Donate using PayPal](https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/9_bdg_secured_by_pp_2line.png)](https://cfanoulis.page.link/donate-paypal)                                                | [Donate using PayPal](https://cfanoulis.page.link/donate-paypal)    |
 | [![Donate using bitcoin](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/btc.png)](bitcoin:bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr?message=Donation%20to%20Charalampos%27s%20OSS%20projects&time=1577294923) | `bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr`                        |
 | ![Donate using Stellar](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/stellar.png)                                                                                                                            | `cfanoulis*keybase.io`                                              | If your wallet or network doesn't support federation, please use `GCVAESPQ3OSXZQCTLJNEXD35GA5CWXPQ6FG6JVBFIDNRRJIG77OKUB4I` as the address |
 
 - Support [**Jonah Snider**](https://github.com/Discoin/scambio/commits?author=pizzafox):
 
-| Method                                                                                              | Address                                                        | Notes                                                                                                                                      |
-| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Method                                                                                                                                            | Address                                                        | Notes                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | [![Pledge using Patreon](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/patreon.jpg)](https://www.patreon.com/join/pizzafox) | [Pledge using Patreon](https://www.patreon.com/join/pizzafox/) |                                                                                                                                            |
 | ![Donate with Zcash](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/zcash.png)                                               | `t1NLnqT6h8BnvZ683GhQ2hBsv3GHsNtEkVE`                          |                                                                                                                                            |
 | ![Donate using bitcoin](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/btc.png)                                              | `1754GdSYLzH7ukgZs3ZPSjk9EsK3qqK9xY`                           |                                                                                                                                            |
