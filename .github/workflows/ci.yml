@@ -137,8 +137,8 @@ jobs:
         run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - name: Install dependencies with Yarn
         run: yarn install
-      - name: Compile TypeScript
-        run: yarn run build
+      - name: Compile TypeScript for publishing
+        run: yarn run build --build tsconfig.build.json
       - name: Run semantic release
         run: yarn run semantic-release
         env:
