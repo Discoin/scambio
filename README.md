@@ -35,7 +35,7 @@ You can safely ignore any warnings about it if you aren't using it.
 
 ```ts
 import Discoin from '@discoin/scambio';
-// Or for CommonJS: const Discoin = require('@discoin/scambio');
+// Or for CommonJS: const Discoin = require('@discoin/scambio').default;
 
 const client = new Discoin('token', 'currencyCode');
 ```
@@ -94,10 +94,10 @@ if (!unhandled.length) return;
 // Iterate through the transactions
 for (const transaction of unhandled) {
 	// Add the amount of money the user needs to get
-	// WARNING: That amount is given on the `payout` property, **not** the `amount` property
+	// WARNING: Pay the user the value in the `payout` property, **not** the `amount` property!
 	console.log(`${transaction.user} got ${transaction.payout}$`);
 
-	// After you're done with that, mark it as completed
+	// After you're done with the transaction, mark it as completed
 	await transaction.update({handled: true});
 }
 ```
