@@ -55,7 +55,7 @@
 		"ava": "^2.4.0",
 		"eslint-config-xo-typescript": "^0.23.0",
 		"nock": "^11.7.0",
-		"nyc": "^14.1.1",
+		"nyc": "^15.0.0",
 		"prettier": "^1.19.1",
 		"rimraf": "^3.0.0",
 		"semantic-release": "^15.14.0",
