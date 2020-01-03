@@ -1,8 +1,9 @@
 import fetch, {Headers} from 'node-fetch';
+import {APICurrency} from '../types/api';
 import {Currency} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
-import {APICurrency} from '../types/api';
 import {apiCurrencyToCurrency} from '../util/data-transfer-object';
+import {throwOnResponseNotOk} from '../util/errors';
 
 /**
  * Store and retrieve many currencies.
@@ -23,6 +24,8 @@ export const currencyStore = {
 
 		const res = await req;
 
+		await throwOnResponseNotOk(res);
+
 		const apiCurrencies: APICurrency[] = await res.json();
 
 		const currencies = apiCurrencies.map(apiCurrency => apiCurrencyToCurrency(apiCurrency));
@@ -41,6 +44,8 @@ export const currencyStore = {
 		});
 
 		const res = await req;
+
+		await throwOnResponseNotOk(res);
 
 		const apiCurrency: APICurrency = await res.json();
 

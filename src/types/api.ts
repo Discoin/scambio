@@ -91,3 +91,18 @@ export interface APIBot extends Omit<Bot, 'currency'> {
 	/** The currency that corresponds to this bot. */
 	readonly currency: APICurrency;
 }
+
+/**
+ * An API error response body.
+ * @example
+ * {
+ * 	"statusCode": 401,
+ * 	"error": "Unauthorized"
+ * }
+ */
+export interface APIErrorResponse {
+	/** The HTTP status code of the response. */
+	readonly statusCode: number;
+	/** A description of what went wrong. */
+	readonly error: string;
+}

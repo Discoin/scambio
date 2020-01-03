@@ -3,6 +3,7 @@ import {Bot} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
 import {APIBot} from '../types/api';
 import {apiBotToBot} from '../util/data-transfer-object';
+import {throwOnResponseNotOk} from '../util/errors';
 
 // Hello welcome to the bot store what would you like to buy
 /**
@@ -24,6 +25,8 @@ export const botStore = {
 
 		const res = await req;
 
+		await throwOnResponseNotOk(res);
+
 		const apiBots: APIBot[] = await res.json();
 
 		const bots = apiBots.map(apiBot => apiBotToBot(apiBot));
@@ -42,6 +45,8 @@ export const botStore = {
 		});
 
 		const res = await req;
+
+		await throwOnResponseNotOk(res);
 
 		const apiBot: APIBot = await res.json();
 

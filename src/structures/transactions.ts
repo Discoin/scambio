@@ -1,7 +1,8 @@
 import fetch, {Headers} from 'node-fetch';
-import {UUID_V4_REG_EXP, API_URL, HTTPRequestMethods, USER_AGENT} from '../util/constants';
-import {UUIDv4, Currency} from '../types/discoin';
 import {APIPartialTransaction, APITransaction, APITransactionCreate} from '../types/api';
+import {Currency, UUIDv4} from '../types/discoin';
+import {API_URL, HTTPRequestMethods, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
+import {throwOnResponseNotOk} from '../util/errors';
 import {Client} from './client';
 
 /**
@@ -80,12 +81,16 @@ export class Transaction {
 			method: HTTPRequestMethods.PATCH,
 			headers: new Headers({
 				Authorization: `Bearer ${this._client.token}`,
+				'Content-Type': 'application/json',
 				'User-Agent': `${USER_AGENT} ${this._client.currencyID}`
 			}),
 			body: JSON.stringify(options)
 		});
 
-		await req;
+		const res = await req;
+
+		await throwOnResponseNotOk(res);
+
 		this.handled = options.handled;
 		return this;
 	}
@@ -110,6 +115,8 @@ export class TransactionStore {
 
 		const res = await req;
 
+		await throwOnResponseNotOk(res);
+
 		const transactions: APIPartialTransaction[] = await res.json();
 
 		return transactions.map(apiTransaction => new Transaction(this.client, apiTransaction));
@@ -129,6 +136,8 @@ export class TransactionStore {
 
 		const res = await req;
 
+		await throwOnResponseNotOk(res);
+
 		const apiTransaction: APIPartialTransaction = await res.json();
 
 		return new Transaction(this.client, apiTransaction);
@@ -142,7 +151,7 @@ export class TransactionStore {
 	async create(options: TransactionCreateOptions): Promise<Transaction> {
 		const req = fetch(`${API_URL}/transactions`, {
 			method: HTTPRequestMethods.POST,
-			headers: new Headers({Authorization: `Bearer ${this.client.token}`}),
+			headers: new Headers({Authorization: `Bearer ${this.client.token}`, 'Content-Type': 'application/json'}),
 			body: JSON.stringify({
 				toId: options.to,
 				amount: options.amount,
@@ -152,7 +161,9 @@ export class TransactionStore {
 
 		const res = await req;
 
-		const apiTransaction = await res.json();
+		await throwOnResponseNotOk(res);
+
+		const apiTransaction: APITransaction = await res.json();
 
 		return new Transaction(this.client, apiTransaction);
 	}
