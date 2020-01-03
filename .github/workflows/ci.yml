@@ -140,14 +140,13 @@ jobs:
       - name: Compile TypeScript for publishing
         run: yarn run build --build tsconfig.build.json
       - name: Run semantic release
-        # This flag will allow the npm module to publish even when we have manually updated the version in package.json
-        run: yarn run semantic-release --allow-same-version
+        run: yarn run semantic-release
         env:
           # Note that the secret name != the env variable name
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Run semantic release for GitHub Package Registry
-        run: yarn run semantic-release --allow-same-version
+        run: yarn run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_REGISTRY: /npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
