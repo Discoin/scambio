@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"alwaysStrict": true,
 		"declaration": true,
 		"esModuleInterop": true,
 		"module": "commonjs",
@@ -12,5 +13,5 @@
 		"typeRoots": ["src/types"]
 	},
 	"exclude": ["node_modules", "nyc_output", "coverage"],
-	"include": ["src"]
+	"include": ["src/**/*.ts"]
 }
