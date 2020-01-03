@@ -193,3 +193,4 @@ CONTRIBUTING.md
 tsconfig.build.json
 tsconfig.json
 .editorconfig
+.yarnrc
