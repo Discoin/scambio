@@ -1,6 +1,6 @@
 {
 	"name": "@discoin/scambio",
-	"version": "1.0.3",
+	"version": "1.0.5",
 	"main": "./tsc_output/src/index",
 	"author": {
 		"name": "The Discoin Association"
