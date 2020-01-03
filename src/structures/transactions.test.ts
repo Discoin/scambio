@@ -8,7 +8,7 @@ import Client from '..';
 const notAUUID = 'not a v4 UUID';
 
 const testTransaction: APITransaction = {
-	amount: 1000,
+	amount: '1000',
 	from: {id: 'OAT', name: 'Dice Oats'},
 	to: {id: 'DTS', name: 'DiscordTel Credits'},
 	handled: false,
@@ -91,7 +91,7 @@ test('Create transaction', async t => {
 
 	// Send the network request that creates the transaction
 	await client.transactions.create({
-		amount: testTransaction.amount,
+		amount: parseFloat(testTransaction.amount),
 		to: testTransaction.to.id,
 		user: testTransaction.user
 	});
@@ -100,7 +100,7 @@ test('Create transaction', async t => {
 	t.deepEqual(
 		requestBody,
 		{
-			amount: testTransaction.amount,
+			amount: parseFloat(testTransaction.amount),
 			toId: testTransaction.to.id,
 			user: testTransaction.user
 		} as APITransactionCreate,

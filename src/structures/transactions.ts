@@ -38,15 +38,15 @@ interface TransactionCreateOptions {
  * A transaction converts one currency to another, using Discoin tokens as an intermediary currency.
  */
 export class Transaction {
-	public static API_URL = API_URL;
-	public payout: number;
-	public amount: number;
-	public from: Pick<Currency, 'id' | 'name'> | Currency;
-	public to: Pick<Currency, 'id' | 'name'> | Currency;
-	public id: UUIDv4;
+	public static readonly API_URL = API_URL;
+	public readonly payout: number;
+	public readonly amount: number;
+	public readonly from: Pick<Currency, 'id' | 'name'> | Currency;
+	public readonly to: Pick<Currency, 'id' | 'name'> | Currency;
+	public readonly id: UUIDv4;
 	public handled: boolean;
-	public user: string;
-	public timestamp: Date;
+	public readonly user: string;
+	public readonly timestamp: Date;
 	private readonly _client: Client;
 
 	/**
@@ -61,7 +61,7 @@ export class Transaction {
 
 		this._client = client;
 		this.id = data.id;
-		this.amount = data.amount;
+		this.amount = parseFloat(data.amount);
 		this.from = data.from;
 		this.to = data.to;
 		this.handled = data.handled;

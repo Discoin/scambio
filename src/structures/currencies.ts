@@ -10,7 +10,7 @@ import {apiCurrencyToCurrency} from '../util/data-transfer-object';
 export const currencyStore = {
 	/**
 	 * Get several currencies from the API by specifying a query.
-	 * @param query The query for finding currencies (not URL encoded)
+	 * @param query The query for finding currencies
 	 * @returns An array of currencies that satisfy the query
 	 * @example
 	 * client.getMany('filter=value||$gte||0.4');
@@ -33,11 +33,10 @@ export const currencyStore = {
 	/**
 	 * Get one currency by ID.
 	 * @param code The currency code of the currency to get
-	 * @param fetchClient The fetch client to use for the network request
 	 * @returns The transaction
 	 */
-	async getOne(code: string, fetchClient: typeof fetch = fetch): Promise<Currency> {
-		const req = fetchClient(`${API_URL}/currencies/${code}`, {
+	async getOne(code: string): Promise<Currency> {
+		const req = fetch(`${API_URL}/currencies/${encodeURIComponent(code)}`, {
 			headers: new Headers({'User-Agent': USER_AGENT})
 		});
 

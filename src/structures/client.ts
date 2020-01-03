@@ -6,7 +6,7 @@ import {botStore} from './bots';
 /**
  * Common queries to use for `getMany` operations.
  */
-interface CommonQueries {
+export interface CommonQueries {
 	/**
 	 * Get unhandled transactions for your bot.
 	 */
@@ -22,13 +22,13 @@ interface CommonQueries {
  */
 export class Client {
 	/** Get one or many currencies from the Discoin network. */
-	public static currencies = currencyStore;
+	public static readonly currencies = currencyStore;
 	/** Get one or many bots from the Discoin network. */
-	public static bots = botStore;
+	public static readonly bots = botStore;
 	/** Common queries customized for your bot. */
-	public commonQueries: CommonQueries;
+	public readonly commonQueries: CommonQueries;
 	/** Update and get transactions. */
-	public transactions: TransactionStore;
+	public readonly transactions: TransactionStore;
 
 	/**
 	 * Create a Discoin client to interact with the Discoin API.

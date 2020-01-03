@@ -22,9 +22,9 @@ export interface Bot {
 	 * @example
 	 * '496480755728384002_DUTC'
 	 */
-	id: string;
+	readonly id: string;
 	/** The currency that corresponds to this bot. */
-	currency: Currency;
+	readonly currency: Currency;
 }
 
 /**
@@ -35,20 +35,20 @@ export interface Currency {
 	 * The shortened currency ID.
 	 * @example 'OAT'
 	 */
-	id: string;
+	readonly id: string;
 	/**
 	 * The full currency name.
 	 * @example 'Dice Oats'
 	 */
-	name: string;
+	readonly name: string;
 	/**
 	 * The value in Discoin this currency is worth.
 	 * @example 0.1
 	 */
-	value: number;
+	readonly value: number;
 	/**
 	 * The reserve available of this currency.
 	 * @example 9999889.021
 	 */
-	reserve: number;
+	readonly reserve: number;
 }
