@@ -16,7 +16,8 @@ export function apiErrorFactory(apiError: APIErrorResponse): Error {
  */
 export async function throwOnResponseNotOk(res: Response): Promise<void> {
 	if (!res.ok) {
-		const requestError: APIErrorResponse = await res.json();
-		throw apiErrorFactory(requestError);
+		const requestError: APIErrorResponse | undefined = await res.json();
+
+		throw apiErrorFactory(requestError ?? {statusCode: res.status, error: '(no body was provided)'});
 	}
 }
