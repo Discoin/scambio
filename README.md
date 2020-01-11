@@ -1,8 +1,9 @@
 # [@discoin/scambio](https://scambio.discoin.zws.im/)
 
-[![Build Status](https://github.com/Discoin/scambio/workflows/CI/badge.svg)](https://github.com/Discoin/scambio/actions)
+[![npm version](https://img.shields.io/npm/v/@discoin/scambio)](https://www.npmjs.com/package/@discoin/scambio)
 [![codecov](https://codecov.io/gh/Discoin/scambio/branch/merge/graph/badge.svg)](https://codecov.io/gh/Discoin/scambio)
 [![MIT license](https://img.shields.io/badge/license-MIT-green)](https://github.com/Discoin/scambio/blob/merge/license)
+[![Build Status](https://github.com/Discoin/scambio/workflows/CI/badge.svg)](https://github.com/Discoin/scambio/actions)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 [![DeepScan grade](https://deepscan.io/api/teams/6595/projects/8606/branches/106731/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=6595&pid=8606&bid=106731)
 
