@@ -115,15 +115,6 @@ Copyright 2019-Present © [Charalampos Fanoulis](https://enkiel.cloud) and [Jona
 
 This project is open-source, thus we don't get any monetary compensation for our work. If you want to support our work, please feel free to donate to us:
 
-- Support [**Charalampos Fanoulis**](https://github.com/Discoin/scambio/commits?author=cfanoulis):
-
-| Method                                                                                                                                                                                                                              | Address                                                             | Notes                                                                                                                                      |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| [![Pledge using Patreon](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/patreon.jpg)](https://www.patreon.com/join/enkiel8029?)                                                                                | [Pledge using on Patreon](https://www.patreon.com/join/enkiel8029?) | Patrons get exclusive access to pre-release projects, discounts on comissions, behind-the-scenes posts and more!                           |
-| [![Donate using PayPal](https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/9_bdg_secured_by_pp_2line.png)](https://cfanoulis.page.link/donate-paypal)                                                | [Donate using PayPal](https://cfanoulis.page.link/donate-paypal)    |
-| [![Donate using bitcoin](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/btc.png)](bitcoin:bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr?message=Donation%20to%20Charalampos%27s%20OSS%20projects&time=1577294923) | `bc1q3e5jhh9qrk4g80ljlvu66u2dsr89v57g5madjr`                        |
-| ![Donate using Stellar](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/stellar.png)                                                                                                                            | `cfanoulis*keybase.io`                                              | If your wallet or network doesn't support federation, please use `GCVAESPQ3OSXZQCTLJNEXD35GA5CWXPQ6FG6JVBFIDNRRJIG77OKUB4I` as the address |
-
 - Support [**Jonah Snider**](https://github.com/Discoin/scambio/commits?author=pizzafox):
 
 | Method                                                                                                                                            | Address                                                        | Notes                                                                                                                                      |
