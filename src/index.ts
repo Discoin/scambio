@@ -1,3 +1,1 @@
-import {Client} from './structures/client';
-
-export default Client;
+export {default} from './structures/client';
