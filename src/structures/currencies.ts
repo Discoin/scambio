@@ -1,9 +1,8 @@
-import fetch, {Headers} from 'node-fetch';
+import ky from 'ky-universal';
 import {APICurrency} from '../types/api';
 import {Currency} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
 import {apiCurrencyToCurrency} from '../util/data-transfer-object';
-import {throwOnResponseNotOk} from '../util/errors';
 
 /**
  * Store and retrieve many currencies.
@@ -18,13 +17,12 @@ export const currencyStore = {
 	 */
 	async getMany(query?: string): Promise<Currency[]> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const req = fetch(`${API_URL}/currencies${query ? `?${query}` : ''}`, {
-			headers: new Headers({'User-Agent': USER_AGENT})
+		const req = ky.get(`currencies${query ? `?${query}` : ''}`, {
+			headers: {'User-Agent': USER_AGENT},
+			prefixUrl: API_URL
 		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const apiCurrencies: APICurrency[] = await res.json();
 
@@ -39,13 +37,12 @@ export const currencyStore = {
 	 * @returns The transaction
 	 */
 	async getOne(code: string): Promise<Currency> {
-		const req = fetch(`${API_URL}/currencies/${encodeURIComponent(code)}`, {
-			headers: new Headers({'User-Agent': USER_AGENT})
+		const req = ky.get(`currencies/${encodeURIComponent(code)}`, {
+			headers: {'User-Agent': USER_AGENT},
+			prefixUrl: API_URL
 		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const apiCurrency: APICurrency = await res.json();
 

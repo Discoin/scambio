@@ -1,9 +1,8 @@
-import fetch, {Headers} from 'node-fetch';
+import ky from 'ky-universal';
 import {Bot} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
 import {APIBot} from '../types/api';
 import {apiBotToBot} from '../util/data-transfer-object';
-import {throwOnResponseNotOk} from '../util/errors';
 
 // Hello welcome to the bot store what would you like to buy
 /**
@@ -19,13 +18,12 @@ export const botStore = {
 	 */
 	async getMany(query?: string): Promise<Bot[]> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const req = fetch(`${API_URL}/bots${query ? `?${query}` : ''}`, {
-			headers: new Headers({'User-Agent': USER_AGENT})
+		const req = ky.get(`bots${query ? `?${query}` : ''}`, {
+			prefixUrl: API_URL,
+			headers: {'User-Agent': USER_AGENT}
 		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const apiBots: APIBot[] = await res.json();
 
@@ -40,13 +38,12 @@ export const botStore = {
 	 * @returns The bot
 	 */
 	async getOne(id: string): Promise<Bot> {
-		const req = fetch(`${API_URL}/bots/${encodeURIComponent(id)}`, {
-			headers: new Headers({'User-Agent': USER_AGENT})
+		const req = ky.get(`bots/${encodeURIComponent(id)}`, {
+			prefixUrl: API_URL,
+			headers: {'User-Agent': USER_AGENT}
 		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const apiBot: APIBot = await res.json();
 
