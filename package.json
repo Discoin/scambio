@@ -45,6 +45,8 @@
 		"test": "nyc ava"
 	},
 	"dependencies": {
+		"ky": "^0.16.1",
+		"ky-universal": "^0.3.0",
 		"node-fetch": "^2.6.0"
 	},
 	"devDependencies": {

@@ -1,8 +1,7 @@
-import fetch, {Headers} from 'node-fetch';
+import ky from 'ky-universal';
 import {APIPartialTransaction, APITransaction, APITransactionCreate} from '../types/api';
 import {Currency, UUIDv4} from '../types/discoin';
-import {API_URL, HTTPRequestMethods, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
-import {throwOnResponseNotOk} from '../util/errors';
+import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
 import {Client} from './client';
 
 /**
@@ -77,19 +76,16 @@ export class Transaction {
 	 * @returns
 	 */
 	async update(options: TransactionUpdateOptions): Promise<this> {
-		const req = fetch(`${API_URL}/transactions/${this.id}`, {
-			method: HTTPRequestMethods.PATCH,
-			headers: new Headers({
+		const req = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {
+			prefixUrl: API_URL,
+			headers: {
 				Authorization: `Bearer ${this._client.token}`,
-				'Content-Type': 'application/json',
 				'User-Agent': `${USER_AGENT} ${this._client.currencyID}`
-			}),
-			body: JSON.stringify(options)
+			},
+			json: options
 		});
 
-		const res = await req;
-
-		await throwOnResponseNotOk(res);
+		await req;
 
 		this.handled = options.handled;
 		return this;
@@ -110,12 +106,12 @@ export class TransactionStore {
 	 * client.getMany('filter=handled||eq||false');
 	 */
 	async getMany(query?: string): Promise<Transaction[]> {
-		// Interpolation of query parameters here is almost certainly a mistake
-		const req = fetch(`${API_URL}/transactions${query ? `?${query}` : ''}`);
+		const req = ky(`transactions${query ? `?${query}` : ''}`, {
+			prefixUrl: API_URL,
+			headers: {'User-Agent': USER_AGENT}
+		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const transactions: APIPartialTransaction[] = await res.json();
 
@@ -132,11 +128,12 @@ export class TransactionStore {
 			throw new RangeError(`Transaction ID ${id} does not appear to be a valid v4 UUID`);
 		}
 
-		const req = fetch(`${API_URL}/transactions/${id}`);
+		const req = ky(`transactions/${encodeURIComponent(id)}`, {
+			prefixUrl: API_URL,
+			headers: {'User-Agent': USER_AGENT}
+		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const apiTransaction: APIPartialTransaction = await res.json();
 
@@ -149,19 +146,19 @@ export class TransactionStore {
 	 * @returns The transaction that was created
 	 */
 	async create(options: TransactionCreateOptions): Promise<Transaction> {
-		const req = fetch(`${API_URL}/transactions`, {
-			method: HTTPRequestMethods.POST,
-			headers: new Headers({Authorization: `Bearer ${this.client.token}`, 'Content-Type': 'application/json'}),
-			body: JSON.stringify({
-				toId: options.to,
-				amount: options.amount,
-				user: options.user
-			} as APITransactionCreate)
+		const json: APITransactionCreate = {
+			amount: options.amount,
+			toId: options.to,
+			user: options.user
+		};
+
+		const req = ky.post('transactions', {
+			prefixUrl: API_URL,
+			headers: {Authorization: `Bearer ${this.client.token}`},
+			json
 		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const apiTransaction: APITransaction = await res.json();
 
