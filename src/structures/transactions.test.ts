@@ -4,6 +4,7 @@ import {API_URL} from '../util/constants';
 import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
 import {Transaction} from './transactions';
 import {Client} from './client';
+import {Except} from 'type-fest';
 
 const notAUUID = 'not a v4 UUID';
 
@@ -18,7 +19,7 @@ const testTransaction: APITransaction = {
 	user: '210024244766179329'
 };
 
-const fullTransaction: Omit<Transaction, '_client' | 'update'> = {
+const fullTransaction: Except<Transaction, 'update'> = {
 	...testTransaction,
 	timestamp: new Date(0),
 	amount: 1000,

@@ -4,6 +4,7 @@ import {Currency, UUIDv4} from '../types/discoin';
 import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
 import {getManyResponseIsDTO} from '../util/data-transfer-object';
 import {Client} from './client';
+import { Except } from 'type-fest';
 
 /**
  * Options for updating a transaction that already exists.
@@ -55,7 +56,7 @@ export class Transaction {
 	 * @param client The Discoin client to use for updating this transaction
 	 * @param data The data for populating this transaction
 	 */
-	constructor(client: Client, data: APITransaction | Omit<Transaction, 'update' | '_client'>) {
+	constructor(client: Client, data: APITransaction | Except<Transaction, 'update'>) {
 		if (!UUID_V4_REG_EXP.test(data.id)) {
 			throw new RangeError(`Transaction ID ${data.id} does not appear to be a valid v4 UUID`);
 		}
