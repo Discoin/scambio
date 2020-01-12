@@ -55,19 +55,19 @@ export class Transaction {
 	 * @param client The Discoin client to use for updating this transaction
 	 * @param data The data for populating this transaction
 	 */
-	constructor(client: Client, data: APITransaction) {
+	constructor(client: Client, data: APITransaction | Omit<Transaction, 'update' | '_client'>) {
 		if (!UUID_V4_REG_EXP.test(data.id)) {
 			throw new RangeError(`Transaction ID ${data.id} does not appear to be a valid v4 UUID`);
 		}
 
 		this._client = client;
 		this.id = data.id;
-		this.amount = parseFloat(data.amount);
+		this.amount = typeof data.amount === 'string' ? parseFloat(data.amount) : data.amount;
 		this.from = data.from;
 		this.to = data.to;
 		this.handled = data.handled;
 		this.user = data.user;
-		this.timestamp = new Date(data.timestamp);
+		this.timestamp = data.timestamp instanceof Date ? data.timestamp :new Date(data.timestamp);
 		this.payout = data.payout;
 	}
 
