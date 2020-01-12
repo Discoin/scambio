@@ -1,7 +1,8 @@
 import ky from 'ky-universal';
-import {APIPartialTransaction, APITransaction, APITransactionCreate} from '../types/api';
+import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
 import {Currency, UUIDv4} from '../types/discoin';
 import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
+import {getManyResponseIsDTO} from '../util/data-transfer-object';
 import {Client} from './client';
 
 /**
@@ -113,9 +114,13 @@ export class TransactionStore {
 
 		const res = await req;
 
-		const transactions: APIPartialTransaction[] = await res.json();
+		const getManyResponseJSON: APITransaction[] | APIGetManyDTO<APITransaction> = await res.json();
 
-		return transactions.map(apiTransaction => new Transaction(this.client, apiTransaction));
+		const apiPartialTransactions = getManyResponseIsDTO(getManyResponseJSON)
+			? getManyResponseJSON.data
+			: getManyResponseJSON;
+
+		return apiPartialTransactions.map(apiPartialTransaction => new Transaction(this.client, apiPartialTransaction));
 	}
 
 	/**
@@ -135,7 +140,7 @@ export class TransactionStore {
 
 		const res = await req;
 
-		const apiTransaction: APIPartialTransaction = await res.json();
+		const apiTransaction: APITransaction = await res.json();
 
 		return new Transaction(this.client, apiTransaction);
 	}

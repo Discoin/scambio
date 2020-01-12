@@ -1,7 +1,7 @@
 import test from 'ava';
 import nock from 'nock';
 import {API_URL} from '../util/constants';
-import {APITransaction, APITransactionCreate} from '../types/api';
+import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
 import {Transaction} from './transactions';
 import Client from '..';
 
@@ -50,19 +50,35 @@ test('Get many transactions', async t => {
 
 	const actualTransactions = await client.transactions.getMany();
 
-	t.deepEqual(actualTransactions, [new Transaction(client, testTransaction)]);
+	t.deepEqual(actualTransactions, [new Transaction(client, testTransaction)], 'No query');
 
-	const query = 'filter=to.id||eq||OAT&filter=handled||eq||false';
+	const filteredQuery = 'filter=to.id||eq||OAT&filter=handled||eq||false';
 
 	nock(API_URL)
 		// We return the same thing regardless of the query
 		// This is just to test what will happen if query is/isn't provided
-		.get(`/transactions?${query}`)
+		.get(`/transactions?${filteredQuery}`)
 		.reply(200, [testTransaction]);
 
-	const actualTransactionsWithQuery = await client.transactions.getMany(query);
+	const actualTransactionsWithQuery = await client.transactions.getMany(filteredQuery);
 
-	t.deepEqual(actualTransactionsWithQuery, [new Transaction(client, testTransaction)]);
+	t.deepEqual(actualTransactionsWithQuery, [new Transaction(client, testTransaction)], 'Filtered query');
+
+	const paginatedQuery = 'page=1&limit=1';
+
+	nock(API_URL)
+		.get(`/transactions?${paginatedQuery}`)
+		.reply(200, {
+			count: 1,
+			data: [testTransaction],
+			page: 1,
+			pageCount: 1,
+			total: 1
+		} as APIGetManyDTO<APITransaction>);
+
+	const paginatedTransactions = await client.transactions.getMany(paginatedQuery);
+
+	t.deepEqual(paginatedTransactions, [new Transaction(client, testTransaction)], 'Paginated query');
 });
 
 test('Update transaction', async t => {

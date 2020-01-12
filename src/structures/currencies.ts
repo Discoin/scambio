@@ -1,8 +1,8 @@
 import ky from 'ky-universal';
-import {APICurrency} from '../types/api';
+import {APICurrency, APIGetManyDTO} from '../types/api';
 import {Currency} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
-import {apiCurrencyToCurrency} from '../util/data-transfer-object';
+import {apiCurrencyToCurrency, getManyResponseIsDTO} from '../util/data-transfer-object';
 
 /**
  * Store and retrieve many currencies.
@@ -24,7 +24,9 @@ export const currencyStore = {
 
 		const res = await req;
 
-		const apiCurrencies: APICurrency[] = await res.json();
+		const getManyResponseJSON: APICurrency[] | APIGetManyDTO<APICurrency> = await res.json();
+
+		const apiCurrencies = getManyResponseIsDTO(getManyResponseJSON) ? getManyResponseJSON.data : getManyResponseJSON;
 
 		const currencies = apiCurrencies.map(apiCurrency => apiCurrencyToCurrency(apiCurrency));
 

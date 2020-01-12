@@ -1,8 +1,8 @@
 import ky from 'ky-universal';
 import {Bot} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
-import {APIBot} from '../types/api';
-import {apiBotToBot} from '../util/data-transfer-object';
+import {APIBot, APIGetManyDTO} from '../types/api';
+import {apiBotToBot, getManyResponseIsDTO} from '../util/data-transfer-object';
 
 // Hello welcome to the bot store what would you like to buy
 /**
@@ -25,7 +25,9 @@ export const botStore = {
 
 		const res = await req;
 
-		const apiBots: APIBot[] = await res.json();
+		const getManyResponseJSON: APIBot[] | APIGetManyDTO<APIBot> = await res.json();
+
+		const apiBots = getManyResponseIsDTO(getManyResponseJSON) ? getManyResponseJSON.data : getManyResponseJSON;
 
 		const bots = apiBots.map(apiBot => apiBotToBot(apiBot));
 

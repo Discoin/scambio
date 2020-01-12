@@ -1,4 +1,4 @@
-import {APICurrency, APIBot} from '../types/api';
+import {APICurrency, APIBot, APIGetManyDTO, APITransaction} from '../types/api';
 import {Currency, Bot} from '../types/discoin';
 
 /**
@@ -21,4 +21,21 @@ export function apiBotToBot(bot: APIBot): Bot {
 	const {currency, ...rest} = bot;
 
 	return {...rest, currency: apiCurrencyToCurrency(currency)};
+}
+
+type GetManyResponse = APIBot[] | APICurrency[] | APITransaction[];
+
+/**
+ * Check if a `getMany` response from the API is a DTO.
+ * @param getManyResponse The `getMany` response to check
+ * @returns Boolean of whether or not the provided response is a DTO
+ */
+export function getManyResponseIsDTO<T>(
+	getManyResponse: GetManyResponse | APIGetManyDTO<T>
+): getManyResponse is APIGetManyDTO<T> {
+	if (!Array.isArray(getManyResponse) && Object.prototype.hasOwnProperty.call(getManyResponse, 'data')) {
+		return true;
+	}
+
+	return false;
 }

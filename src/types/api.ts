@@ -1,5 +1,13 @@
 import {Bot, Currency, UUIDv4} from './discoin';
 
+export interface APIGetManyDTO<T> {
+	data: T[];
+	count: number;
+	total: number;
+	page: number;
+	pageCount: number;
+}
+
 /**
  * A Discoin transaction.
  */
@@ -59,17 +67,6 @@ export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
 	 * @example 1000.24
 	 */
 	readonly amount: string | number;
-}
-
-/**
- * A transaction object from the API.
- */
-export interface APIPartialTransaction extends Omit<APITransaction, 'from' | 'to'> {
-	/** Partial currency that just contains the ID and name. */
-	readonly from: Pick<Currency, 'id' | 'name'>;
-
-	/** Partial currency that just contains the ID and name. */
-	readonly to: Pick<Currency, 'id' | 'name'>;
 }
 
 /**
