@@ -132,4 +132,6 @@ test('Transaction class', t => {
 		RangeError,
 		'Throws error when invalid UUID is provided'
 	);
+
+	t.deepEqual(new Transaction(client, fullTransaction).timestamp, fullTransaction.timestamp);
 });
