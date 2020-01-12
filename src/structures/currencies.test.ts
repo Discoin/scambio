@@ -4,7 +4,7 @@ import {API_URL} from '../util/constants';
 import {APICurrency, APIGetManyDTO} from '../types/api';
 import {apiCurrencyToCurrency} from '../util/data-transfer-object';
 import {currencyStore} from './currencies';
-import { Currency } from '../types/discoin';
+import {Currency} from '../types/discoin';
 
 const testCurrency: APICurrency = {id: 'ABC', name: 'Currency name', reserve: 1_000_000, value: '0.1'};
 
