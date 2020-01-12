@@ -14,6 +14,8 @@ npm i
 pnpm install
 ```
 
+Note that pnpm may have issues with TypeScript due to hard links not being properly handled.
+
 ## Publishing
 
 Publishing is automatically done with [semantic release](https://semantic-release.gitbook.io/semantic-release/).
