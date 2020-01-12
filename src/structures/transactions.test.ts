@@ -3,7 +3,7 @@ import nock from 'nock';
 import {API_URL} from '../util/constants';
 import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
 import {Transaction} from './transactions';
-import Client from '..';
+import {Client} from './client';
 
 const notAUUID = 'not a v4 UUID';
 
