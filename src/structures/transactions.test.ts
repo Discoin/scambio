@@ -1,10 +1,10 @@
 import test from 'ava';
 import nock from 'nock';
+import {Except} from 'type-fest';
 import {API_URL} from '../util/constants';
 import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
 import {Transaction} from './transactions';
 import {Client} from './client';
-import {Except} from 'type-fest';
 
 const notAUUID = 'not a v4 UUID';
 
