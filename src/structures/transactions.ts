@@ -121,9 +121,9 @@ export class TransactionStore {
 				...getManyResponseJSON,
 				data: getManyResponseJSON.data.map(apiTransaction => new Transaction(this.client, apiTransaction))
 			};
-		} else {
-			return getManyResponseJSON.map(apiTransaction => new Transaction(this.client, apiTransaction));
 		}
+
+		return getManyResponseJSON.map(apiTransaction => new Transaction(this.client, apiTransaction));
 	}
 
 	/**

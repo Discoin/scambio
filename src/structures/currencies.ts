@@ -31,9 +31,9 @@ export const currencyStore = {
 				...getManyResponseJSON,
 				data: getManyResponseJSON.data.map(apiCurrency => apiCurrencyToCurrency(apiCurrency))
 			};
-		} else {
-			return getManyResponseJSON.map(apiCurrency => apiCurrencyToCurrency(apiCurrency));
 		}
+
+		return getManyResponseJSON.map(apiCurrency => apiCurrencyToCurrency(apiCurrency));
 	},
 
 	/**

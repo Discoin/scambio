@@ -29,9 +29,9 @@ export const botStore = {
 
 		if (getManyResponseIsDTO(getManyResponseJSON)) {
 			return {...getManyResponseJSON, data: getManyResponseJSON.data.map(apiBot => apiBotToBot(apiBot))};
-		} else {
-			return getManyResponseJSON.map(apiBot => apiBotToBot(apiBot));
 		}
+
+		return getManyResponseJSON.map(apiBot => apiBotToBot(apiBot));
 	},
 
 	/**
