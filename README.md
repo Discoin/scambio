@@ -107,19 +107,8 @@ for (const transaction of unhandled) {
 
 Pull requests and issues are always welcome! Please, read our [Code of Conduct](CODE_OF_CONDUCT.md) and use the issue tracker for bug requests and feature submissions.
 
-## Legal
+## Licence
 
-Copyright 2019-Present © [Charalampos Fanoulis](https://enkiel.cloud) and [Jonah Snider](https://jonah.pw). Distributed under the [MIT licence](LICENCE.md).
+Copyright 2019-2020 [Jonah Snider](https://jonah.pw). Distributed under the [MIT licence](LICENCE.md).
 
-## Support our work
-
-This project is open-source, thus we don't get any monetary compensation for our work. If you want to support our work, please feel free to donate to us:
-
-- Support [**Jonah Snider**](https://github.com/Discoin/scambio/commits?author=pizzafox):
-
-| Method                                                                                                                                            | Address                                                        | Notes                                                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| [![Pledge using Patreon](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/patreon.jpg)](https://www.patreon.com/join/pizzafox) | [Pledge using Patreon](https://www.patreon.com/join/pizzafox/) |                                                                                                                                            |
-| ![Donate with Zcash](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/zcash.png)                                               | `t1NLnqT6h8BnvZ683GhQ2hBsv3GHsNtEkVE`                          |                                                                                                                                            |
-| ![Donate using bitcoin](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/btc.png)                                              | `1754GdSYLzH7ukgZs3ZPSjk9EsK3qqK9xY`                           |                                                                                                                                            |
-| ![Donate using Stellar](https://github.com/Discoin/scambio/raw/master/.github/readme-assets/stellar.png)                                          | `pizzafox*keybase.io`                                          | If your wallet or network doesn't support federation, please use `GAOLRCYYNHBGZFYHT7PK2C4TRKEXTKPHJA6LS2MFWYHIVQHBDJVOIS23` as the address |
+If you would like the licence to be something other than MIT for you or your organization please get in touch.
