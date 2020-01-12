@@ -32,41 +32,63 @@ You can safely ignore any warnings about it if you aren't using it.
 
 ### Examples
 
+Below are several examples of how you can use the library.
+You do everything through a client instance or its static members.
+
 #### Creating a new client
+
+##### ECMAScript modules
 
 ```ts
 import Discoin from '@discoin/scambio';
-// Or for CommonJS: const Discoin = require('@discoin/scambio').default;
+
+const client = new Discoin('token', 'currencyCode');
+```
+
+##### CommonJS
+
+```js
+const Discoin = require('@discoin/scambio').default;
 
 const client = new Discoin('token', 'currencyCode');
 ```
 
 #### Creating a transaction
 
-```ts
-// Get the currency
-const destinationCurrency = client.currencies.getOne('currencyCode');
-
-// Create the transaction
+```js
 const newTransaction = client.transactions.create({
-  to: destinationCurrency
-  amount: 10
+  to: 'ABC'
+  amount: 100
   // Discord user ID
-  user: 'userID'
+  user: '210024244766179329'
 });
 ```
 
 #### Getting transactions
 
-```ts
-// Get a transaction by ID
-await client.transactions.getOne('transactionID');
+##### Get one transaction by ID
 
-// Get all the transactions that match a filter
-// (this uses @nestjsx/crud-request)
+```js
+await client.transactions.getOne('808179ef-aef4-4bbb-ab37-db310235fb0c');
+```
+
+##### Get many transactions with built-in queries
+
+This uses common queries, which are generated specifically for your client and don't need any extra dependencies.
+
+```js
+await client.transactions.getMany(client.commonQueries.UNHANDLED_TRANSACTIONS);
+```
+
+##### Get many transactions with query builder
+
+This uses the `@nestjsx/crud-request` query builder.
+You should use this when you are performing very complex queries or are dynamically creating queries.
+
+```ts
 import {RequestQueryBuilder, CondOperator} from '@nestjsx/crud-request';
 
-const filter = RequestQueryBuilder.create()
+const query = RequestQueryBuilder.create()
 	// Only get transactions where the `amount` field > 10
 	.setFilter({
 		field: 'amount',
@@ -75,40 +97,33 @@ const filter = RequestQueryBuilder.create()
 	})
 	.query();
 
-await client.transactions.getMany(filter);
-
-// Get unhandled transactions for your bot
-// (this uses common queries)
-
-await client.transactions.getMany(client.commonQueries.UNHANDLED_TRANSACTIONS);
+await client.transactions.getMany(query);
 ```
 
 #### Processing transactions
 
+You can mark a transaction as handled after you have paid the user.
+This helps to keep transactions atomic and can make retrying failed transactions very simple.
+
 ```ts
-// Get the unhandled transactions for your bot
-const unhandled = await client.transactions.getMany(client.commonQueries.UNHANDLED_TRANSACTIONS);
+const unhandledTransactions = await client.transactions.getMany(client.commonQueries.UNHANDLED_TRANSACTIONS);
 
-// If there are no unhandled transactions, don't do anything
-if (!unhandled.length) return;
-
-// Iterate through the transactions
-for (const transaction of unhandled) {
-	// Add the amount of money the user needs to get
-	// WARNING: Pay the user the value in the `payout` property, **not** the `amount` property!
-	console.log(`${transaction.user} got ${transaction.payout}$`);
+unhandledTransactions.forEach(async transaction => {
+	console.log(`${transaction.user} received ${transaction.payout} ${transaction.to.id}`);
 
 	// After you're done with the transaction, mark it as completed
 	await transaction.update({handled: true});
-}
+});
 ```
 
 ## Contributing
 
-Pull requests and issues are always welcome! Please, read our [Code of Conduct](CODE_OF_CONDUCT.md) and use the issue tracker for bug requests and feature submissions.
+Pull requests and issues are always welcome!
+Please, read our [Code of Conduct](CODE_OF_CONDUCT.md) and our [contributing guide](CONTRIBUTING.md) if you are interested in helping to improve the library..
 
 ## Licence
 
-Copyright 2019-2020 [Jonah Snider](https://jonah.pw). Distributed under the [MIT licence](LICENCE.md).
+Copyright 2019-2020 [Jonah Snider](https://jonah.pw).
+Distributed under the [MIT licence](LICENCE.md).
 
 If you would like the licence to be something other than MIT for you or your organization please get in touch.
