@@ -1,11 +1,26 @@
 {
-	"name": "@discoin/scambio",
-	"version": "0.0.0-development",
-	"main": "./tsc_output/src/index",
 	"author": {
 		"name": "The Discoin Association"
 	},
-	"license": "MIT",
+	"ava": {
+		"compileEnhancements": false,
+		"extensions": [
+			"ts"
+		],
+		"files": [
+			"!tsc_output",
+			"!docs_out",
+			"!coverage",
+			"!.nyc_output"
+		],
+		"require": [
+			"ts-node/register",
+			"source-map-support/register"
+		]
+	},
+	"bugs": {
+		"url": "https://github.com/Discoin/scambio/issues"
+	},
 	"contributors": [
 		{
 			"email": "jonah@jonah.pw",
@@ -13,32 +28,6 @@
 			"url": "https://jonah.pw"
 		}
 	],
-	"homepage": "https://scambio.discoin.zws.im/",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Discoin/scambio.git"
-	},
-	"bugs": {
-		"url": "https://github.com/Discoin/scambio/issues"
-	},
-	"engines": {
-		"node": "12"
-	},
-	"keywords": [
-		"discoin",
-		"discord",
-		"discord-bot"
-	],
-	"scripts": {
-		"build": "tsc",
-		"docs": "typedoc --out docs_out src",
-		"lint": "xo",
-		"prebuild": "rimraf tsc_output",
-		"predocs": "rimraf docs_out",
-		"pretest": "rimraf coverage .nyc_output",
-		"style": "prettier --ignore-path .gitignore --check \"./**/*.{{j,t}{s,sx},flow,{sc,c,le}ss,json,m{d,dx},{y,ya}ml}\"",
-		"test": "nyc ava"
-	},
 	"dependencies": {
 		"ky": "^0.16.1",
 		"ky-universal": "^0.3.0",
@@ -62,28 +51,18 @@
 		"typescript": "^3.7.3",
 		"xo": "^0.25.3"
 	},
-	"peerDependencies": {
-		"@nestjsx/crud-request": "^4.3.3"
+	"engines": {
+		"node": "12"
 	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"ava": {
-		"compileEnhancements": false,
-		"extensions": [
-			"ts"
-		],
-		"files": [
-			"!tsc_output",
-			"!docs_out",
-			"!coverage",
-			"!.nyc_output"
-		],
-		"require": [
-			"ts-node/register",
-			"source-map-support/register"
-		]
-	},
+	"homepage": "https://scambio.discoin.zws.im/",
+	"keywords": [
+		"discoin",
+		"discord",
+		"discord-bot"
+	],
+	"license": "MIT",
+	"main": "./tsc_output/src/index",
+	"name": "@discoin/scambio",
 	"nyc": {
 		"all": true,
 		"extends": "@istanbuljs/nyc-config-typescript",
@@ -95,6 +74,27 @@
 			"cobertura"
 		]
 	},
+	"peerDependencies": {
+		"@nestjsx/crud-request": "^4.3.3"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Discoin/scambio.git"
+	},
+	"scripts": {
+		"build": "tsc",
+		"docs": "typedoc --out docs_out src",
+		"lint": "xo",
+		"prebuild": "rimraf tsc_output",
+		"predocs": "rimraf docs_out",
+		"pretest": "rimraf coverage .nyc_output",
+		"style": "prettier --ignore-path .gitignore --check \"./**/*.{{j,t}{s,sx},flow,{sc,c,le}ss,json,m{d,dx},{y,ya}ml}\"",
+		"test": "nyc ava"
+	},
+	"version": "0.0.0-development",
 	"xo": {
 		"extends": "xo-typescript",
 		"extensions": [
