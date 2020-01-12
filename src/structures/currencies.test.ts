@@ -57,5 +57,9 @@ test('Get many currencies', async t => {
 
 	const paginatedTransactions = await currencyStore.getMany(paginatedQuery);
 
-	t.deepEqual(paginatedTransactions, [apiCurrencyToCurrency(testCurrency)] as Currency[], 'Paginated query');
+	t.deepEqual(
+		paginatedTransactions,
+		{count: 1, page: 1, pageCount: 1, total: 1, data: [apiCurrencyToCurrency(testCurrency)]},
+		'Paginated query'
+	);
 });

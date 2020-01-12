@@ -67,7 +67,7 @@ export class Transaction {
 		this.to = data.to;
 		this.handled = data.handled;
 		this.user = data.user;
-		this.timestamp = data.timestamp instanceof Date ? data.timestamp :new Date(data.timestamp);
+		this.timestamp = data.timestamp instanceof Date ? data.timestamp : new Date(data.timestamp);
 		this.payout = data.payout;
 	}
 
@@ -106,7 +106,7 @@ export class TransactionStore {
 	 * @example
 	 * client.getMany('filter=handled||eq||false');
 	 */
-	async getMany(query?: string): Promise<Transaction[]> {
+	async getMany(query?: string): Promise<Transaction[] | APIGetManyDTO<Transaction>> {
 		const req = ky(`transactions${query ? `?${query}` : ''}`, {
 			prefixUrl: API_URL,
 			headers: {'User-Agent': USER_AGENT}
@@ -116,11 +116,14 @@ export class TransactionStore {
 
 		const getManyResponseJSON: APITransaction[] | APIGetManyDTO<APITransaction> = await res.json();
 
-		const apiPartialTransactions = getManyResponseIsDTO(getManyResponseJSON)
-			? getManyResponseJSON.data
-			: getManyResponseJSON;
-
-		return apiPartialTransactions.map(apiPartialTransaction => new Transaction(this.client, apiPartialTransaction));
+		if (getManyResponseIsDTO(getManyResponseJSON)) {
+			return {
+				...getManyResponseJSON,
+				data: getManyResponseJSON.data.map(apiTransaction => new Transaction(this.client, apiTransaction))
+			};
+		} else {
+			return getManyResponseJSON.map(apiTransaction => new Transaction(this.client, apiTransaction));
+		}
 	}
 
 	/**

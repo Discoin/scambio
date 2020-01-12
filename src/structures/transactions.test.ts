@@ -18,6 +18,14 @@ const testTransaction: APITransaction = {
 	user: '210024244766179329'
 };
 
+const fullTransaction: Omit<Transaction, '_client' | 'update'> = {
+	...testTransaction,
+	timestamp: new Date(0),
+	amount: 1000,
+	from: {id: 'OAT', name: 'Dice Oats', reserve: 1000, value: 100},
+	to: {id: 'DTS', name: 'DiscordTel Credits', reserve: 1000, value: 100}
+};
+
 const options = {token: 'token', currencyID: 'OAT'};
 const client = new Client(options.token, options.currencyID);
 
@@ -78,7 +86,11 @@ test('Get many transactions', async t => {
 
 	const paginatedTransactions = await client.transactions.getMany(paginatedQuery);
 
-	t.deepEqual(paginatedTransactions, [new Transaction(client, testTransaction)], 'Paginated query');
+	t.deepEqual(
+		paginatedTransactions,
+		{page: 1, pageCount: 1, total: 1, count: 1, data: [new Transaction(client, testTransaction)]},
+		'Paginated query'
+	);
 });
 
 test('Update transaction', async t => {

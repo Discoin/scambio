@@ -16,7 +16,7 @@ export const botStore = {
 	 * @example
 	 * client.getMany('filter=id||eq||388191157869477888');
 	 */
-	async getMany(query?: string): Promise<Bot[]> {
+	async getMany(query?: string): Promise<Bot[] | APIGetManyDTO<Bot>> {
 		// Interpolation of query parameters here is almost certainly a mistake
 		const req = ky.get(`bots${query ? `?${query}` : ''}`, {
 			prefixUrl: API_URL,
@@ -27,11 +27,11 @@ export const botStore = {
 
 		const getManyResponseJSON: APIBot[] | APIGetManyDTO<APIBot> = await res.json();
 
-		const apiBots = getManyResponseIsDTO(getManyResponseJSON) ? getManyResponseJSON.data : getManyResponseJSON;
-
-		const bots = apiBots.map(apiBot => apiBotToBot(apiBot));
-
-		return bots;
+		if (getManyResponseIsDTO(getManyResponseJSON)) {
+			return {...getManyResponseJSON, data: getManyResponseJSON.data.map(apiBot => apiBotToBot(apiBot))};
+		} else {
+			return getManyResponseJSON.map(apiBot => apiBotToBot(apiBot));
+		}
 	},
 
 	/**

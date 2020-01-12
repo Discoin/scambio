@@ -59,5 +59,9 @@ test('Get many bots', async t => {
 
 	const paginatedTransactions = await botStore.getMany(paginatedQuery);
 
-	t.deepEqual(paginatedTransactions, [apiBotToBot(testBot)], 'Paginated query');
+	t.deepEqual(
+		paginatedTransactions,
+		{count: 1, page: 1, pageCount: 1, total: 1, data: [apiBotToBot(testBot)]},
+		'Paginated query'
+	);
 });
