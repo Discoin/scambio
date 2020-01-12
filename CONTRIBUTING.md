@@ -41,7 +41,7 @@ You can run XO with this command:
 yarn run lint
 ```
 
-Note that XO will also error if you have TypeScript errors, not just if your formatting is incorrect.
+Note that XO will also error if you have certain formatting errors, not just if your code has issues.
 
 ## Linting
 
