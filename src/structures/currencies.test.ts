@@ -6,7 +6,7 @@ import {apiCurrencyToCurrency} from '../util/data-transfer-object';
 import {Currency} from '../types/discoin';
 import {currencyStore} from './currencies';
 
-const testCurrency: APICurrency = {id: 'ABC', name: 'Currency name', reserve: 1_000_000, value: '0.1'};
+const testCurrency: APICurrency = {id: 'ABC', name: 'Currency name', reserve: '1_000_000', value: '0.1'};
 
 test.after(() => {
 	nock.restore();

@@ -7,9 +7,9 @@ import {Currency, Bot} from '../types/discoin';
  * @returns The parsed currency
  */
 export function apiCurrencyToCurrency(currency: APICurrency): Currency {
-	const {value, ...rest} = currency;
+	const {value, reserve, ...rest} = currency;
 
-	return {...rest, value: parseFloat(value)};
+	return {...rest, value: parseFloat(value), reserve: parseFloat(reserve)};
 }
 
 /**
