@@ -39,3 +39,11 @@ export function getManyResponseIsDTO<T>(
 
 	return false;
 }
+
+/**
+ * Check if a currency object (`APICurrency` or `Currency`) is an `APICurrency`.
+ * @param currency Currency object to check
+ */
+export function currencyIsAPICurrency(currency: APICurrency | Currency): currency is APICurrency {
+	return typeof currency.reserve === 'string' && typeof currency.value === 'string';
+}

@@ -3,7 +3,7 @@ import {Except} from 'type-fest';
 import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
 import {Currency, UUIDv4} from '../types/discoin';
 import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
-import {getManyResponseIsDTO} from '../util/data-transfer-object';
+import {getManyResponseIsDTO, apiCurrencyToCurrency, currencyIsAPICurrency} from '../util/data-transfer-object';
 import {Client} from './client';
 
 /**
@@ -43,8 +43,8 @@ export class Transaction {
 	public static readonly API_URL = API_URL;
 	public readonly payout: number;
 	public readonly amount: number;
-	public readonly from: Pick<Currency, 'id' | 'name'> | Currency;
-	public readonly to: Pick<Currency, 'id' | 'name'> | Currency;
+	public readonly from: Currency;
+	public readonly to: Currency;
 	public readonly id: UUIDv4;
 	public handled: boolean;
 	public readonly user: string;
@@ -64,8 +64,8 @@ export class Transaction {
 		this._client = client;
 		this.id = data.id;
 		this.amount = typeof data.amount === 'string' ? parseFloat(data.amount) : data.amount;
-		this.from = data.from;
-		this.to = data.to;
+		this.from = currencyIsAPICurrency(data.from) ? apiCurrencyToCurrency(data.from) : data.from;
+		this.to = currencyIsAPICurrency(data.to) ? apiCurrencyToCurrency(data.to) : data.to;
 		this.handled = data.handled;
 		this.user = data.user;
 		this.timestamp = data.timestamp instanceof Date ? data.timestamp : new Date(data.timestamp);

@@ -16,10 +16,10 @@ export interface APITransaction {
 	readonly id: UUIDv4;
 
 	/** The currency this transaction is converting from. */
-	readonly from: Pick<Currency, 'id' | 'name'> | Currency;
+	readonly from: APICurrency;
 
 	/** The currency this transaction is converting to. */
-	readonly to: Pick<Currency, 'id' | 'name'> | Currency;
+	readonly to: APICurrency;
 
 	/**
 	 * The amount in the `from` currency that this transcation is converting.
@@ -62,7 +62,7 @@ export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
 	readonly toId: string;
 	/**
 	 * The amount in the `from` currency that this transcation is converting.
-	 * This is can be a string type to preserve precision of decimal places.
+	 * This can be a string type to preserve precision of decimal places.
 	 * @example '1000.543297'
 	 * @example 1000.24
 	 */
