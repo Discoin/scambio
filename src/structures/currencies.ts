@@ -1,9 +1,8 @@
-import fetch, {Headers} from 'node-fetch';
-import {APICurrency} from '../types/api';
+import ky from 'ky-universal';
+import {APICurrency, APIGetManyDTO} from '../types/api';
 import {Currency} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
-import {apiCurrencyToCurrency} from '../util/data-transfer-object';
-import {throwOnResponseNotOk} from '../util/errors';
+import {apiCurrencyToCurrency, getManyResponseIsDTO} from '../util/data-transfer-object';
 
 /**
  * Store and retrieve many currencies.
@@ -16,21 +15,25 @@ export const currencyStore = {
 	 * @example
 	 * client.getMany('filter=value||$gte||0.4');
 	 */
-	async getMany(query?: string): Promise<Currency[]> {
+	async getMany(query?: string): Promise<Currency[] | APIGetManyDTO<Currency>> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const req = fetch(`${API_URL}/currencies${query ? `?${query}` : ''}`, {
-			headers: new Headers({'User-Agent': USER_AGENT})
+		const req = ky.get(`currencies${query ? `?${query}` : ''}`, {
+			headers: {'User-Agent': USER_AGENT},
+			prefixUrl: API_URL
 		});
 
 		const res = await req;
 
-		await throwOnResponseNotOk(res);
+		const getManyResponseJSON: APICurrency[] | APIGetManyDTO<APICurrency> = await res.json();
 
-		const apiCurrencies: APICurrency[] = await res.json();
+		if (getManyResponseIsDTO(getManyResponseJSON)) {
+			return {
+				...getManyResponseJSON,
+				data: getManyResponseJSON.data.map(apiCurrency => apiCurrencyToCurrency(apiCurrency))
+			};
+		}
 
-		const currencies = apiCurrencies.map(apiCurrency => apiCurrencyToCurrency(apiCurrency));
-
-		return currencies;
+		return getManyResponseJSON.map(apiCurrency => apiCurrencyToCurrency(apiCurrency));
 	},
 
 	/**
@@ -39,13 +42,12 @@ export const currencyStore = {
 	 * @returns The transaction
 	 */
 	async getOne(code: string): Promise<Currency> {
-		const req = fetch(`${API_URL}/currencies/${encodeURIComponent(code)}`, {
-			headers: new Headers({'User-Agent': USER_AGENT})
+		const req = ky.get(`currencies/${encodeURIComponent(code)}`, {
+			headers: {'User-Agent': USER_AGENT},
+			prefixUrl: API_URL
 		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const apiCurrency: APICurrency = await res.json();
 

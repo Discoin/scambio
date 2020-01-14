@@ -14,6 +14,8 @@ npm i
 pnpm install
 ```
 
+Note that pnpm may have issues with TypeScript due to hard links not being properly handled.
+
 ## Publishing
 
 Publishing is automatically done with [semantic release](https://semantic-release.gitbook.io/semantic-release/).
@@ -39,7 +41,7 @@ You can run XO with this command:
 yarn run lint
 ```
 
-Note that XO will also error if you have TypeScript errors, not just if your formatting is incorrect.
+Note that XO will also error if you have certain formatting errors, not just if your code has issues.
 
 ## Linting
 

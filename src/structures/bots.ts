@@ -1,9 +1,8 @@
-import fetch, {Headers} from 'node-fetch';
+import ky from 'ky-universal';
 import {Bot} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
-import {APIBot} from '../types/api';
-import {apiBotToBot} from '../util/data-transfer-object';
-import {throwOnResponseNotOk} from '../util/errors';
+import {APIBot, APIGetManyDTO} from '../types/api';
+import {apiBotToBot, getManyResponseIsDTO} from '../util/data-transfer-object';
 
 // Hello welcome to the bot store what would you like to buy
 /**
@@ -17,21 +16,22 @@ export const botStore = {
 	 * @example
 	 * client.getMany('filter=id||eq||388191157869477888');
 	 */
-	async getMany(query?: string): Promise<Bot[]> {
+	async getMany(query?: string): Promise<Bot[] | APIGetManyDTO<Bot>> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const req = fetch(`${API_URL}/bots${query ? `?${query}` : ''}`, {
-			headers: new Headers({'User-Agent': USER_AGENT})
+		const req = ky.get(`bots${query ? `?${query}` : ''}`, {
+			prefixUrl: API_URL,
+			headers: {'User-Agent': USER_AGENT}
 		});
 
 		const res = await req;
 
-		await throwOnResponseNotOk(res);
+		const getManyResponseJSON: APIBot[] | APIGetManyDTO<APIBot> = await res.json();
 
-		const apiBots: APIBot[] = await res.json();
+		if (getManyResponseIsDTO(getManyResponseJSON)) {
+			return {...getManyResponseJSON, data: getManyResponseJSON.data.map(apiBot => apiBotToBot(apiBot))};
+		}
 
-		const bots = apiBots.map(apiBot => apiBotToBot(apiBot));
-
-		return bots;
+		return getManyResponseJSON.map(apiBot => apiBotToBot(apiBot));
 	},
 
 	/**
@@ -40,13 +40,12 @@ export const botStore = {
 	 * @returns The bot
 	 */
 	async getOne(id: string): Promise<Bot> {
-		const req = fetch(`${API_URL}/bots/${encodeURIComponent(id)}`, {
-			headers: new Headers({'User-Agent': USER_AGENT})
+		const req = ky.get(`bots/${encodeURIComponent(id)}`, {
+			prefixUrl: API_URL,
+			headers: {'User-Agent': USER_AGENT}
 		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const apiBot: APIBot = await res.json();
 

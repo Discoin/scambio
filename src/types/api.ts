@@ -1,5 +1,13 @@
 import {Bot, Currency, UUIDv4} from './discoin';
 
+export interface APIGetManyDTO<T> {
+	data: T[];
+	count: number;
+	total: number;
+	page: number;
+	pageCount: number;
+}
+
 /**
  * A Discoin transaction.
  */
@@ -8,10 +16,10 @@ export interface APITransaction {
 	readonly id: UUIDv4;
 
 	/** The currency this transaction is converting from. */
-	readonly from: Pick<Currency, 'id' | 'name'> | Currency;
+	readonly from: APICurrency;
 
 	/** The currency this transaction is converting to. */
-	readonly to: Pick<Currency, 'id' | 'name'> | Currency;
+	readonly to: APICurrency;
 
 	/**
 	 * The amount in the `from` currency that this transcation is converting.
@@ -54,7 +62,7 @@ export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
 	readonly toId: string;
 	/**
 	 * The amount in the `from` currency that this transcation is converting.
-	 * This is can be a string type to preserve precision of decimal places.
+	 * This can be a string type to preserve precision of decimal places.
 	 * @example '1000.543297'
 	 * @example 1000.24
 	 */
@@ -62,26 +70,21 @@ export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
 }
 
 /**
- * A transaction object from the API.
- */
-export interface APIPartialTransaction extends Omit<APITransaction, 'from' | 'to'> {
-	/** Partial currency that just contains the ID and name. */
-	readonly from: Pick<Currency, 'id' | 'name'>;
-
-	/** Partial currency that just contains the ID and name. */
-	readonly to: Pick<Currency, 'id' | 'name'>;
-}
-
-/**
  * A currency object from the API.
  */
-export interface APICurrency extends Omit<Currency, 'value'> {
+export interface APICurrency extends Omit<Currency, 'value' | 'reserve'> {
 	/**
 	 * The value of this currency.
-	 * For whatever reason the API returns this as a string.
+	 * This is a string type to preserve precision of decimal places.
 	 * @example '0.1'
 	 */
 	readonly value: string;
+	/**
+	 * The reserve available of this currency.
+	 * This is a string type to preserve precision of decimal places.
+	 * @example '34435.66298076442200406902'
+	 */
+	readonly reserve: string;
 }
 
 /**

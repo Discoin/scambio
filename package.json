@@ -1,75 +1,6 @@
 {
-	"name": "@discoin/scambio",
-	"version": "0.0.0-development",
-	"main": "./tsc_output/src/index",
 	"author": {
 		"name": "The Discoin Association"
-	},
-	"license": "MIT",
-	"contributors": [
-		{
-			"email": "jonah@jonah.pw",
-			"name": "Jonah Snider",
-			"url": "https://jonah.pw"
-		},
-		{
-			"email": "charalampos.fanoulis@gmail.com",
-			"name": "Charalampos Fanoulis",
-			"url": "https://enkiel.cloud"
-		}
-	],
-	"homepage": "https://scambio.discoin.zws.im/",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Discoin/scambio.git"
-	},
-	"bugs": {
-		"url": "https://github.com/Discoin/scambio/issues"
-	},
-	"engines": {
-		"node": "12"
-	},
-	"keywords": [
-		"discoin",
-		"discord",
-		"discord-bot"
-	],
-	"scripts": {
-		"build": "tsc",
-		"docs": "typedoc --out docs_out src",
-		"lint": "xo",
-		"prebuild": "rimraf tsc_output",
-		"predocs": "rimraf docs_out",
-		"pretest": "rimraf coverage .nyc_output",
-		"style": "prettier --ignore-path .gitignore --check \"./**/*.{{j,t}{s,sx},flow,{sc,c,le}ss,json,m{d,dx},{y,ya}ml}\"",
-		"test": "nyc ava"
-	},
-	"dependencies": {
-		"node-fetch": "^2.6.0"
-	},
-	"devDependencies": {
-		"@istanbuljs/nyc-config-typescript": "^1.0.0",
-		"@types/node-fetch": "^2.5.4",
-		"@typescript-eslint/eslint-plugin": "^2.9.0",
-		"@typescript-eslint/parser": "^2.10.0",
-		"ava": "^2.4.0",
-		"eslint-config-xo-typescript": "^0.24.1",
-		"nock": "^11.7.0",
-		"nyc": "^15.0.0",
-		"prettier": "^1.19.1",
-		"rimraf": "^3.0.0",
-		"semantic-release": "^15.14.0",
-		"source-map-support": "^0.5.16",
-		"ts-node": "^8.5.4",
-		"typedoc": "^0.15.5",
-		"typescript": "^3.7.3",
-		"xo": "^0.25.3"
-	},
-	"peerDependencies": {
-		"@nestjsx/crud-request": "^4.3.3"
-	},
-	"publishConfig": {
-		"access": "public"
 	},
 	"ava": {
 		"compileEnhancements": false,
@@ -87,6 +18,52 @@
 			"source-map-support/register"
 		]
 	},
+	"bugs": {
+		"url": "https://github.com/Discoin/scambio/issues"
+	},
+	"contributors": [
+		{
+			"email": "jonah@jonah.pw",
+			"name": "Jonah Snider",
+			"url": "https://jonah.pw"
+		}
+	],
+	"dependencies": {
+		"ky": "^0.16.1",
+		"ky-universal": "^0.3.0",
+		"node-fetch": "^2.6.0"
+	},
+	"devDependencies": {
+		"@istanbuljs/nyc-config-typescript": "^1.0.0",
+		"@types/node-fetch": "^2.5.4",
+		"@typescript-eslint/eslint-plugin": "^2.16.0",
+		"@typescript-eslint/parser": "^2.16.0",
+		"ava": "^2.4.0",
+		"eslint-config-xo-typescript": "^0.24.1",
+		"nock": "^11.7.0",
+		"nyc": "^15.0.0",
+		"prettier": "^1.19.1",
+		"rimraf": "^3.0.0",
+		"semantic-release": "^16.0.0",
+		"source-map-support": "^0.5.16",
+		"ts-node": "^8.6.2",
+		"type-fest": "^0.8.1",
+		"typedoc": "^0.16.2",
+		"typescript": "^3.7.3",
+		"xo": "^0.25.3"
+	},
+	"engines": {
+		"node": "12"
+	},
+	"homepage": "https://scambio.discoin.zws.im/",
+	"keywords": [
+		"discoin",
+		"discord",
+		"discord-bot"
+	],
+	"license": "MIT",
+	"main": "./tsc_output/src/index",
+	"name": "@discoin/scambio",
 	"nyc": {
 		"all": true,
 		"extends": "@istanbuljs/nyc-config-typescript",
@@ -98,6 +75,27 @@
 			"cobertura"
 		]
 	},
+	"peerDependencies": {
+		"@nestjsx/crud-request": "^4.3.3"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Discoin/scambio.git"
+	},
+	"scripts": {
+		"build": "tsc",
+		"docs": "typedoc --out docs_out src",
+		"lint": "xo",
+		"prebuild": "rimraf tsc_output",
+		"predocs": "rimraf docs_out",
+		"pretest": "rimraf coverage .nyc_output",
+		"style": "prettier --ignore-path .gitignore --check \"./**/*.{{j,t}{s,sx},flow,{sc,c,le}ss,json,m{d,dx},{y,ya}ml}\"",
+		"test": "nyc ava"
+	},
+	"version": "0.0.0-development",
 	"xo": {
 		"extends": "xo-typescript",
 		"extensions": [

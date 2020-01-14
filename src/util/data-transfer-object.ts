@@ -1,4 +1,4 @@
-import {APICurrency, APIBot} from '../types/api';
+import {APICurrency, APIBot, APIGetManyDTO, APITransaction} from '../types/api';
 import {Currency, Bot} from '../types/discoin';
 
 /**
@@ -7,9 +7,9 @@ import {Currency, Bot} from '../types/discoin';
  * @returns The parsed currency
  */
 export function apiCurrencyToCurrency(currency: APICurrency): Currency {
-	const {value, ...rest} = currency;
+	const {value, reserve, ...rest} = currency;
 
-	return {...rest, value: parseFloat(value)};
+	return {...rest, value: parseFloat(value), reserve: parseFloat(reserve)};
 }
 
 /**
@@ -21,4 +21,30 @@ export function apiBotToBot(bot: APIBot): Bot {
 	const {currency, ...rest} = bot;
 
 	return {...rest, currency: apiCurrencyToCurrency(currency)};
+}
+
+type GetManyResponse = APIBot[] | APICurrency[] | APITransaction[];
+
+/**
+ * Check if a `getMany` response from the API is a DTO.
+ * @param getManyResponse The `getMany` response to check
+ * @returns Boolean of whether or not the provided response is a DTO
+ */
+export function getManyResponseIsDTO<T>(
+	getManyResponse: GetManyResponse | APIGetManyDTO<T>
+): getManyResponse is APIGetManyDTO<T> {
+	if (!Array.isArray(getManyResponse) && Object.prototype.hasOwnProperty.call(getManyResponse, 'data')) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Check if a currency object (`APICurrency` or `Currency`) is an `APICurrency`.
+ * @param currency Currency object to check
+ * @returns Boolean of whether or not the provided currency is an API currency.
+ */
+export function currencyIsAPICurrency(currency: APICurrency | Currency): currency is APICurrency {
+	return typeof currency.reserve === 'string' && typeof currency.value === 'string';
 }

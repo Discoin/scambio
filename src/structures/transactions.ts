@@ -1,8 +1,9 @@
-import fetch, {Headers} from 'node-fetch';
-import {APIPartialTransaction, APITransaction, APITransactionCreate} from '../types/api';
+import ky from 'ky-universal';
+import {Except} from 'type-fest';
+import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
 import {Currency, UUIDv4} from '../types/discoin';
-import {API_URL, HTTPRequestMethods, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
-import {throwOnResponseNotOk} from '../util/errors';
+import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
+import {getManyResponseIsDTO, apiCurrencyToCurrency, currencyIsAPICurrency} from '../util/data-transfer-object';
 import {Client} from './client';
 
 /**
@@ -42,8 +43,8 @@ export class Transaction {
 	public static readonly API_URL = API_URL;
 	public readonly payout: number;
 	public readonly amount: number;
-	public readonly from: Pick<Currency, 'id' | 'name'> | Currency;
-	public readonly to: Pick<Currency, 'id' | 'name'> | Currency;
+	public readonly from: Currency;
+	public readonly to: Currency;
 	public readonly id: UUIDv4;
 	public handled: boolean;
 	public readonly user: string;
@@ -55,19 +56,19 @@ export class Transaction {
 	 * @param client The Discoin client to use for updating this transaction
 	 * @param data The data for populating this transaction
 	 */
-	constructor(client: Client, data: APITransaction) {
+	constructor(client: Client, data: APITransaction | Except<Transaction, 'update'>) {
 		if (!UUID_V4_REG_EXP.test(data.id)) {
 			throw new RangeError(`Transaction ID ${data.id} does not appear to be a valid v4 UUID`);
 		}
 
 		this._client = client;
 		this.id = data.id;
-		this.amount = parseFloat(data.amount);
-		this.from = data.from;
-		this.to = data.to;
+		this.amount = typeof data.amount === 'string' ? parseFloat(data.amount) : data.amount;
+		this.from = currencyIsAPICurrency(data.from) ? apiCurrencyToCurrency(data.from) : data.from;
+		this.to = currencyIsAPICurrency(data.to) ? apiCurrencyToCurrency(data.to) : data.to;
 		this.handled = data.handled;
 		this.user = data.user;
-		this.timestamp = new Date(data.timestamp);
+		this.timestamp = data.timestamp instanceof Date ? data.timestamp : new Date(data.timestamp);
 		this.payout = data.payout;
 	}
 
@@ -77,19 +78,16 @@ export class Transaction {
 	 * @returns
 	 */
 	async update(options: TransactionUpdateOptions): Promise<this> {
-		const req = fetch(`${API_URL}/transactions/${this.id}`, {
-			method: HTTPRequestMethods.PATCH,
-			headers: new Headers({
+		const req = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {
+			prefixUrl: API_URL,
+			headers: {
 				Authorization: `Bearer ${this._client.token}`,
-				'Content-Type': 'application/json',
 				'User-Agent': `${USER_AGENT} ${this._client.currencyID}`
-			}),
-			body: JSON.stringify(options)
+			},
+			json: options
 		});
 
-		const res = await req;
-
-		await throwOnResponseNotOk(res);
+		await req;
 
 		this.handled = options.handled;
 		return this;
@@ -109,17 +107,24 @@ export class TransactionStore {
 	 * @example
 	 * client.getMany('filter=handled||eq||false');
 	 */
-	async getMany(query?: string): Promise<Transaction[]> {
-		// Interpolation of query parameters here is almost certainly a mistake
-		const req = fetch(`${API_URL}/transactions${query ? `?${query}` : ''}`);
+	async getMany(query?: string): Promise<Transaction[] | APIGetManyDTO<Transaction>> {
+		const req = ky(`transactions${query ? `?${query}` : ''}`, {
+			prefixUrl: API_URL,
+			headers: {'User-Agent': USER_AGENT}
+		});
 
 		const res = await req;
 
-		await throwOnResponseNotOk(res);
+		const getManyResponseJSON: APITransaction[] | APIGetManyDTO<APITransaction> = await res.json();
 
-		const transactions: APIPartialTransaction[] = await res.json();
+		if (getManyResponseIsDTO(getManyResponseJSON)) {
+			return {
+				...getManyResponseJSON,
+				data: getManyResponseJSON.data.map(apiTransaction => new Transaction(this.client, apiTransaction))
+			};
+		}
 
-		return transactions.map(apiTransaction => new Transaction(this.client, apiTransaction));
+		return getManyResponseJSON.map(apiTransaction => new Transaction(this.client, apiTransaction));
 	}
 
 	/**
@@ -132,13 +137,14 @@ export class TransactionStore {
 			throw new RangeError(`Transaction ID ${id} does not appear to be a valid v4 UUID`);
 		}
 
-		const req = fetch(`${API_URL}/transactions/${id}`);
+		const req = ky(`transactions/${encodeURIComponent(id)}`, {
+			prefixUrl: API_URL,
+			headers: {'User-Agent': USER_AGENT}
+		});
 
 		const res = await req;
 
-		await throwOnResponseNotOk(res);
-
-		const apiTransaction: APIPartialTransaction = await res.json();
+		const apiTransaction: APITransaction = await res.json();
 
 		return new Transaction(this.client, apiTransaction);
 	}
@@ -149,19 +155,19 @@ export class TransactionStore {
 	 * @returns The transaction that was created
 	 */
 	async create(options: TransactionCreateOptions): Promise<Transaction> {
-		const req = fetch(`${API_URL}/transactions`, {
-			method: HTTPRequestMethods.POST,
-			headers: new Headers({Authorization: `Bearer ${this.client.token}`, 'Content-Type': 'application/json'}),
-			body: JSON.stringify({
-				toId: options.to,
-				amount: options.amount,
-				user: options.user
-			} as APITransactionCreate)
+		const json: APITransactionCreate = {
+			amount: options.amount,
+			toId: options.to,
+			user: options.user
+		};
+
+		const req = ky.post('transactions', {
+			prefixUrl: API_URL,
+			headers: {Authorization: `Bearer ${this.client.token}`},
+			json
 		});
 
 		const res = await req;
-
-		await throwOnResponseNotOk(res);
 
 		const apiTransaction: APITransaction = await res.json();
 
