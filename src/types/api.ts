@@ -96,13 +96,21 @@ export interface APIBot extends Omit<Bot, 'currency'> {
  * An API error response body.
  * @example
  * {
- * 	"statusCode": 401,
- * 	"error": "Unauthorized"
+ * 	statusCode: 401,
+ * 	error: "Unauthorized"
+ * }
+ * @example
+ * {
+ * 	statusCode: 404,
+ * 	error: "Not Found",
+ * 	message: "Cannot GET /"
  * }
  */
 export interface APIErrorResponse {
 	/** The HTTP status code of the response. */
 	readonly statusCode: number;
-	/** A description of what went wrong. */
+	/** HTTP status code error message */
 	readonly error: string;
+	/** A description of what went wrong.  */
+	readonly message?: string;
 }
