@@ -7,7 +7,7 @@ test('API currency to currency', t => {
 		id: 'OAT',
 		name: 'Dice Oats',
 		reserve: '1_000_000',
-		value: '0.1'
+		value: 0.1
 	};
 
 	const currency = apiCurrencyToCurrency(apiCurrency);
@@ -15,7 +15,7 @@ test('API currency to currency', t => {
 	t.is(currency.id, apiCurrency.id, 'ID does not change');
 	t.is(currency.name, apiCurrency.name, 'Name does not change');
 	t.is(currency.reserve, parseFloat(apiCurrency.reserve), 'Parses reserve as a number');
-	t.is(currency.value, parseFloat(apiCurrency.value), 'Parses value as a number');
+	t.is(currency.value, apiCurrency.value, 'Value does not change');
 });
 
 test('API bot to bot', t => {
@@ -25,7 +25,7 @@ test('API bot to bot', t => {
 			id: 'OAT',
 			name: 'Dice Oats',
 			reserve: '1_000_000',
-			value: '0.1'
+			value: 0.1
 		}
 	};
 

@@ -10,8 +10,8 @@ const notAUUID = 'not a v4 UUID';
 
 const testTransaction: APITransaction = {
 	amount: '1000',
-	from: {id: 'OAT', name: 'Dice Oats', reserve: '1000000', value: '0.1'},
-	to: {id: 'DTS', name: 'DiscordTel Credits', reserve: '1000000', value: '1'},
+	from: {id: 'OAT', name: 'Dice Oats', reserve: '1000000', value: 0.1},
+	to: {id: 'DTS', name: 'DiscordTel Credits', reserve: '1000000', value: 1},
 	handled: false,
 	id: 'a62b3566-60a3-4241-8c11-316775b973ff',
 	payout: 100,

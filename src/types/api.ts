@@ -72,17 +72,11 @@ export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
 /**
  * A currency object from the API.
  */
-export interface APICurrency extends Omit<Currency, 'value' | 'reserve'> {
-	/**
-	 * The value of this currency.
-	 * This is a string type to preserve precision of decimal places.
-	 * @example '0.1'
-	 */
-	readonly value: string;
+export interface APICurrency extends Omit<Currency, 'reserve'> {
 	/**
 	 * The reserve available of this currency.
 	 * This is a string type to preserve precision of decimal places.
-	 * @example '34435.66298076442200406902'
+	 * @example '34435.52'
 	 */
 	readonly reserve: string;
 }

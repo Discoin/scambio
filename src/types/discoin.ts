@@ -43,12 +43,14 @@ export interface Currency {
 	readonly name: string;
 	/**
 	 * The value in Discoin this currency is worth.
-	 * @example 0.1
+	 * 4 decimal places of precision.
+	 * @example 0.0401
 	 */
 	readonly value: number;
 	/**
 	 * The reserve available of this currency.
-	 * @example 9999889.021
+	 * 2 decimal places of precision.
+	 * @example 9999889.0213
 	 */
 	readonly reserve: number;
 }
