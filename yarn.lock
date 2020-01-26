@@ -391,6 +391,7 @@ __metadata:
   resolution: "@discoin/scambio@workspace:."
   dependencies:
     "@istanbuljs/nyc-config-typescript": ^1.0.0
+    "@types/node": ^12.12.25
     "@types/node-fetch": ^2.5.4
     "@typescript-eslint/eslint-plugin": ^2.17.0
     "@typescript-eslint/parser": ^2.17.0
@@ -736,6 +737,13 @@ __metadata:
   version: 13.5.0
   resolution: "@types/node@npm:13.5.0"
   checksum: c168b6228f3a0845fa7530169b5c25dfce069f5cd315ebaade02875eaadbea8eca8dc1337b6b1996ee268b1d649aaef89c2aafa452b2b24f4235eaecf83b4941
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^12.12.25":
+  version: 12.12.25
+  resolution: "@types/node@npm:12.12.25"
+  checksum: 2bc6bd1139551e403c9c00e002bbe66a7771084b68eb1c38ee9077aa13689e20c097a7c7fdb08adf6a1245863cd363d8d66d2b3fe6f00ae1ae3b3cf539827f73
   languageName: node
   linkType: hard
 
