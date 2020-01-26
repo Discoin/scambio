@@ -6,7 +6,7 @@ import {apiBotToBot} from '../util/data-transfer-object';
 import {botStore} from './bots';
 
 const testBot: APIBot = {
-	currency: {id: 'ABC', name: 'Currency name', reserve: '1_000_000', value: 0.1},
+	currency: {id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1},
 	id: '123456789'
 };
 

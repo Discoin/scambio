@@ -6,7 +6,7 @@ test('API currency to currency', t => {
 	const apiCurrency: APICurrency = {
 		id: 'OAT',
 		name: 'Dice Oats',
-		reserve: '1_000_000',
+		reserve: '1000000',
 		value: 0.1
 	};
 
@@ -24,7 +24,7 @@ test('API bot to bot', t => {
 		currency: {
 			id: 'OAT',
 			name: 'Dice Oats',
-			reserve: '1_000_000',
+			reserve: '1000000',
 			value: 0.1
 		}
 	};
