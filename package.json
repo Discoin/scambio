@@ -3,7 +3,6 @@
 		"name": "The Discoin Association"
 	},
 	"ava": {
-		"compileEnhancements": false,
 		"extensions": [
 			"ts"
 		],

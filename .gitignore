@@ -182,3 +182,7 @@ tsc_output
 
 # TypeDoc output folder
 docs_out
+
+# Yarn
+.yarn
+.pnp.js
