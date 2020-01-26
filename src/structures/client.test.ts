@@ -1,8 +1,9 @@
 import test from 'ava';
 import {Client} from './client';
 
+const options = {token: 'token', currencyID: 'ABC'};
+
 test('Client', t => {
-	const options = {token: 'token', currencyID: 'ABC'};
 	const client = new Client(options.token, options.currencyID);
 
 	t.is(client.transactions.client, client, 'Transaction store client is this client');

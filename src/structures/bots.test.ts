@@ -24,6 +24,9 @@ test('Get one bot', async t => {
 	return t.deepEqual(actualBot, apiBotToBot(testBot));
 });
 
+const filteredQuery = 'filter=id||eq||388191157869477888';
+const paginatedQuery = 'page=1&limit=1';
+
 test('Get many bots', async t => {
 	nock(API_URL)
 		.get('/bots')
@@ -32,8 +35,6 @@ test('Get many bots', async t => {
 	const actualBots = await botStore.getMany();
 
 	t.deepEqual(actualBots, [apiBotToBot(testBot)], 'No query');
-
-	const filteredQuery = 'filter=id||eq||388191157869477888';
 
 	nock(API_URL)
 		// We return the same thing regardless of the query
@@ -44,8 +45,6 @@ test('Get many bots', async t => {
 	const filteredBots = await botStore.getMany(filteredQuery);
 
 	t.deepEqual(filteredBots, [apiBotToBot(testBot)], 'Filtered query');
-
-	const paginatedQuery = 'page=1&limit=1';
 
 	nock(API_URL)
 		.get(`/bots?${paginatedQuery}`)

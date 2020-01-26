@@ -50,6 +50,9 @@ test('Get one transaction', async t => {
 	);
 });
 
+const paginatedQuery = 'page=1&limit=1';
+const filteredQuery = 'filter=to.id||eq||OAT&filter=handled||eq||false';
+
 test('Get many transactions', async t => {
 	const client = new Client(options.token, options.currencyID);
 
@@ -61,8 +64,6 @@ test('Get many transactions', async t => {
 
 	t.deepEqual(actualTransactions, [new Transaction(client, testTransaction)], 'No query');
 
-	const filteredQuery = 'filter=to.id||eq||OAT&filter=handled||eq||false';
-
 	nock(API_URL)
 		// We return the same thing regardless of the query
 		// This is just to test what will happen if query is/isn't provided
@@ -72,8 +73,6 @@ test('Get many transactions', async t => {
 	const actualTransactionsWithQuery = await client.transactions.getMany(filteredQuery);
 
 	t.deepEqual(actualTransactionsWithQuery, [new Transaction(client, testTransaction)], 'Filtered query');
-
-	const paginatedQuery = 'page=1&limit=1';
 
 	nock(API_URL)
 		.get(`/transactions?${paginatedQuery}`)

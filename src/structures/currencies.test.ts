@@ -22,6 +22,9 @@ test('Get one currency', async t => {
 	return t.deepEqual(actualCurrency, apiCurrencyToCurrency(testCurrency));
 });
 
+const filteredQuery = 'filter=value||$gte||0.4';
+const paginatedQuery = 'page=1&limit=1';
+
 test('Get many currencies', async t => {
 	nock(API_URL)
 		.get('/currencies')
@@ -30,8 +33,6 @@ test('Get many currencies', async t => {
 	const actualCurrencies = await currencyStore.getMany();
 
 	t.deepEqual(actualCurrencies, [apiCurrencyToCurrency(testCurrency)] as Currency[], 'No query');
-
-	const filteredQuery = 'filter=value||$gte||0.4';
 
 	nock(API_URL)
 		// We return the same thing regardless of the query
@@ -42,8 +43,6 @@ test('Get many currencies', async t => {
 	const filteredCurrencies = await currencyStore.getMany(filteredQuery);
 
 	t.deepEqual(filteredCurrencies, [apiCurrencyToCurrency(testCurrency)] as Currency[], 'Filtered query');
-
-	const paginatedQuery = 'page=1&limit=1';
 
 	nock(API_URL)
 		.get(`/currencies?${paginatedQuery}`)

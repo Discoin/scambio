@@ -18,17 +18,17 @@ test('API currency to currency', t => {
 	t.is(currency.value, apiCurrency.value, 'Value does not change');
 });
 
-test('API bot to bot', t => {
-	const apiBot: APIBot = {
-		id: '388191157869477888',
-		currency: {
-			id: 'OAT',
-			name: 'Dice Oats',
-			reserve: '1000000',
-			value: 0.1
-		}
-	};
+const apiBot: APIBot = {
+	id: '388191157869477888',
+	currency: {
+		id: 'OAT',
+		name: 'Dice Oats',
+		reserve: '1000000',
+		value: 0.1
+	}
+};
 
+test('API bot to bot', t => {
 	const bot = apiBotToBot(apiBot);
 
 	t.is(bot.id, apiBot.id, 'ID does not change');
