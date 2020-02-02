@@ -45,7 +45,7 @@ test('Get one transaction', async t => {
 
 	await t.throwsAsync(
 		async () => client.transactions.getOne(notAUUID),
-		RangeError,
+		{instanceOf: RangeError},
 		'Throws error when invalid UUID is provided'
 	);
 });
@@ -141,7 +141,7 @@ test('Transaction class', t => {
 
 	t.throws(
 		() => new Transaction(client, {...rest, id: notAUUID}),
-		RangeError,
+		{instanceOf: RangeError},
 		'Throws error when invalid UUID is provided'
 	);
 
