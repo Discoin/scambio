@@ -29,13 +29,11 @@
 	],
 	"dependencies": {
 		"ky": "^0.17.0",
-		"ky-universal": "^0.5.0",
-		"node-fetch": "^2.6.0"
+		"ky-universal": "^0.5.0"
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "^1.0.0",
 		"@types/node": "12.12.28",
-		"@types/node-fetch": "^2.5.4",
 		"ava": "^3.2.0",
 		"nock": "^12.0.1",
 		"nyc": "^15.0.0",
