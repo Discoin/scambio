@@ -10,9 +10,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v2
       - name: Setup Node.js for use with Actions
         uses: actions/setup-node@v1
         with:
@@ -35,9 +33,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v2
       - name: Setup Node.js for use with Actions
         uses: actions/setup-node@v1
         with:
@@ -55,9 +51,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v2
       - name: Setup Node.js for use with Actions
         uses: actions/setup-node@v1
         with:
@@ -75,9 +69,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v2
       - name: Setup Node.js for use with Actions
         uses: actions/setup-node@v1
         with:
@@ -101,9 +93,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v2
       - name: Setup Node.js for use with Actions
         uses: actions/setup-node@v1
         with:
@@ -128,9 +118,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v2
       - name: Setup Node.js for use with Actions
         uses: actions/setup-node@v1
         with:
