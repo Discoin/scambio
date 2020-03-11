@@ -78,7 +78,7 @@ export class Transaction {
 	 * @returns
 	 */
 	async update(options: TransactionUpdateOptions): Promise<this> {
-		const req = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {
+		const request = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {
 			prefixUrl: API_URL,
 			headers: {
 				Authorization: `Bearer ${this._client.token}`,
@@ -87,7 +87,7 @@ export class Transaction {
 			json: options
 		});
 
-		await req;
+		await request;
 
 		this.handled = options.handled;
 		return this;
@@ -108,14 +108,14 @@ export class TransactionStore {
 	 * client.getMany('filter=handled||eq||false');
 	 */
 	async getMany(query?: string): Promise<Transaction[] | APIGetManyDTO<Transaction>> {
-		const req = ky(`transactions${query ? `?${query}` : ''}`, {
+		const request = ky(`transactions${query ? `?${query}` : ''}`, {
 			prefixUrl: API_URL,
 			headers: {'User-Agent': USER_AGENT}
 		});
 
-		const res = await req;
+		const response = await request;
 
-		const getManyResponseJSON: APITransaction[] | APIGetManyDTO<APITransaction> = await res.json();
+		const getManyResponseJSON: APITransaction[] | APIGetManyDTO<APITransaction> = await response.json();
 
 		if (getManyResponseIsDTO(getManyResponseJSON)) {
 			return {
@@ -137,14 +137,14 @@ export class TransactionStore {
 			throw new RangeError(`Transaction ID ${id} does not appear to be a valid v4 UUID`);
 		}
 
-		const req = ky(`transactions/${encodeURIComponent(id)}`, {
+		const request = ky(`transactions/${encodeURIComponent(id)}`, {
 			prefixUrl: API_URL,
 			headers: {'User-Agent': USER_AGENT}
 		});
 
-		const res = await req;
+		const response = await request;
 
-		const apiTransaction: APITransaction = await res.json();
+		const apiTransaction: APITransaction = await response.json();
 
 		return new Transaction(this.client, apiTransaction);
 	}
@@ -161,15 +161,15 @@ export class TransactionStore {
 			user: options.user
 		};
 
-		const req = ky.post('transactions', {
+		const request = ky.post('transactions', {
 			prefixUrl: API_URL,
 			headers: {Authorization: `Bearer ${this.client.token}`},
 			json
 		});
 
-		const res = await req;
+		const response = await request;
 
-		const apiTransaction: APITransaction = await res.json();
+		const apiTransaction: APITransaction = await response.json();
 
 		return new Transaction(this.client, apiTransaction);
 	}

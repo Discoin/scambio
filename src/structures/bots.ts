@@ -18,14 +18,14 @@ export const botStore = {
 	 */
 	async getMany(query?: string): Promise<Bot[] | APIGetManyDTO<Bot>> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const req = ky.get(`bots${query ? `?${query}` : ''}`, {
+		const request = ky.get(`bots${query ? `?${query}` : ''}`, {
 			prefixUrl: API_URL,
 			headers: {'User-Agent': USER_AGENT}
 		});
 
-		const res = await req;
+		const response = await request;
 
-		const getManyResponseJSON: APIBot[] | APIGetManyDTO<APIBot> = await res.json();
+		const getManyResponseJSON: APIBot[] | APIGetManyDTO<APIBot> = await response.json();
 
 		if (getManyResponseIsDTO(getManyResponseJSON)) {
 			return {...getManyResponseJSON, data: getManyResponseJSON.data.map(apiBot => apiBotToBot(apiBot))};
@@ -40,12 +40,12 @@ export const botStore = {
 	 * @returns The bot
 	 */
 	async getOne(id: string): Promise<Bot> {
-		const req = ky.get(`bots/${encodeURIComponent(id)}`, {
+		const request = ky.get(`bots/${encodeURIComponent(id)}`, {
 			prefixUrl: API_URL,
 			headers: {'User-Agent': USER_AGENT}
 		});
 
-		const res = await req;
+		const res = await request;
 
 		const apiBot: APIBot = await res.json();
 

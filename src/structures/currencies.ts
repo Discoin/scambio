@@ -17,14 +17,14 @@ export const currencyStore = {
 	 */
 	async getMany(query?: string): Promise<Currency[] | APIGetManyDTO<Currency>> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const req = ky.get(`currencies${query ? `?${query}` : ''}`, {
+		const request = ky.get(`currencies${query ? `?${query}` : ''}`, {
 			headers: {'User-Agent': USER_AGENT},
 			prefixUrl: API_URL
 		});
 
-		const res = await req;
+		const response = await request;
 
-		const getManyResponseJSON: APICurrency[] | APIGetManyDTO<APICurrency> = await res.json();
+		const getManyResponseJSON: APICurrency[] | APIGetManyDTO<APICurrency> = await response.json();
 
 		if (getManyResponseIsDTO(getManyResponseJSON)) {
 			return {
@@ -42,12 +42,12 @@ export const currencyStore = {
 	 * @returns The transaction
 	 */
 	async getOne(code: string): Promise<Currency> {
-		const req = ky.get(`currencies/${encodeURIComponent(code)}`, {
+		const request = ky.get(`currencies/${encodeURIComponent(code)}`, {
 			headers: {'User-Agent': USER_AGENT},
 			prefixUrl: API_URL
 		});
 
-		const res = await req;
+		const res = await request;
 
 		const apiCurrency: APICurrency = await res.json();
 
