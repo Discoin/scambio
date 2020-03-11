@@ -4,7 +4,7 @@ import packageJSON from '../../package.json';
 export const TOKEN_REG_EXP = /^[a-f\d]{64}$/i;
 
 /** Regular expression for a v4 UUUID (used for transaction IDs). */
-export const UUID_V4_REG_EXP = /^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+export const UUID_V4_REG_EXP = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i;
 
 /** The base URL for the API. */
 export const API_URL = 'https://discoin.zws.im';
