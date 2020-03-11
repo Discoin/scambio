@@ -45,9 +45,9 @@ export const botStore = {
 			headers: {'User-Agent': USER_AGENT}
 		});
 
-		const res = await request;
+		const response = await request;
 
-		const apiBot: APIBot = await res.json();
+		const apiBot: APIBot = await response.json();
 
 		const bot = apiBotToBot(apiBot);
 

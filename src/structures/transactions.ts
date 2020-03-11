@@ -75,7 +75,7 @@ export class Transaction {
 	/**
 	 * Update this transaction.
 	 * @param options Options to update this transaction
-	 * @returns
+	 * @returns The transaction that was just updated
 	 */
 	async update(options: TransactionUpdateOptions): Promise<this> {
 		const request = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {

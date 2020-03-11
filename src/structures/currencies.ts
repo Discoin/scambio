@@ -47,9 +47,9 @@ export const currencyStore = {
 			prefixUrl: API_URL
 		});
 
-		const res = await request;
+		const response = await request;
 
-		const apiCurrency: APICurrency = await res.json();
+		const apiCurrency: APICurrency = await response.json();
 
 		const currency = apiCurrencyToCurrency(apiCurrency);
 
