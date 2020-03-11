@@ -45,7 +45,7 @@
 		"type-fest": "^0.12.0",
 		"typedoc": "^0.16.9",
 		"typescript": "^3.7.5",
-		"xo": "^0.27.2"
+		"xo": "^0.28.0"
 	},
 	"engines": {
 		"node": "12"
