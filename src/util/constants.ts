@@ -10,7 +10,7 @@ export const API_URL = 'https://discoin.zws.im';
  * Set of HTTP request methods to indicate the desired action to be performed for a given resource.
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
  */
-export enum HTTPRequestMethods {
+export const enum HTTPRequestMethods {
 	/** The `GET` method requests a representation of the specified resource. Requests using `GET` should only retrieve data. */
 	GET = 'GET',
 	/** The `HEAD` method asks for a response identical to that of a `GET` request, but without the response body. */
