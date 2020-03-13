@@ -1,8 +1,5 @@
 import packageJSON from '../../package.json';
 
-/** Regular expression for a Discoin API token (SHA 256 digest). */
-export const TOKEN_REG_EXP = /^[a-f\d]{64}$/i;
-
 /** Regular expression for a v4 UUUID (used for transaction IDs). */
 export const UUID_V4_REG_EXP = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i;
 
