@@ -30,9 +30,7 @@ type GetManyResponse = APIBot[] | APICurrency[] | APITransaction[];
  * @param getManyResponse The `getMany` response to check
  * @returns Boolean of whether or not the provided response is a DTO
  */
-export function getManyResponseIsDTO<T>(
-	getManyResponse: GetManyResponse | APIGetManyDTO<T>
-): getManyResponse is APIGetManyDTO<T> {
+export function getManyResponseIsDTO<T>(getManyResponse: GetManyResponse | APIGetManyDTO<T>): getManyResponse is APIGetManyDTO<T> {
 	if (!Array.isArray(getManyResponse) && Object.prototype.hasOwnProperty.call(getManyResponse, 'data')) {
 		return true;
 	}

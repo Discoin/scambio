@@ -35,19 +35,13 @@ test.after(() => {
 });
 
 test('Get one transaction', async t => {
-	nock(API_URL)
-		.get(`/transactions/${testTransaction.id}`)
-		.reply(200, testTransaction);
+	nock(API_URL).get(`/transactions/${testTransaction.id}`).reply(200, testTransaction);
 
 	const actualTransaction = await client.transactions.getOne(testTransaction.id);
 
 	t.deepEqual(actualTransaction, new Transaction(client, testTransaction));
 
-	await t.throwsAsync(
-		async () => client.transactions.getOne(notAUUID),
-		{instanceOf: RangeError},
-		'Throws error when invalid UUID is provided'
-	);
+	await t.throwsAsync(async () => client.transactions.getOne(notAUUID), {instanceOf: RangeError}, 'Throws error when invalid UUID is provided');
 });
 
 const paginatedQuery = 'page=1&limit=1';
@@ -56,9 +50,7 @@ const filteredQuery = 'filter=to.id||eq||OAT&filter=handled||eq||false';
 test('Get many transactions', async t => {
 	const client = new Client(options.token, options.currencyID);
 
-	nock(API_URL)
-		.get('/transactions')
-		.reply(200, [testTransaction]);
+	nock(API_URL).get('/transactions').reply(200, [testTransaction]);
 
 	const actualTransactions = await client.transactions.getMany();
 
@@ -86,19 +78,13 @@ test('Get many transactions', async t => {
 
 	const paginatedTransactions = await client.transactions.getMany(paginatedQuery);
 
-	t.deepEqual(
-		paginatedTransactions,
-		{page: 1, pageCount: 1, total: 1, count: 1, data: [new Transaction(client, testTransaction)]},
-		'Paginated query'
-	);
+	t.deepEqual(paginatedTransactions, {page: 1, pageCount: 1, total: 1, count: 1, data: [new Transaction(client, testTransaction)]}, 'Paginated query');
 });
 
 test('Update transaction', async t => {
 	const transaction = new Transaction(client, testTransaction);
 
-	nock(API_URL)
-		.patch(`/transactions/${testTransaction.id}`)
-		.reply(200, testTransaction);
+	nock(API_URL).patch(`/transactions/${testTransaction.id}`).reply(200, testTransaction);
 
 	await transaction.update({handled: true});
 
@@ -139,11 +125,7 @@ test('Create transaction', async t => {
 test('Transaction class', t => {
 	const {id: _id, ...rest} = testTransaction;
 
-	t.throws(
-		() => new Transaction(client, {...rest, id: notAUUID}),
-		{instanceOf: RangeError},
-		'Throws error when invalid UUID is provided'
-	);
+	t.throws(() => new Transaction(client, {...rest, id: notAUUID}), {instanceOf: RangeError}, 'Throws error when invalid UUID is provided');
 
 	t.deepEqual(new Transaction(client, fullTransaction).timestamp, fullTransaction.timestamp);
 });

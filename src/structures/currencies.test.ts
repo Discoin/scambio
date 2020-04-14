@@ -13,9 +13,7 @@ test.after(() => {
 });
 
 test('Get one currency', async t => {
-	nock(API_URL)
-		.get(`/currencies/${testCurrency.id}`)
-		.reply(200, testCurrency);
+	nock(API_URL).get(`/currencies/${testCurrency.id}`).reply(200, testCurrency);
 
 	const actualCurrency = await currencyStore.getOne(testCurrency.id);
 
@@ -26,9 +24,7 @@ const filteredQuery = 'filter=value||$gte||0.4';
 const paginatedQuery = 'page=1&limit=1';
 
 test('Get many currencies', async t => {
-	nock(API_URL)
-		.get('/currencies')
-		.reply(200, [testCurrency]);
+	nock(API_URL).get('/currencies').reply(200, [testCurrency]);
 
 	const actualCurrencies = await currencyStore.getMany();
 
@@ -56,9 +52,5 @@ test('Get many currencies', async t => {
 
 	const paginatedTransactions = await currencyStore.getMany(paginatedQuery);
 
-	t.deepEqual(
-		paginatedTransactions,
-		{count: 1, page: 1, pageCount: 1, total: 1, data: [apiCurrencyToCurrency(testCurrency)]},
-		'Paginated query'
-	);
+	t.deepEqual(paginatedTransactions, {count: 1, page: 1, pageCount: 1, total: 1, data: [apiCurrencyToCurrency(testCurrency)]}, 'Paginated query');
 });

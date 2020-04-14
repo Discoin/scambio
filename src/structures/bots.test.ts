@@ -15,9 +15,7 @@ test.after(() => {
 });
 
 test('Get one bot', async t => {
-	nock(API_URL)
-		.get(`/bots/${testBot.id}`)
-		.reply(200, testBot);
+	nock(API_URL).get(`/bots/${testBot.id}`).reply(200, testBot);
 
 	const actualBot = await botStore.getOne(testBot.id);
 
@@ -28,9 +26,7 @@ const filteredQuery = 'filter=id||eq||388191157869477888';
 const paginatedQuery = 'page=1&limit=1';
 
 test('Get many bots', async t => {
-	nock(API_URL)
-		.get('/bots')
-		.reply(200, [testBot]);
+	nock(API_URL).get('/bots').reply(200, [testBot]);
 
 	const actualBots = await botStore.getMany();
 
@@ -58,9 +54,5 @@ test('Get many bots', async t => {
 
 	const paginatedTransactions = await botStore.getMany(paginatedQuery);
 
-	t.deepEqual(
-		paginatedTransactions,
-		{count: 1, page: 1, pageCount: 1, total: 1, data: [apiBotToBot(testBot)]},
-		'Paginated query'
-	);
+	t.deepEqual(paginatedTransactions, {count: 1, page: 1, pageCount: 1, total: 1, data: [apiBotToBot(testBot)]}, 'Paginated query');
 });
