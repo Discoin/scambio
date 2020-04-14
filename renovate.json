@@ -1,10 +1,11 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": ["config:base"],
+	"labels": ["dependencies"],
 	"packageRules": [
 		{
-			"updateTypes": ["patch"],
-			"automerge": true
+			"automerge": true,
+			"updateTypes": ["patch"]
 		}
 	],
 	"semanticCommitType": "build"
