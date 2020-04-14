@@ -92,6 +92,14 @@
 	},
 	"version": "0.0.0-development",
 	"xo": {
+		"overrides": [
+			{
+				"files": "src/**/*.test.ts",
+				"rules": {
+					"@typescript-eslint/prefer-readonly-parameter-types": "off"
+				}
+			}
+		],
 		"prettier": true
 	}
 }

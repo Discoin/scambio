@@ -1,7 +1,8 @@
-import test from 'ava';
+import test, {ExecutionContext} from 'ava';
 import nock from 'nock';
-import {API_URL} from '../util/constants';
+import {ReadonlyDeep} from 'type-fest';
 import {APIBot, APIGetManyDTO} from '../types/api';
+import {API_URL} from '../util/constants';
 import {apiBotToBot} from '../util/data-transfer-object';
 import {botStore} from './bots';
 
@@ -14,7 +15,7 @@ test.after(() => {
 	nock.restore();
 });
 
-test('Get one bot', async t => {
+test('Get one bot', async (t: ReadonlyDeep<ExecutionContext>) => {
 	nock(API_URL).get(`/bots/${testBot.id}`).reply(200, testBot);
 
 	const actualBot = await botStore.getOne(testBot.id);
@@ -25,7 +26,7 @@ test('Get one bot', async t => {
 const filteredQuery = 'filter=id||eq||388191157869477888';
 const paginatedQuery = 'page=1&limit=1';
 
-test('Get many bots', async t => {
+test('Get many bots', async (t: ReadonlyDeep<ExecutionContext>) => {
 	nock(API_URL).get('/bots').reply(200, [testBot]);
 
 	const actualBots = await botStore.getMany();

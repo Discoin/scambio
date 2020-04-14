@@ -1,9 +1,10 @@
-import test from 'ava';
+import test, {ExecutionContext} from 'ava';
 import {Client} from './client';
+import {ReadonlyDeep} from 'type-fest';
 
 const options = {token: 'token', currencyID: 'ABC'};
 
-test('Client', t => {
+test('Client', (t: ReadonlyDeep<ExecutionContext>) => {
 	const client = new Client(options.token, options.currencyID);
 
 	t.is(client.transactions.client, client, 'Transaction store client is this client');

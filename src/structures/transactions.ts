@@ -1,5 +1,5 @@
 import ky from 'ky-universal';
-import {Except} from 'type-fest';
+import {Except, ReadonlyDeep} from 'type-fest';
 import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
 import {Currency, UUIDv4} from '../types/discoin';
 import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
@@ -56,14 +56,14 @@ export class Transaction {
 	 * @param client The Discoin client to use for updating this transaction
 	 * @param data The data for populating this transaction
 	 */
-	constructor(client: Client, data: APITransaction | Except<Transaction, 'update'>) {
+	constructor(client: ReadonlyDeep<Client>, data: Readonly<APITransaction | Except<Transaction, 'update'>>) {
 		if (!UUID_V4_REG_EXP.test(data.id)) {
 			throw new RangeError(`Transaction ID ${data.id} does not appear to be a valid v4 UUID`);
 		}
 
 		this._client = client;
 		this.id = data.id;
-		this.amount = typeof data.amount === 'string' ? parseFloat(data.amount) : data.amount;
+		this.amount = typeof data.amount === 'string' ? Number.parseFloat(data.amount) : data.amount;
 		this.from = currencyIsAPICurrency(data.from) ? apiCurrencyToCurrency(data.from) : data.from;
 		this.to = currencyIsAPICurrency(data.to) ? apiCurrencyToCurrency(data.to) : data.to;
 		this.handled = data.handled;
@@ -77,7 +77,7 @@ export class Transaction {
 	 * @param options Options to update this transaction
 	 * @returns The transaction that was just updated
 	 */
-	async update(options: TransactionUpdateOptions): Promise<this> {
+	async update(options: Readonly<TransactionUpdateOptions>): Promise<this> {
 		const request = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {
 			prefixUrl: API_URL,
 			headers: {
@@ -98,7 +98,7 @@ export class Transaction {
  * Store and retrieve many transactions.
  */
 export class TransactionStore {
-	constructor(public client: Client) {}
+	constructor(public client: ReadonlyDeep<Client>) {}
 
 	/**
 	 * Get several transactions from the API by specifying a query.
@@ -154,7 +154,7 @@ export class TransactionStore {
 	 * @param options Options for creating the transaction
 	 * @returns The transaction that was created
 	 */
-	async create(options: TransactionCreateOptions): Promise<Transaction> {
+	async create(options: Readonly<TransactionCreateOptions>): Promise<Transaction> {
 		const json: APITransactionCreate = {
 			amount: options.amount,
 			toId: options.to,
