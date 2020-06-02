@@ -10,7 +10,7 @@
 		"sourceMap": true,
 		"strict": true,
 		"target": "es2017",
-		"typeRoots": ["src/types"]
+		"types": ["@types/node"]
 	},
 	"exclude": ["node_modules", "nyc_output", "coverage"],
 	"include": ["src/**/*.ts"]

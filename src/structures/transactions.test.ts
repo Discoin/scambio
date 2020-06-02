@@ -97,9 +97,9 @@ test('Create transaction', async (t: ReadonlyDeep<ExecutionContext>) => {
 
 	const scope = nock(API_URL)
 		.post('/transactions', (body: APITransactionCreate) => {
-			// Body filter is used to save the provided request body for validation late
+			// Body filter is used to save the provided request body for validation later
 			requestBody = body;
-			return body;
+			return true;
 		})
 		.reply(201, testTransaction);
 
