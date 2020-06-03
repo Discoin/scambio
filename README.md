@@ -7,8 +7,8 @@
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo)
 [![DeepScan grade](https://deepscan.io/api/teams/6595/projects/8606/branches/106731/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=6595&pid=8606&bid=106731)
 
-The official Node.js library for [Discoin](https://github.com/Discoin).
-Features async await syntax and first-class TypeScript support.
+The official JS/TS library for [Discoin](https://github.com/Discoin).
+Features browser and first-class TypeScript support.
 
 ## Usage
 
