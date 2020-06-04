@@ -17,10 +17,10 @@ export const botStore = {
 	 * client.getMany('filter=id||eq||388191157869477888');
 	 */
 	async getMany(query?: string): Promise<Bot[] | APIGetManyDTO<Bot>> {
-		// Interpolation of query parameters here is almost certainly a mistake
-		const request = ky.get(`bots${query ? `?${query}` : ''}`, {
+		const request = ky.get(`bots`, {
 			prefixUrl: API_URL,
-			headers: {'User-Agent': USER_AGENT}
+			headers: {'User-Agent': USER_AGENT},
+			searchParams: query
 		});
 
 		const response = await request;

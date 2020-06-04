@@ -17,9 +17,10 @@ export const currencyStore = {
 	 */
 	async getMany(query?: string): Promise<Currency[] | APIGetManyDTO<Currency>> {
 		// Interpolation of query parameters here is almost certainly a mistake
-		const request = ky.get(`currencies${query ? `?${query}` : ''}`, {
+		const request = ky.get(`currencies`, {
 			headers: {'User-Agent': USER_AGENT},
-			prefixUrl: API_URL
+			prefixUrl: API_URL,
+			searchParams: query
 		});
 
 		const response = await request;

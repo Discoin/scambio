@@ -108,9 +108,10 @@ export class TransactionStore {
 	 * client.getMany('filter=handled||eq||false');
 	 */
 	async getMany(query?: string): Promise<Transaction[] | APIGetManyDTO<Transaction>> {
-		const request = ky(`transactions${query ? `?${query}` : ''}`, {
+		const request = ky(`transactions`, {
 			prefixUrl: API_URL,
-			headers: {'User-Agent': USER_AGENT}
+			headers: {'User-Agent': USER_AGENT},
+			searchParams: query
 		});
 
 		const response = await request;
