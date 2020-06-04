@@ -180,7 +180,6 @@ $RECYCLE.BIN/
 # TypeDoc output folder
 docs_out
 
-.dependabot
 .github
 .vscode
 src
@@ -194,3 +193,4 @@ tsconfig.build.json
 tsconfig.json
 .editorconfig
 .yarnrc
+renovate.json
