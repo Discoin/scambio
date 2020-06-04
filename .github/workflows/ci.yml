@@ -11,12 +11,6 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
-      - name: Setup Node.js for use with Actions
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.16.1'
-      - name: Install Yarn
-        run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - name: Install dependencies with Yarn
         run: yarn install
       - name: Compile TypeScript
@@ -34,12 +28,6 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
-      - name: Setup Node.js for use with Actions
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.16.1'
-      - name: Install Yarn
-        run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - name: Install dependencies with Yarn
         run: yarn install
       - name: Lint with XO
@@ -52,12 +40,6 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
-      - name: Setup Node.js for use with Actions
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.16.1'
-      - name: Install Yarn
-        run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - name: Install dependencies with Yarn
         run: yarn install
       - name: Check style with Prettier
@@ -70,12 +52,6 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
-      - name: Setup Node.js for use with Actions
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.16.1'
-      - name: Install Yarn
-        run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - name: Install dependencies with Yarn
         run: yarn install
       - name: Run tests
@@ -94,12 +70,6 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
-      - name: Setup Node.js for use with Actions
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.16.1'
-      - name: Install Yarn
-        run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - name: Install dependencies with Yarn
         run: yarn install
       - name: Generate documentation
@@ -119,12 +89,6 @@ jobs:
     steps:
       - name: Checkout git repository
         uses: actions/checkout@v2
-      - name: Setup Node.js for use with Actions
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.16.1'
-      - name: Install Yarn
-        run: curl -o- -L https://yarnpkg.com/install.sh | bash
       - name: Install dependencies with Yarn
         run: yarn install
       - name: Compile TypeScript for publishing
