@@ -82,7 +82,7 @@
 	},
 	"scripts": {
 		"build": "tsc",
-		"docs": "typedoc --out docs_out --theme minimal src",
+		"docs": "typedoc --out docs_out --mode file --exclude \"src/*/*.test.*\"",
 		"lint": "xo",
 		"prebuild": "rimraf tsc_output",
 		"predocs": "rimraf docs_out",
