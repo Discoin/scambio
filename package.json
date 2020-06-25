@@ -29,7 +29,7 @@
 	],
 	"dependencies": {
 		"ky": "^0.20.0",
-		"ky-universal": "^0.7.0"
+		"ky-universal": "^0.8.0"
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "1.0.1",
