@@ -12,7 +12,6 @@ export interface APIGetManyDTO<T> {
 /** The default currency returned by the API, with some fields eagerly loaded. */
 export type PartialCurrency = Pick<Currency, 'id' | 'name'> & {bot: Pick<Bot, 'name'> & {discord_id: string}};
 
-
 /**
  * A Discoin transaction.
  */

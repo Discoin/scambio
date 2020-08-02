@@ -27,7 +27,7 @@ export interface Bot {
 	 * The name of the bot.
 	 * @example 'Dice'
 	 */
-	name: string
+	name: string;
 }
 
 /**

@@ -20,7 +20,7 @@ export function apiCurrencyToCurrency(currency: APICurrency): Currency {
 export function apiBotToBot(bot: APIBot): Bot {
 	const {currencies, ...rest} = bot;
 
-	return {...rest, currencies: currencies.map(apiCurrencyToCurrency)};
+	return {...rest, currencies: currencies.map(currency => apiCurrencyToCurrency(currency))};
 }
 
 type GetManyResponse = APIBot[] | APICurrency[] | APITransaction[];
@@ -31,7 +31,7 @@ type GetManyResponse = APIBot[] | APICurrency[] | APITransaction[];
  * @returns Boolean of whether or not the provided response is a DTO
  */
 export function getManyResponseIsDTO<T>(getManyResponse: GetManyResponse | APIGetManyDTO<T>): getManyResponse is APIGetManyDTO<T> {
-	return !Array.isArray(getManyResponse) && Object.prototype.hasOwnProperty.call(getManyResponse, 'data')
+	return !Array.isArray(getManyResponse) && Object.prototype.hasOwnProperty.call(getManyResponse, 'data');
 }
 
 /**

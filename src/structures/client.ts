@@ -38,7 +38,7 @@ export class Client {
 	constructor(public token: Token, public currencyIDs: string[]) {
 		this.transactions = new TransactionStore(this);
 
-		const relevantTransactionsFilter = `filter=to.id||inL||${currencyIDs.map(encodeURIComponent).join(',')}`;
+		const relevantTransactionsFilter = `filter=to.id||inL||${currencyIDs.map(currencyID => encodeURIComponent(currencyID)).join(',')}`;
 
 		this.commonQueries = {
 			RELEVANT_TRANSACTIONS: relevantTransactionsFilter,

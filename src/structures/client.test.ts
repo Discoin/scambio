@@ -11,7 +11,7 @@ test('Client', (t: ExecutionContext) => {
 	t.is(client.token, options.token, 'Token property is what was provided');
 	t.is(client.currencyIDs, options.currencyIDs, 'Currency ID property is what was provided');
 
-	const currencies = options.currencyIDs.map(encodeURIComponent).join(',');
+	const currencies = options.currencyIDs.map(currencyID => encodeURIComponent(currencyID)).join(',');
 
 	t.deepEqual(
 		client.commonQueries,
