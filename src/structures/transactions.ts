@@ -1,9 +1,9 @@
 import ky from 'ky-universal';
-import {Except, ReadonlyDeep} from 'type-fest';
-import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
-import {Currency, UUIDv4} from '../types/discoin';
+import {Except} from 'type-fest';
+import {APIGetManyDTO, APITransaction, APITransactionCreate, PartialCurrency} from '../types/api';
+import {UUIDv4} from '../types/discoin';
 import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
-import {getManyResponseIsDTO, apiCurrencyToCurrency, currencyIsAPICurrency} from '../util/data-transfer-object';
+import {getManyResponseIsDTO} from '../util/data-transfer-object';
 import {Client} from './client';
 
 /**
@@ -24,6 +24,11 @@ interface TransactionCreateOptions {
 	 */
 	to: string;
 	/**
+	 * Currency ID to convert from.
+	 * @example 'OAT'
+	 */
+	from: string;
+	/**
 	 * Amount in your bot's currency you are converting
 	 * @example 100.23
 	 */
@@ -43,8 +48,8 @@ export class Transaction {
 	public static readonly API_URL = API_URL;
 	public readonly payout: number;
 	public readonly amount: number;
-	public readonly from: Currency;
-	public readonly to: Currency;
+	public readonly from: PartialCurrency;
+	public readonly to: PartialCurrency;
 	public readonly id: UUIDv4;
 	public handled: boolean;
 	public readonly user: string;
@@ -56,16 +61,16 @@ export class Transaction {
 	 * @param client The Discoin client to use for updating this transaction
 	 * @param data The data for populating this transaction
 	 */
-	constructor(client: ReadonlyDeep<Client>, data: Readonly<APITransaction | Except<Transaction, 'update'>>) {
+	constructor(client: Client, data: APITransaction | Except<Transaction, 'update'>) {
 		if (!UUID_V4_REG_EXP.test(data.id)) {
 			throw new RangeError(`Transaction ID ${data.id} does not appear to be a valid v4 UUID`);
 		}
 
 		this._client = client;
 		this.id = data.id;
-		this.amount = typeof data.amount === 'string' ? Number.parseFloat(data.amount) : data.amount;
-		this.from = currencyIsAPICurrency(data.from) ? apiCurrencyToCurrency(data.from) : data.from;
-		this.to = currencyIsAPICurrency(data.to) ? apiCurrencyToCurrency(data.to) : data.to;
+		this.amount = typeof data.amount === 'string' ? Number(data.amount) : data.amount;
+		this.from = data.from;
+		this.to = data.to;
 		this.handled = data.handled;
 		this.user = data.user;
 		this.timestamp = data.timestamp instanceof Date ? data.timestamp : new Date(data.timestamp);
@@ -77,12 +82,12 @@ export class Transaction {
 	 * @param options Options to update this transaction
 	 * @returns The transaction that was just updated
 	 */
-	async update(options: Readonly<TransactionUpdateOptions>): Promise<this> {
+	async update(options: TransactionUpdateOptions): Promise<this> {
 		const request = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {
 			prefixUrl: API_URL,
 			headers: {
 				Authorization: `Bearer ${this._client.token}`,
-				'User-Agent': `${USER_AGENT} ${this._client.currencyID}`
+				'User-Agent': USER_AGENT
 			},
 			json: options
 		});
@@ -98,7 +103,7 @@ export class Transaction {
  * Store and retrieve many transactions.
  */
 export class TransactionStore {
-	constructor(public client: ReadonlyDeep<Client>) {}
+	constructor(public readonly client: Client) {}
 
 	/**
 	 * Get several transactions from the API by specifying a query.
@@ -155,10 +160,11 @@ export class TransactionStore {
 	 * @param options Options for creating the transaction
 	 * @returns The transaction that was created
 	 */
-	async create(options: Readonly<TransactionCreateOptions>): Promise<Transaction> {
+	async create(options: TransactionCreateOptions): Promise<Transaction> {
 		const json: APITransactionCreate = {
 			amount: options.amount,
-			toId: options.to,
+			to: options.to,
+			from: options.from,
 			user: options.user
 		};
 

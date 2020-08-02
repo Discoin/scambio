@@ -1,17 +1,17 @@
 import test, {ExecutionContext} from 'ava';
 import nock from 'nock';
-import {Except, ReadonlyDeep} from 'type-fest';
+import {Except} from 'type-fest';
+import {APIGetManyDTO, APITransaction, APITransactionCreate} from '../types/api';
 import {API_URL} from '../util/constants';
-import {APITransaction, APITransactionCreate, APIGetManyDTO} from '../types/api';
-import {Transaction} from './transactions';
 import {Client} from './client';
+import {Transaction} from './transactions';
 
 const notAUUID = 'not a v4 UUID';
 
 const testTransaction: APITransaction = {
 	amount: '1000',
-	from: {id: 'OAT', name: 'Dice Oats', reserve: '1000000', value: 0.1},
-	to: {id: 'DTS', name: 'DiscordTel Credits', reserve: '1000000', value: 1},
+	from: {id: 'OAT', name: 'Oats', bot: {discord_id: '123', name: 'Dice'}},
+	to: {id: 'DTS', name: 'Credits', bot: {discord_id: '123', name: 'DTel'}},
 	handled: false,
 	id: 'a62b3566-60a3-4241-8c11-316775b973ff',
 	payout: 100,
@@ -22,19 +22,17 @@ const testTransaction: APITransaction = {
 const fullTransaction: Except<Transaction, 'update'> = {
 	...testTransaction,
 	timestamp: new Date(0),
-	amount: 1000,
-	from: {id: 'OAT', name: 'Dice Oats', reserve: 1000, value: 100},
-	to: {id: 'DTS', name: 'DiscordTel Credits', reserve: 1000, value: 100}
+	amount: 1000
 };
 
-const options = {token: 'token', currencyID: 'OAT'};
-const client = new Client(options.token, options.currencyID);
+const options = {token: 'token', currencyIDs: ['OAT']};
+const client = new Client(options.token, options.currencyIDs);
 
 test.after(() => {
 	nock.restore();
 });
 
-test('Get one transaction', async (t: ReadonlyDeep<ExecutionContext>) => {
+test('Get one transaction', async (t: ExecutionContext) => {
 	nock(API_URL).get(`/transactions/${testTransaction.id}`).reply(200, testTransaction);
 
 	const actualTransaction = await client.transactions.getOne(testTransaction.id);
@@ -47,9 +45,7 @@ test('Get one transaction', async (t: ReadonlyDeep<ExecutionContext>) => {
 const paginatedQuery = 'page=1&limit=1';
 const filteredQuery = 'filter=to.id||eq||OAT&filter=handled||eq||false';
 
-test('Get many transactions', async (t: ReadonlyDeep<ExecutionContext>) => {
-	const client = new Client(options.token, options.currencyID);
-
+test('Get many transactions', async (t: ExecutionContext) => {
 	nock(API_URL).get('/transactions').reply(200, [testTransaction]);
 
 	const actualTransactions = await client.transactions.getMany();
@@ -81,7 +77,7 @@ test('Get many transactions', async (t: ReadonlyDeep<ExecutionContext>) => {
 	t.deepEqual(paginatedTransactions, {page: 1, pageCount: 1, total: 1, count: 1, data: [new Transaction(client, testTransaction)]}, 'Paginated query');
 });
 
-test('Update transaction', async (t: ReadonlyDeep<ExecutionContext>) => {
+test('Update transaction', async (t: ExecutionContext) => {
 	const transaction = new Transaction(client, testTransaction);
 
 	nock(API_URL).patch(`/transactions/${testTransaction.id}`).reply(200, testTransaction);
@@ -91,7 +87,7 @@ test('Update transaction', async (t: ReadonlyDeep<ExecutionContext>) => {
 	t.true(transaction.handled, 'Handled is updated');
 });
 
-test('Create transaction', async (t: ReadonlyDeep<ExecutionContext>) => {
+test('Create transaction', async (t: ExecutionContext) => {
 	// `nock` doesn't really have a way to validate request bodies, so we do this
 	let requestBody;
 
@@ -105,8 +101,9 @@ test('Create transaction', async (t: ReadonlyDeep<ExecutionContext>) => {
 
 	// Send the network request that creates the transaction
 	await client.transactions.create({
-		amount: Number.parseFloat(testTransaction.amount),
+		amount: Number(testTransaction.amount),
 		to: testTransaction.to.id,
+		from: testTransaction.from.id,
 		user: testTransaction.user
 	});
 
@@ -114,15 +111,16 @@ test('Create transaction', async (t: ReadonlyDeep<ExecutionContext>) => {
 	t.deepEqual(
 		requestBody,
 		{
-			amount: Number.parseFloat(testTransaction.amount),
-			toId: testTransaction.to.id,
+			amount: Number(testTransaction.amount),
+			from: testTransaction.from.id,
+			to: testTransaction.to.id,
 			user: testTransaction.user
 		} as APITransactionCreate,
 		'Request body should have correct structure and information'
 	);
 });
 
-test('Transaction class', (t: ReadonlyDeep<ExecutionContext>) => {
+test('Transaction class', (t: ExecutionContext) => {
 	const {id: _id, ...rest} = testTransaction;
 
 	t.throws(() => new Transaction(client, {...rest, id: notAUUID}), {instanceOf: RangeError}, 'Throws error when invalid UUID is provided');

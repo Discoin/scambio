@@ -7,9 +7,9 @@ import {Currency, Bot} from '../types/discoin';
  * @returns The parsed currency
  */
 export function apiCurrencyToCurrency(currency: APICurrency): Currency {
-	const {reserve, ...rest} = currency;
+	const {reserve, wid, ...rest} = currency;
 
-	return {...rest, reserve: Number.parseFloat(reserve)};
+	return {...rest, reserve: Number(reserve), wid: Number(wid)};
 }
 
 /**
@@ -18,9 +18,9 @@ export function apiCurrencyToCurrency(currency: APICurrency): Currency {
  * @param bot The API bot to convert
  */
 export function apiBotToBot(bot: APIBot): Bot {
-	const {currency, ...rest} = bot;
+	const {currencies, ...rest} = bot;
 
-	return {...rest, currency: apiCurrencyToCurrency(currency)};
+	return {...rest, currencies: currencies.map(apiCurrencyToCurrency)};
 }
 
 type GetManyResponse = APIBot[] | APICurrency[] | APITransaction[];
@@ -31,11 +31,7 @@ type GetManyResponse = APIBot[] | APICurrency[] | APITransaction[];
  * @returns Boolean of whether or not the provided response is a DTO
  */
 export function getManyResponseIsDTO<T>(getManyResponse: GetManyResponse | APIGetManyDTO<T>): getManyResponse is APIGetManyDTO<T> {
-	if (!Array.isArray(getManyResponse) && Object.prototype.hasOwnProperty.call(getManyResponse, 'data')) {
-		return true;
-	}
-
-	return false;
+	return !Array.isArray(getManyResponse) && Object.prototype.hasOwnProperty.call(getManyResponse, 'data')
 }
 
 /**

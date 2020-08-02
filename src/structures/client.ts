@@ -33,12 +33,12 @@ export class Client {
 	/**
 	 * Create a Discoin client to interact with the Discoin API.
 	 * @param token The token to use for this client
-	 * @param currencyID The currency ID that your bot uses
+	 * @param currencyIDs The currency IDs that your bot uses
 	 */
-	constructor(public token: Token, public currencyID: string) {
+	constructor(public token: Token, public currencyIDs: string[]) {
 		this.transactions = new TransactionStore(this);
 
-		const relevantTransactionsFilter = `filter=to.id||eq||${currencyID}`;
+		const relevantTransactionsFilter = `filter=to.id||inL||${currencyIDs.map(encodeURIComponent).join(',')}`;
 
 		this.commonQueries = {
 			RELEVANT_TRANSACTIONS: relevantTransactionsFilter,

@@ -16,15 +16,18 @@ export type UUIDv4 = string;
 export interface Bot {
 	/**
 	 * The ID of this bot.
-	 * This is usually a Discord user ID, but sometimes isn't.
+	 * This is a Discord user ID, but sometimes isn't.
 	 * @example
 	 * '388191157869477888'
-	 * @example
-	 * '496480755728384002_DUTC'
 	 */
-	readonly id: string;
-	/** The currency that corresponds to this bot. */
-	readonly currency: Currency;
+	id: string;
+	/** The currencies that correspond to this bot. */
+	currencies: Currency[];
+	/**
+	 * The name of the bot.
+	 * @example 'Dice'
+	 */
+	name: string
 }
 
 /**
@@ -35,22 +38,26 @@ export interface Currency {
 	 * The shortened currency ID.
 	 * @example 'OAT'
 	 */
-	readonly id: string;
+	id: string;
 	/**
 	 * The full currency name.
-	 * @example 'Dice Oats'
+	 * @example 'Oats'
 	 */
-	readonly name: string;
+	name: string;
 	/**
 	 * The value in Discoin this currency is worth.
-	 * 4 decimal places of precision.
 	 * @example 0.0401
 	 */
-	readonly value: number;
+	value: number;
 	/**
 	 * The reserve available of this currency.
-	 * 2 decimal places of precision.
-	 * @example 9999889.0213
+	 * @example '1000.02'
 	 */
-	readonly reserve: number;
+	reserve: number;
+	/**
+	 * The worth in Discoin (WiD) of the currency.
+	 * This is used to determine the `value` field.
+	 * @example '1.02'
+	 */
+	wid: number;
 }

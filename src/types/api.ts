@@ -1,4 +1,5 @@
 import {Bot, Currency, UUIDv4} from './discoin';
+import {Except} from 'type-fest';
 
 export interface APIGetManyDTO<T> {
 	data: T[];
@@ -8,85 +9,87 @@ export interface APIGetManyDTO<T> {
 	pageCount: number;
 }
 
+/** The default currency returned by the API, with some fields eagerly loaded. */
+export type PartialCurrency = Pick<Currency, 'id' | 'name'> & {bot: Pick<Bot, 'name'> & {discord_id: string}};
+
+
 /**
  * A Discoin transaction.
  */
 export interface APITransaction {
 	/** The transaction ID. */
-	readonly id: UUIDv4;
+	id: UUIDv4;
 
 	/** The currency this transaction is converting from. */
-	readonly from: APICurrency;
+	from: PartialCurrency;
 
 	/** The currency this transaction is converting to. */
-	readonly to: APICurrency;
+	to: PartialCurrency;
 
 	/**
 	 * The amount in the `from` currency that this transcation is converting.
 	 * This is a string type to preserve precision of decimal places.
 	 * @example '1000'
 	 */
-	readonly amount: string;
+	amount: string;
 
 	/**
 	 * The Discord user ID of the user who initiated the transaction.
 	 * @example '210024244766179329'
 	 */
-	readonly user: string;
+	user: string;
 
 	/**
 	 * Whether or not this transaction was handled by the recipient bot.
 	 * A transaction is handled when the recipient bot paid the respective user the correct amount in bot currency.
 	 * Can only be updated by the recipient bot.
 	 */
-	readonly handled: boolean;
+	handled: boolean;
 
 	/**
 	 * Timestamp of when this transaction was initiated.
 	 * @example '2019-12-09T12:28:50.231Z'
 	 */
-	readonly timestamp: string;
+	timestamp: string;
 
 	/**
 	 * How much the receiving bot should payout to the user who initiated the transaction.
 	 * @example 500
 	 */
-	readonly payout: number;
+	payout: number;
 }
 
 /**
  * A request body sent to the API when creating a transaction.
  */
 export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
+	/** Currency ID of the currency you are converting from. */
+	from: string;
 	/** Currency ID of the currency you are converting to. */
-	readonly toId: string;
+	to: string;
 	/**
 	 * The amount in the `from` currency that this transcation is converting.
 	 * This can be a string type to preserve precision of decimal places.
 	 * @example '1000.543297'
 	 * @example 1000.24
 	 */
-	readonly amount: string | number;
+	amount: string | number;
 }
 
 /**
  * A currency object from the API.
  */
-export interface APICurrency extends Omit<Currency, 'reserve'> {
-	/**
-	 * The reserve available of this currency.
-	 * This is a string type to preserve precision of decimal places.
-	 * @example '34435.52'
-	 */
-	readonly reserve: string;
+export interface APICurrency extends Except<Currency, 'reserve' | 'wid'> {
+	reserve: string;
+	wid: string;
 }
 
 /**
  * A bot object from the API.
  */
-export interface APIBot extends Omit<Bot, 'currency'> {
-	/** The currency that corresponds to this bot. */
-	readonly currency: APICurrency;
+export interface APIBot extends Except<Bot, 'currencies'> {
+	/** The currencies that correspond to this bot. */
+	currencies: APICurrency[];
 }
 
 /**
@@ -105,9 +108,9 @@ export interface APIBot extends Omit<Bot, 'currency'> {
  */
 export interface APIErrorResponse {
 	/** The HTTP status code of the response. */
-	readonly statusCode: number;
+	statusCode: number;
 	/** HTTP status code error message */
-	readonly error: string;
+	error: string;
 	/** A description of what went wrong.  */
-	readonly message?: string;
+	message?: string;
 }

@@ -5,15 +5,14 @@ import {APICurrency, APIGetManyDTO} from '../types/api';
 import {apiCurrencyToCurrency} from '../util/data-transfer-object';
 import {Currency} from '../types/discoin';
 import {currencyStore} from './currencies';
-import {ReadonlyDeep} from 'type-fest';
 
-const testCurrency: APICurrency = {id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1};
+const testCurrency: APICurrency = {id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'};
 
 test.after(() => {
 	nock.restore();
 });
 
-test('Get one currency', async (t: ReadonlyDeep<ExecutionContext>) => {
+test('Get one currency', async (t: ExecutionContext) => {
 	nock(API_URL).get(`/currencies/${testCurrency.id}`).reply(200, testCurrency);
 
 	const actualCurrency = await currencyStore.getOne(testCurrency.id);
@@ -24,7 +23,7 @@ test('Get one currency', async (t: ReadonlyDeep<ExecutionContext>) => {
 const filteredQuery = 'filter=value||$gte||0.4';
 const paginatedQuery = 'page=1&limit=1';
 
-test('Get many currencies', async (t: ReadonlyDeep<ExecutionContext>) => {
+test('Get many currencies', async (t: ExecutionContext) => {
 	nock(API_URL).get('/currencies').reply(200, [testCurrency]);
 
 	const actualCurrencies = await currencyStore.getMany();

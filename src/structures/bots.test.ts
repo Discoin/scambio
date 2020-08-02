@@ -1,13 +1,13 @@
 import test, {ExecutionContext} from 'ava';
 import nock from 'nock';
-import {ReadonlyDeep} from 'type-fest';
 import {APIBot, APIGetManyDTO} from '../types/api';
 import {API_URL} from '../util/constants';
 import {apiBotToBot} from '../util/data-transfer-object';
 import {botStore} from './bots';
 
 const testBot: APIBot = {
-	currency: {id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1},
+	currencies: [{id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'}],
+	name: 'Test bot',
 	id: '123456789'
 };
 
@@ -15,7 +15,7 @@ test.after(() => {
 	nock.restore();
 });
 
-test('Get one bot', async (t: ReadonlyDeep<ExecutionContext>) => {
+test('Get one bot', async (t: ExecutionContext) => {
 	nock(API_URL).get(`/bots/${testBot.id}`).reply(200, testBot);
 
 	const actualBot = await botStore.getOne(testBot.id);
@@ -26,7 +26,7 @@ test('Get one bot', async (t: ReadonlyDeep<ExecutionContext>) => {
 const filteredQuery = 'filter=id||eq||388191157869477888';
 const paginatedQuery = 'page=1&limit=1';
 
-test('Get many bots', async (t: ReadonlyDeep<ExecutionContext>) => {
+test('Get many bots', async (t: ExecutionContext) => {
 	nock(API_URL).get('/bots').reply(200, [testBot]);
 
 	const actualBots = await botStore.getMany();
