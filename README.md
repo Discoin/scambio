@@ -42,7 +42,7 @@ You do everything through a client instance or its static members.
 ```ts
 import Discoin from '@discoin/scambio';
 
-const client = new Discoin('token', 'currencyCode');
+const client = new Discoin('token', ['currencyCode']);
 ```
 
 ##### CommonJS
@@ -50,7 +50,7 @@ const client = new Discoin('token', 'currencyCode');
 ```js
 const Discoin = require('@discoin/scambio').default;
 
-const client = new Discoin('token', 'currencyCode');
+const client = new Discoin('token', ['currencyCode']);
 ```
 
 #### Creating a transaction
