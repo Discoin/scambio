@@ -2,6 +2,7 @@ import {Token} from '../types/discoin';
 import {TransactionStore} from './transactions';
 import {currencyStore} from './currencies';
 import {botStore} from './bots';
+import {invariant} from '../util/invariant';
 
 /**
  * Common queries to use for `getMany` operations.
@@ -36,6 +37,10 @@ export class Client {
 	 * @param currencyIDs The currency IDs that your bot uses
 	 */
 	constructor(public token: Token, public currencyIDs: string[]) {
+		invariant(token !== undefined, 'token was undefined');
+		invariant(currencyIDs !== undefined, 'currencyIDs was undefined');
+		invariant(typeof currencyIDs !== 'string', ['currencyID has been deprecated, you must pass an array of currencyIDs', `['${currencyIDs}']`].join('\n'));
+
 		this.transactions = new TransactionStore(this);
 
 		const relevantTransactionsFilter = `filter=to.id||inL||${currencyIDs.map(currencyID => encodeURIComponent(currencyID)).join(',')}`;

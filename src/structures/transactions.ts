@@ -4,6 +4,7 @@ import {APIGetManyDTO, APITransaction, APITransactionCreate, PartialCurrency} fr
 import {UUIDv4} from '../types/discoin';
 import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
 import {getManyResponseIsDTO} from '../util/data-transfer-object';
+import {invariant} from '../util/invariant';
 import {Client} from './client';
 
 /**
@@ -83,6 +84,8 @@ export class Transaction {
 	 * @returns The transaction that was just updated
 	 */
 	async update(options: TransactionUpdateOptions): Promise<this> {
+		invariant(options, "Update options weren't provided");
+
 		const request = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {
 			prefixUrl: API_URL,
 			headers: {
@@ -139,6 +142,8 @@ export class TransactionStore {
 	 * @returns The transaction
 	 */
 	async getOne(id: UUIDv4): Promise<Transaction> {
+		invariant(typeof id === 'string', "id wasn't string type");
+
 		if (!UUID_V4_REG_EXP.test(id)) {
 			throw new RangeError(`Transaction ID ${id} does not appear to be a valid v4 UUID`);
 		}

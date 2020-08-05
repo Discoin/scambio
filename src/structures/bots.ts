@@ -1,8 +1,9 @@
 import ky from 'ky-universal';
+import {APIBot, APIGetManyDTO} from '../types/api';
 import {Bot} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
-import {APIBot, APIGetManyDTO} from '../types/api';
 import {apiBotToBot, getManyResponseIsDTO} from '../util/data-transfer-object';
+import {invariant} from '../util/invariant';
 
 // Hello welcome to the bot store what would you like to buy
 /**
@@ -40,6 +41,8 @@ export const botStore = {
 	 * @returns The bot
 	 */
 	async getOne(id: string): Promise<Bot> {
+		invariant(typeof id === 'string', "id wasn't string type");
+
 		const request = ky.get(`bots/${encodeURIComponent(id)}`, {
 			prefixUrl: API_URL,
 			headers: {'User-Agent': USER_AGENT}

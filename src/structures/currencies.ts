@@ -3,6 +3,7 @@ import {APICurrency, APIGetManyDTO} from '../types/api';
 import {Currency} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
 import {apiCurrencyToCurrency, getManyResponseIsDTO} from '../util/data-transfer-object';
+import {invariant} from '../util/invariant';
 
 /**
  * Store and retrieve many currencies.
@@ -43,6 +44,8 @@ export const currencyStore = {
 	 * @returns The transaction
 	 */
 	async getOne(code: string): Promise<Currency> {
+		invariant(typeof code === 'string', "code wasn't string type");
+
 		const request = ky.get(`currencies/${encodeURIComponent(code)}`, {
 			headers: {'User-Agent': USER_AGENT},
 			prefixUrl: API_URL
