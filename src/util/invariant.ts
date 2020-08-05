@@ -1,4 +1,4 @@
-const prefix: string = '@discoin/scambio: Assertion failed';
+const prefix = '@discoin/scambio: Assertion failed';
 
 /**
  * Throws an errror if `condition` is falsy.
@@ -10,7 +10,7 @@ export function invariant(condition: unknown, message?: string): asserts conditi
 	if (!condition) {
 		if (process.env.NODE_ENV === '') {
 			// Message is only in development
-			throw new Error(`${prefix}: ${message || ''}`);
+			throw new Error(`${prefix}: ${message ?? ''}`);
 		} else {
 			throw new Error(prefix);
 		}

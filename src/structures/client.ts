@@ -39,7 +39,10 @@ export class Client {
 	constructor(public token: Token, public currencyIDs: string[]) {
 		invariant(token !== undefined, 'token was undefined');
 		invariant(currencyIDs !== undefined, 'currencyIDs was undefined');
-		invariant(typeof currencyIDs !== 'string', ['currencyID has been deprecated, you must pass an array of currencyIDs', `['${currencyIDs}']`].join('\n'));
+		invariant(
+			typeof currencyIDs !== 'string',
+			['currencyID has been deprecated, you must pass an array of currencyIDs', `['${(currencyIDs as unknown) as string}']`].join('\n')
+		);
 
 		this.transactions = new TransactionStore(this);
 
