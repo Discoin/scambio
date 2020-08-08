@@ -57,10 +57,11 @@ const client = new Discoin('token', ['currencyCode']);
 
 ```js
 const newTransaction = client.transactions.create({
-  to: 'ABC'
-  amount: 100
-  // Discord user ID
-  user: '210024244766179329'
+	from: 'XYZ',
+	to: 'ABC',
+	amount: 100,
+	// Discord user ID
+	user: '210024244766179329'
 });
 ```
 
