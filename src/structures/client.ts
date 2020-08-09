@@ -46,11 +46,11 @@ export class Client {
 
 		this.transactions = new TransactionStore(this);
 
-		const relevantTransactionsFilter = `filter=to.id||inL||${currencyIDs.map(currencyID => encodeURIComponent(currencyID)).join(',')}`;
+		const relevantTransactionsFilter = `filter=to.id||$in||${currencyIDs.map(currencyID => encodeURIComponent(currencyID.toUpperCase())).join(',')}`;
 
 		this.commonQueries = {
 			RELEVANT_TRANSACTIONS: relevantTransactionsFilter,
-			UNHANDLED_TRANSACTIONS: `${relevantTransactionsFilter}&filter=handled||eq||false`
+			UNHANDLED_TRANSACTIONS: `${relevantTransactionsFilter}&filter=handled||$eq||false`
 		};
 	}
 }
