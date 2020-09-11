@@ -1,14 +1,21 @@
 import packageJSON from '../../package.json';
 
-/** Regular expression for a v4 UUUID (used for transaction IDs). */
+/**
+ * Regular expression for a v4 UUUID (used for transaction IDs).
+ * @private
+ */
 export const UUID_V4_REG_EXP = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i;
 
-/** The base URL for the API. */
+/**
+ * The base URL for the API.
+ * @private
+ */
 export const API_URL = 'https://discoin.zws.im';
 
 /**
  * Set of HTTP request methods to indicate the desired action to be performed for a given resource.
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+ * @private
  */
 export const enum HTTPRequestMethods {
 	/** The `GET` method requests a representation of the specified resource. Requests using `GET` should only retrieve data. */
@@ -34,7 +41,7 @@ export const enum HTTPRequestMethods {
 /**
  * The User-Agent header to use in requests.
  * Automatically generated from the version of the package you are using.
- * @example
- * 'Scambio v3.0.0'
+ * @example 'Scambio v3.0.0'
+ * @private
  */
 export const USER_AGENT = `Scambio v${packageJSON.version}`;

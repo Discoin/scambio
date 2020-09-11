@@ -5,6 +5,7 @@ import {Currency, Bot} from '../types/discoin';
  * Convert an API currency to a regular currency.
  * @param currency API currency to convert
  * @returns The parsed currency
+ * @private
  */
 export function apiCurrencyToCurrency(currency: APICurrency): Currency {
 	const {reserve, wid, ...rest} = currency;
@@ -16,6 +17,7 @@ export function apiCurrencyToCurrency(currency: APICurrency): Currency {
  * Convert an API bot to a regular bot.
  * Wrapper around `apiCurrencyToCurrency()`.
  * @param bot The API bot to convert
+ * @private
  */
 export function apiBotToBot(bot: APIBot): Bot {
 	const {currencies, ...rest} = bot;
@@ -29,6 +31,7 @@ type GetManyResponse = APIBot[] | APICurrency[] | APITransaction[];
  * Check if a `getMany` response from the API is a DTO.
  * @param getManyResponse The `getMany` response to check
  * @returns Boolean of whether or not the provided response is a DTO
+ * @private
  */
 export function getManyResponseIsDTO<T>(getManyResponse: GetManyResponse | APIGetManyDTO<T>): getManyResponse is APIGetManyDTO<T> {
 	return !Array.isArray(getManyResponse) && Object.prototype.hasOwnProperty.call(getManyResponse, 'data');
@@ -38,6 +41,7 @@ export function getManyResponseIsDTO<T>(getManyResponse: GetManyResponse | APIGe
  * Check if a currency object (`APICurrency` or `Currency`) is an `APICurrency`.
  * @param currency Currency object to check
  * @returns Boolean of whether or not the provided currency is an API currency.
+ * @private
  */
 export function currencyIsAPICurrency(currency: APICurrency | Currency): currency is APICurrency {
 	return typeof currency.reserve === 'string' && typeof currency.value === 'string';

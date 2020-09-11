@@ -1,6 +1,9 @@
 import {Bot, Currency, UUIDv4} from './discoin';
 import {Except} from 'type-fest';
 
+/**
+ * @private
+ */
 export interface APIGetManyDTO<T> {
 	data: T[];
 	count: number;
@@ -9,11 +12,15 @@ export interface APIGetManyDTO<T> {
 	pageCount: number;
 }
 
-/** The default currency returned by the API, with some fields eagerly loaded. */
+/**
+ * The default currency returned by the API, with some fields eagerly loaded.
+ * @private
+ */
 export type PartialCurrency = Pick<Currency, 'id' | 'name'> & {bot: Pick<Bot, 'name'> & {discord_id: string}};
 
 /**
  * A Discoin transaction.
+ * @private
  */
 export interface APITransaction {
 	/** The transaction ID. */
@@ -60,6 +67,7 @@ export interface APITransaction {
 
 /**
  * A request body sent to the API when creating a transaction.
+ * @private
  */
 export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
 	/** Currency ID of the currency you are converting from. */
@@ -77,6 +85,7 @@ export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
 
 /**
  * A currency object from the API.
+ * @private
  */
 export interface APICurrency extends Except<Currency, 'reserve' | 'wid'> {
 	reserve: string;
@@ -85,6 +94,7 @@ export interface APICurrency extends Except<Currency, 'reserve' | 'wid'> {
 
 /**
  * A bot object from the API.
+ * @private
  */
 export interface APIBot extends Except<Bot, 'currencies'> {
 	/** The currencies that correspond to this bot. */
@@ -104,6 +114,7 @@ export interface APIBot extends Except<Bot, 'currencies'> {
  * 	error: "Not Found",
  * 	message: "Cannot GET /"
  * }
+ * @private
  */
 export interface APIErrorResponse {
 	/** The HTTP status code of the response. */
