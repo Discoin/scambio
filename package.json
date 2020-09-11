@@ -33,19 +33,19 @@
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "1.0.1",
-		"@types/node": "12.12.54",
-		"ava": "3.11.1",
+		"@types/node": "12.12.57",
+		"ava": "3.12.1",
 		"nock": "13.0.4",
 		"nyc": "15.1.0",
 		"prettier": "2.0.4",
 		"rimraf": "3.0.2",
 		"semantic-release": "17.1.1",
 		"source-map-support": "0.5.19",
-		"ts-node": "8.10.2",
+		"ts-node": "9.0.0",
 		"type-fest": "0.16.0",
-		"typedoc": "0.18.0",
+		"typedoc": "0.19.1",
 		"typescript": "3.9.7",
-		"xo": "0.33.0"
+		"xo": "0.33.1"
 	},
 	"engines": {
 		"node": "10 || 11 || 12 || 13 || 14"
