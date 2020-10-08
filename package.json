@@ -33,7 +33,7 @@
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "1.0.1",
-		"@types/node": "12.12.65",
+		"@types/node": "12.12.66",
 		"ava": "3.13.0",
 		"nock": "13.0.4",
 		"nyc": "15.1.0",
