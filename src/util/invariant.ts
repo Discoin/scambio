@@ -8,11 +8,7 @@ const prefix = '@discoin/scambio: Assertion failed';
  */
 export function invariant(condition: unknown, message?: string): asserts condition {
 	if (!condition) {
-		if (process.env.NODE_ENV === '') {
-			// Message is only in development
-			throw new Error(`${prefix}: ${message ?? ''}`);
-		} else {
-			throw new Error(prefix);
-		}
+		const error = process.env.NODE_ENV === '' ? new Error(`${prefix}: ${message ?? ''}`) : new Error(prefix);
+		throw error;
 	}
 }
