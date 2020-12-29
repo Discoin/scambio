@@ -83,7 +83,7 @@
 	},
 	"scripts": {
 		"build": "tsc",
-		"docs": "typedoc --out docs_out --mode file --exclude \"src/*/*.test.*\"",
+		"docs": "typedoc --out docs_out --entryPoints ./src/index.ts",
 		"lint": "xo",
 		"prebuild": "rimraf tsc_output",
 		"predocs": "rimraf docs_out",
