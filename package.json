@@ -44,7 +44,7 @@
 		"source-map-support": "0.5.19",
 		"ts-node": "9.1.1",
 		"type-fest": "0.20.2",
-		"typedoc": "0.19.2",
+		"typedoc": "0.20.1",
 		"typescript": "4.1.2",
 		"xo": "0.36.1"
 	},
@@ -83,7 +83,7 @@
 	},
 	"scripts": {
 		"build": "tsc",
-		"docs": "typedoc --out docs_out --mode file --exclude \"src/*/*.test.*\"",
+		"docs": "typedoc --out docs_out --entryPoints ./src/index.ts",
 		"lint": "xo",
 		"prebuild": "rimraf tsc_output",
 		"predocs": "rimraf docs_out",
