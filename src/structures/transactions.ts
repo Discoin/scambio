@@ -10,7 +10,7 @@ import {Client} from './client';
 /**
  * Options for updating a transaction that already exists.
  */
-interface TransactionUpdateOptions {
+export interface TransactionUpdateOptions {
 	/** Whether or not the transaction is handled. */
 	handled: boolean;
 }
@@ -18,7 +18,7 @@ interface TransactionUpdateOptions {
 /**
  * Options for creating a transaction.
  */
-interface TransactionCreateOptions {
+export interface TransactionCreateOptions {
 	/**
 	 * Currency ID to convert to.
 	 * @example 'OAT'
