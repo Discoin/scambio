@@ -196,7 +196,9 @@ tsc_output
 docs_out
 
 # Yarn
-.yarn/build-state.yml
-.yarn/unplugged
-.yarn/cache
-.pnp.js
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
