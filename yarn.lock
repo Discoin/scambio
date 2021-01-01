@@ -299,7 +299,7 @@ __metadata:
     source-map-support: 0.5.19
     ts-node: 9.1.1
     type-fest: 0.20.2
-    typedoc: 0.20.6
+    typedoc: 0.20.7
     typescript: 4.1.2
     xo: 0.36.1
   peerDependencies:
@@ -10947,9 +10947,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"typedoc@npm:0.20.6":
-  version: 0.20.6
-  resolution: "typedoc@npm:0.20.6"
+"typedoc@npm:0.20.7":
+  version: 0.20.7
+  resolution: "typedoc@npm:0.20.7"
   dependencies:
     colors: ^1.4.0
     fs-extra: ^9.0.1
@@ -10966,7 +10966,7 @@ fsevents@~2.1.2:
     typescript: 3.9.x || 4.0.x || 4.1.x
   bin:
     typedoc: bin/typedoc
-  checksum: 467621591d547decec35dc66290c25dd25016b9a8243943f1e13d4f9167a901443578f70d45913f1ad7aa9e8f4980697047fd061bc3c206ff52b260b2d92e930
+  checksum: 5d63ee39a70b69b8a6984e01ec798c4a1b98213e1f8ff9c4a40a51a6b25530e724f5d5e1a3390b310d4a5274952fada750de4950e69464ccc8bc7fa83504a9cd
   languageName: node
   linkType: hard
 
