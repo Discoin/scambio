@@ -20,7 +20,7 @@ test('Get one bot', async (t: ExecutionContext) => {
 
 	const actualBot = await botStore.getOne(testBot.id);
 
-	return t.deepEqual(actualBot, apiBotToBot(testBot));
+	t.deepEqual(actualBot, apiBotToBot(testBot));
 });
 
 const filteredQuery = 'filter=id||eq||388191157869477888';

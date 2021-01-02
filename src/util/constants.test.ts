@@ -2,7 +2,7 @@ import test, {ExecutionContext} from 'ava';
 import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from './constants';
 
 test('API URL', (t: ExecutionContext) => {
-	return t.notThrows(() => new URL(API_URL), 'API URL is a proper URL');
+	t.notThrows(() => new URL(API_URL), 'API URL is a proper URL');
 });
 
 test('UUID v4 RegExp', (t: ExecutionContext) => {
