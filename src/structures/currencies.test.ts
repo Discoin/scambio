@@ -17,7 +17,7 @@ test('Get one currency', async (t: ExecutionContext) => {
 
 	const actualCurrency = await currencyStore.getOne(testCurrency.id);
 
-	return t.deepEqual(actualCurrency, apiCurrencyToCurrency(testCurrency));
+	t.deepEqual(actualCurrency, apiCurrencyToCurrency(testCurrency));
 });
 
 const filteredQuery = 'filter=value||$gte||0.4';
