@@ -295,7 +295,7 @@ __metadata:
     nyc: 15.1.0
     prettier: 2.2.1
     rimraf: 3.0.2
-    semantic-release: 17.3.3
+    semantic-release: 17.3.4
     source-map-support: 0.5.19
     ts-node: 9.1.1
     type-fest: 0.20.2
@@ -9745,9 +9745,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"semantic-release@npm:17.3.3":
-  version: 17.3.3
-  resolution: "semantic-release@npm:17.3.3"
+"semantic-release@npm:17.3.4":
+  version: 17.3.4
+  resolution: "semantic-release@npm:17.3.4"
   dependencies:
     "@semantic-release/commit-analyzer": ^8.0.0
     "@semantic-release/error": ^2.2.0
@@ -9776,10 +9776,10 @@ fsevents@~2.1.2:
     semver: ^7.3.2
     semver-diff: ^3.1.1
     signale: ^1.2.1
-    yargs: ^15.0.1
+    yargs: ^16.2.0
   bin:
     semantic-release: bin/semantic-release.js
-  checksum: 0ff2b8a2a82ea3670c903f05588ecaa8bc63d6cd53f8c110cd7e843ff14024a7714eb53bb74d4c59857e214f4bba373d62fcaab657bc4810748ee5231a0fc7ea
+  checksum: daa136cc79845c6640373c8baeb784d8bec464395e0d7c2e72b8d926a3e404399a2e23550f51062bef4bd29b8e2110d18ba55d8e7b86657fa5d1c7bb44facee9
   languageName: node
   linkType: hard
 
@@ -11817,7 +11817,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"yargs@npm:^15.0.1, yargs@npm:^15.0.2":
+"yargs@npm:^15.0.2":
   version: 15.3.1
   resolution: "yargs@npm:15.3.1"
   dependencies:
