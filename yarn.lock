@@ -185,15 +185,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.6.3":
-  version: 7.8.4
-  resolution: "@babel/runtime@npm:7.8.4"
-  dependencies:
-    regenerator-runtime: ^0.13.2
-  checksum: e81c601fd206a3909bacd5b41bc2044dc9e0a4dfd9b7cc3479b920b2e3bc5a3cefbd4dc9543218b659735ce771a9bc9bf77e3fcf814bfced26829403daaa096e
-  languageName: node
-  linkType: hard
-
 "@babel/template@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/template@npm:7.10.4"
@@ -295,7 +286,7 @@ __metadata:
     nyc: 15.1.0
     prettier: 2.2.1
     rimraf: 3.0.2
-    semantic-release: 17.3.5
+    semantic-release: 17.3.6
     source-map-support: 0.5.19
     ts-node: 9.1.1
     type-fest: 0.20.2
@@ -2616,19 +2607,6 @@ __metadata:
   version: 1.0.2
   resolution: "core-util-is@npm:1.0.2"
   checksum: 089015ee3c462dfceba70faa1df83b42a7bb35db26dae6af283247b06fe3216c65fccd9f00eebcaf98300dc31e981d56aae9f90b624f8f6ff1153e235ff88b65
-  languageName: node
-  linkType: hard
-
-"cosmiconfig@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "cosmiconfig@npm:6.0.0"
-  dependencies:
-    "@types/parse-json": ^4.0.0
-    import-fresh: ^3.1.0
-    parse-json: ^5.0.0
-    path-type: ^4.0.0
-    yaml: ^1.7.2
-  checksum: bbd6bbaefe15938107da21f2b5f2d5ede75c7ed4bca5af904d91987c59b050ac95f5e786d9021e16959e0119b36174b190f6040a1daf6fddc75361ab123c0d45
   languageName: node
   linkType: hard
 
@@ -5180,7 +5158,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"import-fresh@npm:^3.0.0, import-fresh@npm:^3.1.0, import-fresh@npm:^3.2.1":
+"import-fresh@npm:^3.0.0, import-fresh@npm:^3.2.1":
   version: 3.2.1
   resolution: "import-fresh@npm:3.2.1"
   dependencies:
@@ -9373,13 +9351,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.2":
-  version: 0.13.3
-  resolution: "regenerator-runtime@npm:0.13.3"
-  checksum: fc026f997801876927d8b11bd94b1d445c01fb1b112dcc35b1c4e83490b87954d26d8164c50098cdebaa8edc3cbfaa0e474758a57e28efc25930972148274b7a
-  languageName: node
-  linkType: hard
-
 "regex-not@npm:^1.0.0, regex-not@npm:^1.0.2":
   version: 1.0.2
   resolution: "regex-not@npm:1.0.2"
@@ -9745,9 +9716,9 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"semantic-release@npm:17.3.5":
-  version: 17.3.5
-  resolution: "semantic-release@npm:17.3.5"
+"semantic-release@npm:17.3.6":
+  version: 17.3.6
+  resolution: "semantic-release@npm:17.3.6"
   dependencies:
     "@semantic-release/commit-analyzer": ^8.0.0
     "@semantic-release/error": ^2.2.0
@@ -9755,10 +9726,10 @@ fsevents@~2.1.2:
     "@semantic-release/npm": ^7.0.0
     "@semantic-release/release-notes-generator": ^9.0.0
     aggregate-error: ^3.0.0
-    cosmiconfig: ^6.0.0
+    cosmiconfig: ^7.0.0
     debug: ^4.0.0
     env-ci: ^5.0.0
-    execa: ^4.0.0
+    execa: ^5.0.0
     figures: ^3.0.0
     find-versions: ^4.0.0
     get-stream: ^5.0.0
@@ -9779,7 +9750,7 @@ fsevents@~2.1.2:
     yargs: ^16.2.0
   bin:
     semantic-release: bin/semantic-release.js
-  checksum: 1e7b3b5005daeb5a94b0b3e9d2344311a8e6fb8e8bfa3268ff111824dff99ee1094bdec727745e12cd6913130b62f8d4e94b4a4464a7f69842aead334a6841b6
+  checksum: 3856ccdf118fffa73743b2581cda66912909b0e7974e02ae6550b926f15d08fdac60952f2daaebe652caa6d31879a88c139de7ba05cf6014042a473d0ac8d985
   languageName: node
   linkType: hard
 
@@ -11741,15 +11712,6 @@ fsevents@~2.1.2:
   version: 1.10.0
   resolution: "yaml@npm:1.10.0"
   checksum: d4cc9f9724f8d0aebc2cf52e4e6aa7059f12d50deb54b5225d103462fb2af36e5c0bb419101ca4b1f0cd3b4db9e4139cf2c690e863ac6227648d39d6f4e2522c
-  languageName: node
-  linkType: hard
-
-"yaml@npm:^1.7.2":
-  version: 1.7.2
-  resolution: "yaml@npm:1.7.2"
-  dependencies:
-    "@babel/runtime": ^7.6.3
-  checksum: 8b5d70dfff792ef1fa4728a86052d2fa63698535b90bf3cf7c7d56412f08e351c2bb91e20b395225595f9b68ec67f83aaa18d0441a9e771d8a23ff67db44cee4
   languageName: node
   linkType: hard
 
