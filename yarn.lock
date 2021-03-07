@@ -282,7 +282,7 @@ __metadata:
     eslint-plugin-prettier: 3.3.1
     ky: ^0.25.0
     ky-universal: ^0.8.0
-    nock: 13.0.10
+    nock: 13.0.11
     nyc: 15.1.0
     prettier: 2.2.1
     rimraf: 3.0.2
@@ -7483,15 +7483,15 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"nock@npm:13.0.10":
-  version: 13.0.10
-  resolution: "nock@npm:13.0.10"
+"nock@npm:13.0.11":
+  version: 13.0.11
+  resolution: "nock@npm:13.0.11"
   dependencies:
     debug: ^4.1.0
     json-stringify-safe: ^5.0.1
     lodash.set: ^4.3.2
     propagate: ^2.0.0
-  checksum: 9dffa2c45de0caba5842dce1fa145d0581e8c1217bf531eee29f04d7e9823c3a53c298de18143e11363db5fcc0afb39650ae71aecfd966682a5bfc4bc3d31ae6
+  checksum: 75aca1f14036e9ba6aaa03813b83d1685cd3f2268b154b30ab9f5f00719958140a9d0b1e5f4f420da4e1e6d9fa14f193fc4df68b007d49d7a749dc6fd1646071
   languageName: node
   linkType: hard
 
