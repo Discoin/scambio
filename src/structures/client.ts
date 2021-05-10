@@ -1,8 +1,8 @@
 import {Token} from '../types/discoin';
+import {invariant} from '../util/invariant';
 import {TransactionStore} from './transactions';
 import {currencyStore} from './currencies';
 import {botStore} from './bots';
-import {invariant} from '../util/invariant';
 
 /**
  * Common queries to use for `getMany` operations.

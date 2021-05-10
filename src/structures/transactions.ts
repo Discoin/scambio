@@ -1,11 +1,11 @@
 import ky from 'ky-universal';
 import {Except} from 'type-fest';
-import {APIGetManyDTO, APITransaction, APITransactionCreate, PartialCurrency} from '../types/api';
+import type {APIGetManyDTO, APITransaction, APITransactionCreate, PartialCurrency} from '../types/api';
 import {UUIDv4} from '../types/discoin';
 import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
 import {getManyResponseIsDTO} from '../util/data-transfer-object';
 import {invariant} from '../util/invariant';
-import {Client} from './client';
+import type {Client} from './client';
 
 /**
  * Options for updating a transaction that already exists.
@@ -124,7 +124,7 @@ export class TransactionStore {
 
 		const response = await request;
 
-		const getManyResponseJSON: APITransaction[] | APIGetManyDTO<APITransaction> = await response.json();
+		const getManyResponseJSON = (await response.json()) as APITransaction[] | APIGetManyDTO<APITransaction>;
 
 		if (getManyResponseIsDTO(getManyResponseJSON)) {
 			return {
@@ -155,7 +155,7 @@ export class TransactionStore {
 
 		const response = await request;
 
-		const apiTransaction: APITransaction = await response.json();
+		const apiTransaction = (await response.json()) as APITransaction;
 
 		return new Transaction(this.client, apiTransaction);
 	}
@@ -181,7 +181,7 @@ export class TransactionStore {
 
 		const response = await request;
 
-		const apiTransaction: APITransaction = await response.json();
+		const apiTransaction = (await response.json()) as APITransaction;
 
 		return new Transaction(this.client, apiTransaction);
 	}

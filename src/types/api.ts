@@ -1,5 +1,5 @@
-import {Bot, Currency, UUIDv4} from './discoin';
 import {Except} from 'type-fest';
+import {Bot, Currency, UUIDv4} from './discoin';
 
 /**
  * @private

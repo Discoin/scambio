@@ -26,7 +26,7 @@ export const currencyStore = {
 
 		const response = await request;
 
-		const getManyResponseJSON: APICurrency[] | APIGetManyDTO<APICurrency> = await response.json();
+		const getManyResponseJSON = (await response.json()) as APICurrency[] | APIGetManyDTO<APICurrency>;
 
 		if (getManyResponseIsDTO(getManyResponseJSON)) {
 			return {
@@ -53,7 +53,7 @@ export const currencyStore = {
 
 		const response = await request;
 
-		const apiCurrency: APICurrency = await response.json();
+		const apiCurrency = (await response.json()) as APICurrency;
 
 		const currency = apiCurrencyToCurrency(apiCurrency);
 

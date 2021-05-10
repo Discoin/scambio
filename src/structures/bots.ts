@@ -26,7 +26,7 @@ export const botStore = {
 
 		const response = await request;
 
-		const getManyResponseJSON: APIBot[] | APIGetManyDTO<APIBot> = await response.json();
+		const getManyResponseJSON = (await response.json()) as APIBot[] | APIGetManyDTO<APIBot>;
 
 		if (getManyResponseIsDTO(getManyResponseJSON)) {
 			return {...getManyResponseJSON, data: getManyResponseJSON.data.map(apiBot => apiBotToBot(apiBot))};
@@ -50,7 +50,7 @@ export const botStore = {
 
 		const response = await request;
 
-		const apiBot: APIBot = await response.json();
+		const apiBot = (await response.json()) as APIBot;
 
 		const bot = apiBotToBot(apiBot);
 
