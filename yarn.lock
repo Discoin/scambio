@@ -434,7 +434,7 @@ __metadata:
     nyc: 15.1.0
     prettier: 2.3.1
     rimraf: 3.0.2
-    semantic-release: 17.4.3
+    semantic-release: 17.4.4
     source-map-support: 0.5.19
     ts-node: 10.0.0
     type-fest: 1.2.0
@@ -10162,9 +10162,9 @@ resolve@^1.10.0:
   languageName: node
   linkType: hard
 
-"semantic-release@npm:17.4.3":
-  version: 17.4.3
-  resolution: "semantic-release@npm:17.4.3"
+"semantic-release@npm:17.4.4":
+  version: 17.4.4
+  resolution: "semantic-release@npm:17.4.4"
   dependencies:
     "@semantic-release/commit-analyzer": ^8.0.0
     "@semantic-release/error": ^2.2.0
@@ -10196,7 +10196,7 @@ resolve@^1.10.0:
     yargs: ^16.2.0
   bin:
     semantic-release: bin/semantic-release.js
-  checksum: a670e0a551e5aa368a9fa8738334363d4931cfca3c0e490c52b926da2e0d7b7e6c7897c58b4640a4ff2c29db30bb51252bb68f8f844ceba0f54cc8a9df4db088
+  checksum: 4c78340c628c74aa2d76343086edd80f15233e25c735e924f203b22ca075bf1412488180aaf7a3e9c2d1e37a4dd0e9da7fcd59b8511e8b1fa9c1e7982d500988
   languageName: node
   linkType: hard
 
@@ -11558,11 +11558,11 @@ resolve@^1.10.0:
 
 "typescript@patch:typescript@4.2.4#builtin<compat/typescript>, typescript@patch:typescript@^4.2.4#builtin<compat/typescript>":
   version: 4.2.4
-  resolution: "typescript@patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=a45b0e"
+  resolution: "typescript@patch:typescript@npm%3A4.2.4#builtin<compat/typescript>::version=4.2.4&hash=ddfc1b"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 3be44317593182e8ce494c114e7ad9b0bb2553a22f3085cc6da4f0a36912c20850daa9be4c898af2ab6fc8b12f430c1c9e46ac715721867cd38643f2350d3ef9
+  checksum: 64658fdf27872904641dcaacf925e6b5a52fb4aa4881a5a726fc78a11b76748423ce9e996dac42313729321061c4dd38a06108014f8d07b222dcff2687037186
   languageName: node
   linkType: hard
 
