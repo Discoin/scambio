@@ -429,7 +429,7 @@ __metadata:
     ava: 3.15.0
     eslint-plugin-prettier: 3.4.0
     ky: ^0.25.0
-    ky-universal: ^0.8.0
+    ky-universal: ^0.9.0
     nock: 13.1.1
     nyc: 15.1.0
     prettier: 2.3.2
@@ -1702,7 +1702,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buffer-from@npm:^1.0.0, buffer-from@npm:^1.1.1":
+"buffer-from@npm:^1.0.0":
   version: 1.1.1
   resolution: "buffer-from@npm:1.1.1"
   checksum: 540ceb79c4f5bfcadaabbc18324fa84c50dc52905084be7c03596a339cf5a88513bee6831ce9b36ddd046fab09257a7c80686e129d0559a0cfd141da196ad956
@@ -2615,12 +2615,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"data-uri-to-buffer@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "data-uri-to-buffer@npm:3.0.0"
-  dependencies:
-    buffer-from: ^1.1.1
-  checksum: e870d70678c777355a9923a29f49a713b738251ffb165153d30862eb86edcda7c336c2877b8fb5d04689b61a2f73d43e654a330a9e8b2faaca41f89ba3415a44
+"data-uri-to-buffer@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "data-uri-to-buffer@npm:3.0.1"
+  checksum: 9f28217ba76eaca400a75f4b1a1d0f55058082c8152a3d88ad5feeec5e54b8c7b6d8a7bb210206bfa552a927c1b942b6102ddbb2feaa557321ea94762c4f14e2
   languageName: node
   linkType: hard
 
@@ -3837,10 +3835,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fetch-blob@npm:^1.0.6":
-  version: 1.0.6
-  resolution: "fetch-blob@npm:1.0.6"
-  checksum: d79ff6a4af89357d82970588d6a0b28803c03ef9a28df3d4fa48e73a63bc2cf2765bdfc47a2412070f836e4bcb1c65ea7bf506a5fd006bbb9d8e63ee03db34ab
+"fetch-blob@npm:^2.1.1":
+  version: 2.1.2
+  resolution: "fetch-blob@npm:2.1.2"
+  peerDependenciesMeta:
+    domexception:
+      optional: true
+  checksum: c11ab96a1961c61b4f200fa1bf8da2feb48e999ed661bf792469a0dc1e4cc4ee4fa5da1e0091687ca34cabb91b4f4f3fcc5177019709b0ea7fbc28cc07f55b9f
   languageName: node
   linkType: hard
 
@@ -5818,19 +5819,19 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"ky-universal@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "ky-universal@npm:0.8.0"
+"ky-universal@npm:^0.9.0":
+  version: 0.9.1
+  resolution: "ky-universal@npm:0.9.1"
   dependencies:
     abort-controller: ^3.0.0
-    node-fetch: ^3.0.0-beta.7
+    node-fetch: 3.0.0-beta.9
   peerDependencies:
-    ky: ">=0.17.0"
-    web-streams-polyfill: ">=2.0.0"
+    ky: ">=0.26.0"
+    web-streams-polyfill: ">=3.0.1"
   peerDependenciesMeta:
     web-streams-polyfill:
       optional: true
-  checksum: 1a5fc160e6ed580e5fa3ac6e1c6d9c6e4243e6871b1ccb85a106c690a9ab552c4a13b7274f17339e63b05b35420d7f2785ce6473652aa166a27e4fa2464d722d
+  checksum: 424e6e57e7fea8d7e3e8e16e6586a21c0bd6dc7b8036f89f6e3506bbe63e6b133a321c7a23efbc96023b6b6ff090260d636d32a9586145579b2ae8d45aa382cc
   languageName: node
   linkType: hard
 
@@ -6981,20 +6982,20 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"node-fetch@npm:3.0.0-beta.9":
+  version: 3.0.0-beta.9
+  resolution: "node-fetch@npm:3.0.0-beta.9"
+  dependencies:
+    data-uri-to-buffer: ^3.0.1
+    fetch-blob: ^2.1.1
+  checksum: e1b71946805b6dbe44394df4dcd7287bb18c2d93bb5b1d41de24c5d87bc3ec28be5e7ec0601dfc93a62d41c05a25dc5f7c0804912e2c11bfbb23252c8ff2a155
+  languageName: node
+  linkType: hard
+
 "node-fetch@npm:^2.3.0":
   version: 2.6.0
   resolution: "node-fetch@npm:2.6.0"
   checksum: dd9f586a9f7ddb7dd94d2aba9cb693d32f5001e9850098512fbc8a4cbdd56838afa08ed0a6725b9fce9b01ec12b713e622cbfc16d92762d8b937b238330a632a
-  languageName: node
-  linkType: hard
-
-"node-fetch@npm:^3.0.0-beta.7":
-  version: 3.0.0-beta.6-exportfix
-  resolution: "node-fetch@npm:3.0.0-beta.6-exportfix"
-  dependencies:
-    data-uri-to-buffer: ^3.0.0
-    fetch-blob: ^1.0.6
-  checksum: 9a98f12932a21004120f5f1a94563c5fb64b1001284618a1d2612b708bdb2c4763fc883113b3bd22a729a24ceeffe5a728bd4c334151991513994f57ac4e9fc7
   languageName: node
   linkType: hard
 
