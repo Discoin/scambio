@@ -1,3 +1,5 @@
+import process from 'process';
+
 const prefix = '@discoin/scambio: Assertion failed';
 
 /**
