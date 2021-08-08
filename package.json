@@ -105,5 +105,6 @@
 			"unicorn/prefer-node-protocol": "off"
 		},
 		"prettier": true
-	}
+	},
+	"packageManager": "yarn@3.0.0"
 }
