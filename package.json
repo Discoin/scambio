@@ -101,6 +101,9 @@
 				}
 			}
 		],
+		"rules": {
+			"unicorn/prefer-node-protocol": "off"
+		},
 		"prettier": true
 	}
 }
