@@ -22,7 +22,7 @@
 		{
 			"name": "Jonah Snider",
 			"email": "jonah@jonah.pw",
-			"url": "https://jonah.pw"
+			"url": "https://jonahsnider.com"
 		}
 	],
 	"main": "./tsc_output/src/index",
