@@ -82,7 +82,7 @@
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "1.0.1",
-		"@types/node": "14.17.10",
+		"@types/node": "14.17.11",
 		"ava": "3.15.0",
 		"eslint-plugin-prettier": "3.4.0",
 		"nock": "13.1.1",
