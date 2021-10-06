@@ -32,24 +32,11 @@
 		"predocs": "rimraf docs_out",
 		"docs": "typedoc --out docs_out --entryPoints ./src/index.ts",
 		"lint": "xo",
+		"style": "prettier --check .",
 		"pretest": "rimraf coverage .nyc_output",
-		"test": "nyc ava",
-		"style": "prettier --check ."
+		"test": "nyc ava"
 	},
-	"xo": {
-		"overrides": [
-			{
-				"files": "src/**/*.test.ts",
-				"rules": {
-					"@typescript-eslint/prefer-readonly-parameter-types": "off"
-				}
-			}
-		],
-		"prettier": true,
-		"rules": {
-			"unicorn/prefer-node-protocol": "off"
-		}
-	},
+	"prettier": "@jonahsnider/prettier-config",
 	"ava": {
 		"extensions": [
 			"ts"
@@ -82,6 +69,8 @@
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "1.0.1",
+		"@jonahsnider/prettier-config": "1.0.0",
+		"@jonahsnider/xo-config": "1.0.0",
 		"@types/node": "14.17.21",
 		"ava": "3.15.0",
 		"eslint-plugin-prettier": "4.0.0",

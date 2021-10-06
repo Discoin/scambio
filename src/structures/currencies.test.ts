@@ -1,12 +1,12 @@
 import test, {ExecutionContext} from 'ava';
 import nock from 'nock';
 import {API_URL} from '../util/constants';
-import {APICurrency, APIGetManyDTO} from '../types/api';
+import {ApiCurrency, ApiGetManyDto} from '../types/api';
 import {apiCurrencyToCurrency} from '../util/data-transfer-object';
 import {Currency} from '../types/discoin';
 import {currencyStore} from './currencies';
 
-const testCurrency: APICurrency = {id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'};
+const testCurrency: ApiCurrency = {id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'};
 
 test.after(() => {
 	nock.restore();
@@ -47,8 +47,8 @@ test('Get many currencies', async (t: ExecutionContext) => {
 			data: [testCurrency],
 			page: 1,
 			pageCount: 1,
-			total: 1
-		} as APIGetManyDTO<APICurrency>);
+			total: 1,
+		} as ApiGetManyDto<ApiCurrency>);
 
 	const paginatedTransactions = await currencyStore.getMany(paginatedQuery);
 

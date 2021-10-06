@@ -1,8 +1,8 @@
 import ky from 'ky-universal';
-import {APICurrency, APIGetManyDTO} from '../types/api';
+import {ApiCurrency, ApiGetManyDto} from '../types/api';
 import {Currency} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
-import {apiCurrencyToCurrency, getManyResponseIsDTO} from '../util/data-transfer-object';
+import {apiCurrencyToCurrency, getManyResponseIsDto} from '../util/data-transfer-object';
 import {invariant} from '../util/invariant';
 
 /**
@@ -16,26 +16,26 @@ export const currencyStore = {
 	 * @example
 	 * client.getMany('filter=value||$gte||0.4');
 	 */
-	async getMany(query?: string): Promise<Currency[] | APIGetManyDTO<Currency>> {
+	async getMany(query?: string): Promise<Currency[] | ApiGetManyDto<Currency>> {
 		// Interpolation of query parameters here is almost certainly a mistake
 		const request = ky.get(`currencies`, {
 			headers: {'User-Agent': USER_AGENT},
 			prefixUrl: API_URL,
-			searchParams: query
+			searchParams: query,
 		});
 
 		const response = await request;
 
-		const getManyResponseJSON = (await response.json()) as APICurrency[] | APIGetManyDTO<APICurrency>;
+		const getManyResponseJson = (await response.json()) as ApiCurrency[] | ApiGetManyDto<ApiCurrency>;
 
-		if (getManyResponseIsDTO(getManyResponseJSON)) {
+		if (getManyResponseIsDto(getManyResponseJson)) {
 			return {
-				...getManyResponseJSON,
-				data: getManyResponseJSON.data.map(apiCurrency => apiCurrencyToCurrency(apiCurrency))
+				...getManyResponseJson,
+				data: getManyResponseJson.data.map(apiCurrency => apiCurrencyToCurrency(apiCurrency)),
 			};
 		}
 
-		return getManyResponseJSON.map(apiCurrency => apiCurrencyToCurrency(apiCurrency));
+		return getManyResponseJson.map(apiCurrency => apiCurrencyToCurrency(apiCurrency));
 	},
 
 	/**
@@ -48,15 +48,15 @@ export const currencyStore = {
 
 		const request = ky.get(`currencies/${encodeURIComponent(code)}`, {
 			headers: {'User-Agent': USER_AGENT},
-			prefixUrl: API_URL
+			prefixUrl: API_URL,
 		});
 
 		const response = await request;
 
-		const apiCurrency = (await response.json()) as APICurrency;
+		const apiCurrency = (await response.json()) as ApiCurrency;
 
 		const currency = apiCurrencyToCurrency(apiCurrency);
 
 		return currency;
-	}
+	},
 };

@@ -1,14 +1,14 @@
 import test, {ExecutionContext} from 'ava';
 import nock from 'nock';
-import {APIBot, APIGetManyDTO} from '../types/api';
+import {ApiBot, ApiGetManyDto} from '../types/api';
 import {API_URL} from '../util/constants';
 import {apiBotToBot} from '../util/data-transfer-object';
 import {botStore} from './bots';
 
-const testBot: APIBot = {
+const testBot: ApiBot = {
 	currencies: [{id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'}],
 	name: 'Test bot',
-	id: '123456789'
+	id: '123456789',
 };
 
 test.after(() => {
@@ -50,8 +50,8 @@ test('Get many bots', async (t: ExecutionContext) => {
 			data: [testBot],
 			page: 1,
 			pageCount: 1,
-			total: 1
-		} as APIGetManyDTO<APIBot>);
+			total: 1,
+		} as ApiGetManyDto<ApiBot>);
 
 	const paginatedTransactions = await botStore.getMany(paginatedQuery);
 

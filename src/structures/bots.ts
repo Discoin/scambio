@@ -1,8 +1,8 @@
 import ky from 'ky-universal';
-import {APIBot, APIGetManyDTO} from '../types/api';
+import {ApiBot, ApiGetManyDto} from '../types/api';
 import {Bot} from '../types/discoin';
 import {API_URL, USER_AGENT} from '../util/constants';
-import {apiBotToBot, getManyResponseIsDTO} from '../util/data-transfer-object';
+import {apiBotToBot, getManyResponseIsDto} from '../util/data-transfer-object';
 import {invariant} from '../util/invariant';
 
 // Hello welcome to the bot store what would you like to buy
@@ -17,22 +17,22 @@ export const botStore = {
 	 * @example
 	 * client.getMany('filter=id||eq||388191157869477888');
 	 */
-	async getMany(query?: string): Promise<Bot[] | APIGetManyDTO<Bot>> {
+	async getMany(query?: string): Promise<Bot[] | ApiGetManyDto<Bot>> {
 		const request = ky.get(`bots`, {
 			prefixUrl: API_URL,
 			headers: {'User-Agent': USER_AGENT},
-			searchParams: query
+			searchParams: query,
 		});
 
 		const response = await request;
 
-		const getManyResponseJSON = (await response.json()) as APIBot[] | APIGetManyDTO<APIBot>;
+		const getManyResponseJson = (await response.json()) as ApiBot[] | ApiGetManyDto<ApiBot>;
 
-		if (getManyResponseIsDTO(getManyResponseJSON)) {
-			return {...getManyResponseJSON, data: getManyResponseJSON.data.map(apiBot => apiBotToBot(apiBot))};
+		if (getManyResponseIsDto(getManyResponseJson)) {
+			return {...getManyResponseJson, data: getManyResponseJson.data.map(apiBot => apiBotToBot(apiBot))};
 		}
 
-		return getManyResponseJSON.map(apiBot => apiBotToBot(apiBot));
+		return getManyResponseJson.map(apiBot => apiBotToBot(apiBot));
 	},
 
 	/**
@@ -45,15 +45,15 @@ export const botStore = {
 
 		const request = ky.get(`bots/${encodeURIComponent(id)}`, {
 			prefixUrl: API_URL,
-			headers: {'User-Agent': USER_AGENT}
+			headers: {'User-Agent': USER_AGENT},
 		});
 
 		const response = await request;
 
-		const apiBot = (await response.json()) as APIBot;
+		const apiBot = (await response.json()) as ApiBot;
 
 		const bot = apiBotToBot(apiBot);
 
 		return bot;
-	}
+	},
 };
