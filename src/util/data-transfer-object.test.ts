@@ -1,6 +1,6 @@
 import test from 'ava';
-import type {ApiBot, ApiCurrency} from '../types/api.js';
-import {apiBotToBot, apiCurrencyToCurrency} from './data-transfer-object.js';
+import type {ApiBot, ApiCurrency} from '../types/api';
+import {apiBotToBot, apiCurrencyToCurrency} from './data-transfer-object';
 
 test('API currency to currency', t => {
 	const apiCurrency: ApiCurrency = {

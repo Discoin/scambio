@@ -1,5 +1,5 @@
 import type {Except} from 'type-fest';
-import type {Bot, Currency, UuidV4} from './discoin.js';
+import type {Bot, Currency, UuidV4} from './discoin';
 
 /**
  * @internal

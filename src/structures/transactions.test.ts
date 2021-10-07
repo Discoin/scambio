@@ -1,10 +1,10 @@
 import test from 'ava';
 import nock from 'nock';
 import type {Except} from 'type-fest';
-import type {ApiGetManyDto, ApiTransaction, ApiTransactionCreate} from '../types/api.js';
-import {API_URL} from '../util/constants.js';
-import {Client} from './client.js';
-import {Transaction} from './transactions.js';
+import type {ApiGetManyDto, ApiTransaction, ApiTransactionCreate} from '../types/api';
+import {API_URL} from '../util/constants';
+import {Client} from './client';
+import {Transaction} from './transactions';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const NOT_A_UUID = 'not a v4 UUID';

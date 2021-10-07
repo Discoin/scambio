@@ -1,11 +1,11 @@
 import ky from 'ky-universal';
 import type {Except} from 'type-fest';
-import type {ApiGetManyDto, ApiTransaction, ApiTransactionCreate, PartialCurrency} from '../types/api.js';
-import type {UuidV4} from '../types/discoin.js';
-import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants.js';
-import {getManyResponseIsDto} from '../util/data-transfer-object.js';
-import {invariant} from '../util/invariant.js';
-import type {Client} from './client.js';
+import type {ApiGetManyDto, ApiTransaction, ApiTransactionCreate, PartialCurrency} from '../types/api';
+import type {UuidV4} from '../types/discoin';
+import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
+import {getManyResponseIsDto} from '../util/data-transfer-object';
+import {invariant} from '../util/invariant';
+import type {Client} from './client';
 
 /**
  * Options for updating a transaction that already exists.

@@ -1,9 +1,9 @@
 import test from 'ava';
 import nock from 'nock';
-import type {ApiBot, ApiGetManyDto} from '../types/api.js';
-import {API_URL} from '../util/constants.js';
-import {apiBotToBot} from '../util/data-transfer-object.js';
-import {botStore} from './bots.js';
+import type {ApiBot, ApiGetManyDto} from '../types/api';
+import {API_URL} from '../util/constants';
+import {apiBotToBot} from '../util/data-transfer-object';
+import {botStore} from './bots';
 
 const testBot: ApiBot = {
 	currencies: [{id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'}],

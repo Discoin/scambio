@@ -1,10 +1,10 @@
 import test from 'ava';
 import nock from 'nock';
-import {API_URL} from '../util/constants.js';
-import type {ApiCurrency, ApiGetManyDto} from '../types/api.js';
-import {apiCurrencyToCurrency} from '../util/data-transfer-object.js';
-import type {Currency} from '../types/discoin.js';
-import {currencyStore} from './currencies.js';
+import {API_URL} from '../util/constants';
+import type {ApiCurrency, ApiGetManyDto} from '../types/api';
+import {apiCurrencyToCurrency} from '../util/data-transfer-object';
+import type {Currency} from '../types/discoin';
+import {currencyStore} from './currencies';
 
 const testCurrency: ApiCurrency = {id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'};
 

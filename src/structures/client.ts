@@ -1,8 +1,8 @@
-import type {Token} from '../types/discoin.js';
-import {invariant} from '../util/invariant.js';
-import {TransactionStore} from './transactions.js';
-import {currencyStore} from './currencies.js';
-import {botStore} from './bots.js';
+import type {Token} from '../types/discoin';
+import {invariant} from '../util/invariant';
+import {TransactionStore} from './transactions';
+import {currencyStore} from './currencies';
+import {botStore} from './bots';
 
 /**
  * Common queries to use for `getMany` operations.

@@ -1,9 +1,9 @@
 import ky from 'ky-universal';
-import type {ApiCurrency, ApiGetManyDto} from '../types/api.js';
-import type {Currency} from '../types/discoin.js';
-import {API_URL, USER_AGENT} from '../util/constants.js';
-import {apiCurrencyToCurrency, getManyResponseIsDto} from '../util/data-transfer-object.js';
-import {invariant} from '../util/invariant.js';
+import type {ApiCurrency, ApiGetManyDto} from '../types/api';
+import type {Currency} from '../types/discoin';
+import {API_URL, USER_AGENT} from '../util/constants';
+import {apiCurrencyToCurrency, getManyResponseIsDto} from '../util/data-transfer-object';
+import {invariant} from '../util/invariant';
 
 /**
  * Store and retrieve many currencies.

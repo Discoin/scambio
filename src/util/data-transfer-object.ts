@@ -1,5 +1,5 @@
-import type {ApiCurrency, ApiBot, ApiGetManyDto, ApiTransaction} from '../types/api.js';
-import type {Currency, Bot} from '../types/discoin.js';
+import type {ApiCurrency, ApiBot, ApiGetManyDto, ApiTransaction} from '../types/api';
+import type {Currency, Bot} from '../types/discoin';
 
 /**
  * Convert an API currency to a regular currency.

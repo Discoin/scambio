@@ -1,5 +1,5 @@
 import test from 'ava';
-import {Client} from './client.js';
+import {Client} from './client';
 
 const options = {token: 'token', currencyIds: ['ABC', 'xyz']};
 

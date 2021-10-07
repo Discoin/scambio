@@ -1,9 +1,9 @@
 import ky from 'ky-universal';
-import type {ApiBot, ApiGetManyDto} from '../types/api.js';
-import type {Bot} from '../types/discoin.js';
-import {API_URL, USER_AGENT} from '../util/constants.js';
-import {apiBotToBot, getManyResponseIsDto} from '../util/data-transfer-object.js';
-import {invariant} from '../util/invariant.js';
+import type {ApiBot, ApiGetManyDto} from '../types/api';
+import type {Bot} from '../types/discoin';
+import {API_URL, USER_AGENT} from '../util/constants';
+import {apiBotToBot, getManyResponseIsDto} from '../util/data-transfer-object';
+import {invariant} from '../util/invariant';
 
 // Hello welcome to the bot store what would you like to buy
 /**
