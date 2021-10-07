@@ -1,9 +1,9 @@
 import ky from 'ky-universal';
-import {ApiCurrency, ApiGetManyDto} from '../types/api';
-import {Currency} from '../types/discoin';
-import {API_URL, USER_AGENT} from '../util/constants';
-import {apiCurrencyToCurrency, getManyResponseIsDto} from '../util/data-transfer-object';
-import {invariant} from '../util/invariant';
+import type {ApiCurrency, ApiGetManyDto} from '../types/api.js';
+import type {Currency} from '../types/discoin.js';
+import {API_URL, USER_AGENT} from '../util/constants.js';
+import {apiCurrencyToCurrency, getManyResponseIsDto} from '../util/data-transfer-object.js';
+import {invariant} from '../util/invariant.js';
 
 /**
  * Store and retrieve many currencies.
@@ -11,7 +11,7 @@ import {invariant} from '../util/invariant';
 export const currencyStore = {
 	/**
 	 * Get several currencies from the API by specifying a query.
-	 * @param query The query for finding currencies
+	 * @param query - The query for finding currencies
 	 * @returns An array of currencies that satisfy the query
 	 * @example
 	 * client.getMany('filter=value||$gte||0.4');
@@ -40,7 +40,7 @@ export const currencyStore = {
 
 	/**
 	 * Get one currency by ID.
-	 * @param code The currency code of the currency to get
+	 * @param code - The currency code of the currency to get
 	 * @returns The transaction
 	 */
 	async getOne(code: string): Promise<Currency> {

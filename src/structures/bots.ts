@@ -1,9 +1,9 @@
 import ky from 'ky-universal';
-import {ApiBot, ApiGetManyDto} from '../types/api';
-import {Bot} from '../types/discoin';
-import {API_URL, USER_AGENT} from '../util/constants';
-import {apiBotToBot, getManyResponseIsDto} from '../util/data-transfer-object';
-import {invariant} from '../util/invariant';
+import type {ApiBot, ApiGetManyDto} from '../types/api.js';
+import type {Bot} from '../types/discoin.js';
+import {API_URL, USER_AGENT} from '../util/constants.js';
+import {apiBotToBot, getManyResponseIsDto} from '../util/data-transfer-object.js';
+import {invariant} from '../util/invariant.js';
 
 // Hello welcome to the bot store what would you like to buy
 /**
@@ -12,7 +12,7 @@ import {invariant} from '../util/invariant';
 export const botStore = {
 	/**
 	 * Get several bot from the API by specifying a query.
-	 * @param query The query for finding bots
+	 * @param query - The query for finding bots
 	 * @returns An array of bots that satisfy the query
 	 * @example
 	 * client.getMany('filter=id||eq||388191157869477888');
@@ -37,7 +37,7 @@ export const botStore = {
 
 	/**
 	 * Get one bot by ID.
-	 * @param id The ID of the bot to get
+	 * @param id - The ID of the bot to get
 	 * @returns The bot
 	 */
 	async getOne(id: string): Promise<Bot> {

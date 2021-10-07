@@ -1,8 +1,8 @@
-import {Token} from '../types/discoin';
-import {invariant} from '../util/invariant';
-import {TransactionStore} from './transactions';
-import {currencyStore} from './currencies';
-import {botStore} from './bots';
+import type {Token} from '../types/discoin.js';
+import {invariant} from '../util/invariant.js';
+import {TransactionStore} from './transactions.js';
+import {currencyStore} from './currencies.js';
+import {botStore} from './bots.js';
 
 /**
  * Common queries to use for `getMany` operations.
@@ -33,8 +33,8 @@ export class Client {
 
 	/**
 	 * Create a Discoin client to interact with the Discoin API.
-	 * @param token The token to use for this client
-	 * @param currencyIds The currency IDs that your bot uses
+	 * @param token - The token to use for this client
+	 * @param currencyIds - The currency IDs that your bot uses
 	 */
 	constructor(public token: Token, public currencyIds: string[]) {
 		invariant(token !== undefined, 'token was undefined');

@@ -1,8 +1,8 @@
-import {Except} from 'type-fest';
-import {Bot, Currency, UuidV4} from './discoin';
+import type {Except} from 'type-fest';
+import type {Bot, Currency, UuidV4} from './discoin.js';
 
 /**
- * @private
+ * @internal
  */
 export interface ApiGetManyDto<T> {
 	data: T[];
@@ -14,13 +14,13 @@ export interface ApiGetManyDto<T> {
 
 /**
  * The default currency returned by the API, with some fields eagerly loaded.
- * @private
+ * @internal
  */
 export type PartialCurrency = Pick<Currency, 'id' | 'name'> & {bot: Pick<Bot, 'name'> & {discord_id: string}};
 
 /**
  * A Discoin transaction.
- * @private
+ * @internal
  */
 export interface ApiTransaction {
 	/** The transaction ID. */
@@ -67,7 +67,7 @@ export interface ApiTransaction {
 
 /**
  * A request body sent to the API when creating a transaction.
- * @private
+ * @internal
  */
 export interface ApiTransactionCreate extends Pick<ApiTransaction, 'user'> {
 	/** Currency ID of the currency you are converting from. */
@@ -85,7 +85,7 @@ export interface ApiTransactionCreate extends Pick<ApiTransaction, 'user'> {
 
 /**
  * A currency object from the API.
- * @private
+ * @internal
  */
 export interface ApiCurrency extends Except<Currency, 'reserve' | 'wid'> {
 	reserve: string;
@@ -94,7 +94,7 @@ export interface ApiCurrency extends Except<Currency, 'reserve' | 'wid'> {
 
 /**
  * A bot object from the API.
- * @private
+ * @internal
  */
 export interface ApiBot extends Except<Bot, 'currencies'> {
 	/** The currencies that correspond to this bot. */
@@ -104,17 +104,21 @@ export interface ApiBot extends Except<Bot, 'currencies'> {
 /**
  * An API error response body.
  * @example
+ * ```js
  * {
  * 	statusCode: 401,
  * 	error: "Unauthorized"
  * }
+ * ```
  * @example
+ * ```js
  * {
  * 	statusCode: 404,
  * 	error: "Not Found",
  * 	message: "Cannot GET /"
  * }
- * @private
+ * ```
+ * @internal
  */
 export interface ApiErrorResponse {
 	/** The HTTP status code of the response. */

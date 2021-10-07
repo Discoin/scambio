@@ -1,9 +1,9 @@
-import test, {ExecutionContext} from 'ava';
-import {Client} from './client';
+import test from 'ava';
+import {Client} from './client.js';
 
 const options = {token: 'token', currencyIds: ['ABC', 'xyz']};
 
-test('Client', (t: ExecutionContext) => {
+test('Client', t => {
 	const client = new Client(options.token, options.currencyIds);
 
 	t.is(client.transactions.client, client, 'Transaction store client is this client');

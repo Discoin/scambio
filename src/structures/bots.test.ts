@@ -1,9 +1,9 @@
-import test, {ExecutionContext} from 'ava';
+import test from 'ava';
 import nock from 'nock';
-import {ApiBot, ApiGetManyDto} from '../types/api';
-import {API_URL} from '../util/constants';
-import {apiBotToBot} from '../util/data-transfer-object';
-import {botStore} from './bots';
+import type {ApiBot, ApiGetManyDto} from '../types/api.js';
+import {API_URL} from '../util/constants.js';
+import {apiBotToBot} from '../util/data-transfer-object.js';
+import {botStore} from './bots.js';
 
 const testBot: ApiBot = {
 	currencies: [{id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'}],
@@ -15,7 +15,7 @@ test.after(() => {
 	nock.restore();
 });
 
-test('Get one bot', async (t: ExecutionContext) => {
+test('Get one bot', async t => {
 	nock(API_URL).get(`/bots/${testBot.id}`).reply(200, testBot);
 
 	const actualBot = await botStore.getOne(testBot.id);
@@ -26,7 +26,7 @@ test('Get one bot', async (t: ExecutionContext) => {
 const filteredQuery = 'filter=id||eq||388191157869477888';
 const paginatedQuery = 'page=1&limit=1';
 
-test('Get many bots', async (t: ExecutionContext) => {
+test('Get many bots', async t => {
 	nock(API_URL).get('/bots').reply(200, [testBot]);
 
 	const actualBots = await botStore.getMany();

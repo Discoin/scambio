@@ -1,8 +1,8 @@
-import test, {ExecutionContext} from 'ava';
-import {ApiBot, ApiCurrency} from '../types/api';
-import {apiBotToBot, apiCurrencyToCurrency} from './data-transfer-object';
+import test from 'ava';
+import type {ApiBot, ApiCurrency} from '../types/api.js';
+import {apiBotToBot, apiCurrencyToCurrency} from './data-transfer-object.js';
 
-test('API currency to currency', (t: ExecutionContext) => {
+test('API currency to currency', t => {
 	const apiCurrency: ApiCurrency = {
 		id: 'OAT',
 		name: 'Dice Oats',
@@ -34,7 +34,7 @@ const apiBot: ApiBot = {
 	],
 };
 
-test('API bot to bot', (t: ExecutionContext) => {
+test('API bot to bot', t => {
 	const bot = apiBotToBot(apiBot);
 
 	t.is(bot.id, apiBot.id, 'ID does not change');
