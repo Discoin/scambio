@@ -1,51 +1,54 @@
-import test, {ExecutionContext} from 'ava';
+import test from 'ava';
 import nock from 'nock';
-import {Except} from 'type-fest';
-import {APIGetManyDTO, APITransaction, APITransactionCreate} from '../types/api';
+import type {Except} from 'type-fest';
+import type {ApiGetManyDto, ApiTransaction, ApiTransactionCreate} from '../types/api';
 import {API_URL} from '../util/constants';
 import {Client} from './client';
 import {Transaction} from './transactions';
 
-const notAUUID = 'not a v4 UUID';
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const NOT_A_UUID = 'not a v4 UUID';
 
-const testTransaction: APITransaction = {
+const testTransaction: ApiTransaction = {
 	amount: '1000',
+	// eslint-disable-next-line @typescript-eslint/naming-convention
 	from: {id: 'OAT', name: 'Oats', bot: {discord_id: '123', name: 'Dice'}},
+	// eslint-disable-next-line @typescript-eslint/naming-convention
 	to: {id: 'DTS', name: 'Credits', bot: {discord_id: '123', name: 'DTel'}},
 	handled: false,
 	id: 'a62b3566-60a3-4241-8c11-316775b973ff',
 	payout: 100,
 	timestamp: '2020-01-01T12:28:17.294Z',
-	user: '210024244766179329'
+	user: '210024244766179329',
 };
 
 const fullTransaction: Except<Transaction, 'update'> = {
 	...testTransaction,
 	timestamp: new Date(0),
-	amount: 1000
+	amount: 1000,
 };
 
-const options = {token: 'token', currencyIDs: ['OAT']};
-const client = new Client(options.token, options.currencyIDs);
+const options = {token: 'token', currencyIds: ['OAT']};
+const client = new Client(options.token, options.currencyIds);
 
 test.after(() => {
 	nock.restore();
 });
 
-test('Get one transaction', async (t: ExecutionContext) => {
+test('Get one transaction', async t => {
 	nock(API_URL).get(`/transactions/${testTransaction.id}`).reply(200, testTransaction);
 
 	const actualTransaction = await client.transactions.getOne(testTransaction.id);
 
 	t.deepEqual(actualTransaction, new Transaction(client, testTransaction));
 
-	await t.throwsAsync(async () => client.transactions.getOne(notAUUID), {instanceOf: RangeError}, 'Throws error when invalid UUID is provided');
+	await t.throwsAsync(async () => client.transactions.getOne(NOT_A_UUID), {instanceOf: RangeError}, 'Throws error when invalid UUID is provided');
 });
 
 const paginatedQuery = 'page=1&limit=1';
 const filteredQuery = 'filter=to.id||eq||OAT&filter=handled||eq||false';
 
-test('Get many transactions', async (t: ExecutionContext) => {
+test('Get many transactions', async t => {
 	nock(API_URL).get('/transactions').reply(200, [testTransaction]);
 
 	const actualTransactions = await client.transactions.getMany();
@@ -69,15 +72,15 @@ test('Get many transactions', async (t: ExecutionContext) => {
 			data: [testTransaction],
 			page: 1,
 			pageCount: 1,
-			total: 1
-		} as APIGetManyDTO<APITransaction>);
+			total: 1,
+		} as ApiGetManyDto<ApiTransaction>);
 
 	const paginatedTransactions = await client.transactions.getMany(paginatedQuery);
 
 	t.deepEqual(paginatedTransactions, {page: 1, pageCount: 1, total: 1, count: 1, data: [new Transaction(client, testTransaction)]}, 'Paginated query');
 });
 
-test('Update transaction', async (t: ExecutionContext) => {
+test('Update transaction', async t => {
 	const transaction = new Transaction(client, testTransaction);
 
 	nock(API_URL).patch(`/transactions/${testTransaction.id}`).reply(200, testTransaction);
@@ -87,12 +90,12 @@ test('Update transaction', async (t: ExecutionContext) => {
 	t.true(transaction.handled, 'Handled is updated');
 });
 
-test('Create transaction', async (t: ExecutionContext) => {
+test('Create transaction', async t => {
 	// `nock` doesn't really have a way to validate request bodies, so we do this
 	let requestBody;
 
 	const scope = nock(API_URL)
-		.post('/transactions', (body: APITransactionCreate) => {
+		.post('/transactions', (body: ApiTransactionCreate) => {
 			// Body filter is used to save the provided request body for validation later
 			requestBody = body;
 			return true;
@@ -104,7 +107,7 @@ test('Create transaction', async (t: ExecutionContext) => {
 		amount: Number(testTransaction.amount),
 		to: testTransaction.to.id,
 		from: testTransaction.from.id,
-		user: testTransaction.user
+		user: testTransaction.user,
 	});
 
 	t.true(scope.isDone(), 'Network request is finished');
@@ -114,16 +117,16 @@ test('Create transaction', async (t: ExecutionContext) => {
 			amount: Number(testTransaction.amount),
 			from: testTransaction.from.id,
 			to: testTransaction.to.id,
-			user: testTransaction.user
-		} as APITransactionCreate,
-		'Request body should have correct structure and information'
+			user: testTransaction.user,
+		} as ApiTransactionCreate,
+		'Request body should have correct structure and information',
 	);
 });
 
-test('Transaction class', (t: ExecutionContext) => {
+test('Transaction class', t => {
 	const {id: _id, ...rest} = testTransaction;
 
-	t.throws(() => new Transaction(client, {...rest, id: notAUUID}), {instanceOf: RangeError}, 'Throws error when invalid UUID is provided');
+	t.throws(() => new Transaction(client, {...rest, id: NOT_A_UUID}), {instanceOf: RangeError}, 'Throws error when invalid UUID is provided');
 
 	t.deepEqual(new Transaction(client, fullTransaction).timestamp, fullTransaction.timestamp);
 });

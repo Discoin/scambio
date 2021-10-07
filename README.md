@@ -61,7 +61,7 @@ const newTransaction = client.transactions.create({
 	to: 'ABC',
 	amount: 100,
 	// Discord user ID
-	user: '210024244766179329'
+	user: '210024244766179329',
 });
 ```
 
@@ -94,7 +94,7 @@ const query = RequestQueryBuilder.create()
 	.setFilter({
 		field: 'amount',
 		operator: CondOperator.GREATER_THAN,
-		value: 10
+		value: 10,
 	})
 	.query();
 

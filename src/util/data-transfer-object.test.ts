@@ -1,14 +1,14 @@
-import test, {ExecutionContext} from 'ava';
-import {APIBot, APICurrency} from '../types/api';
+import test from 'ava';
+import type {ApiBot, ApiCurrency} from '../types/api';
 import {apiBotToBot, apiCurrencyToCurrency} from './data-transfer-object';
 
-test('API currency to currency', (t: ExecutionContext) => {
-	const apiCurrency: APICurrency = {
+test('API currency to currency', t => {
+	const apiCurrency: ApiCurrency = {
 		id: 'OAT',
 		name: 'Dice Oats',
 		reserve: '1000000',
 		value: 0.1,
-		wid: '10'
+		wid: '10',
 	};
 
 	const currency = apiCurrencyToCurrency(apiCurrency);
@@ -20,7 +20,7 @@ test('API currency to currency', (t: ExecutionContext) => {
 	t.is(currency.value, apiCurrency.value, 'Value does not change');
 });
 
-const apiBot: APIBot = {
+const apiBot: ApiBot = {
 	id: '388191157869477888',
 	name: 'Dice',
 	currencies: [
@@ -29,12 +29,12 @@ const apiBot: APIBot = {
 			name: 'Oats',
 			reserve: '1000000',
 			value: 0.1,
-			wid: '10'
-		}
-	]
+			wid: '10',
+		},
+	],
 };
 
-test('API bot to bot', (t: ExecutionContext) => {
+test('API bot to bot', t => {
 	const bot = apiBotToBot(apiBot);
 
 	t.is(bot.id, apiBot.id, 'ID does not change');

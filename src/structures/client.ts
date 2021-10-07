@@ -1,4 +1,4 @@
-import {Token} from '../types/discoin';
+import type {Token} from '../types/discoin';
 import {invariant} from '../util/invariant';
 import {TransactionStore} from './transactions';
 import {currencyStore} from './currencies';
@@ -33,24 +33,26 @@ export class Client {
 
 	/**
 	 * Create a Discoin client to interact with the Discoin API.
-	 * @param token The token to use for this client
-	 * @param currencyIDs The currency IDs that your bot uses
+	 * @param token - The token to use for this client
+	 * @param currencyIds - The currency IDs that your bot uses
 	 */
-	constructor(public token: Token, public currencyIDs: string[]) {
+	constructor(public token: Token, public currencyIds: string[]) {
 		invariant(token !== undefined, 'token was undefined');
-		invariant(currencyIDs !== undefined, 'currencyIDs was undefined');
+		invariant(currencyIds !== undefined, 'currencyIDs was undefined');
 		invariant(
-			typeof currencyIDs !== 'string',
-			['currencyID has been deprecated, you must pass an array of currencyIDs', `['${currencyIDs as unknown as string}']`].join('\n')
+			typeof currencyIds !== 'string',
+			['currencyID has been deprecated, you must pass an array of currencyIDs', `['${currencyIds as unknown as string}']`].join('\n'),
 		);
 
 		this.transactions = new TransactionStore(this);
 
-		const relevantTransactionsFilter = `filter=to.id||$in||${currencyIDs.map(currencyID => encodeURIComponent(currencyID.toUpperCase())).join(',')}`;
+		const relevantTransactionsFilter = `filter=to.id||$in||${currencyIds.map(currencyID => encodeURIComponent(currencyID.toUpperCase())).join(',')}`;
 
 		this.commonQueries = {
+			/* eslint-disable @typescript-eslint/naming-convention */
 			RELEVANT_TRANSACTIONS: relevantTransactionsFilter,
-			UNHANDLED_TRANSACTIONS: `${relevantTransactionsFilter}&filter=handled||$eq||false`
+			UNHANDLED_TRANSACTIONS: `${relevantTransactionsFilter}&filter=handled||$eq||false`,
+			/* eslint-enable @typescript-eslint/naming-convention */
 		};
 	}
 }

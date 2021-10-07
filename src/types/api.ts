@@ -1,10 +1,10 @@
-import {Except} from 'type-fest';
-import {Bot, Currency, UUIDv4} from './discoin';
+import type {Except} from 'type-fest';
+import type {Bot, Currency, UuidV4} from './discoin';
 
 /**
- * @private
+ * @internal
  */
-export interface APIGetManyDTO<T> {
+export interface ApiGetManyDto<T> {
 	data: T[];
 	count: number;
 	total: number;
@@ -14,17 +14,17 @@ export interface APIGetManyDTO<T> {
 
 /**
  * The default currency returned by the API, with some fields eagerly loaded.
- * @private
+ * @internal
  */
 export type PartialCurrency = Pick<Currency, 'id' | 'name'> & {bot: Pick<Bot, 'name'> & {discord_id: string}};
 
 /**
  * A Discoin transaction.
- * @private
+ * @internal
  */
-export interface APITransaction {
+export interface ApiTransaction {
 	/** The transaction ID. */
-	id: UUIDv4;
+	id: UuidV4;
 
 	/** The currency this transaction is converting from. */
 	from: PartialCurrency;
@@ -67,9 +67,9 @@ export interface APITransaction {
 
 /**
  * A request body sent to the API when creating a transaction.
- * @private
+ * @internal
  */
-export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
+export interface ApiTransactionCreate extends Pick<ApiTransaction, 'user'> {
 	/** Currency ID of the currency you are converting from. */
 	from: string;
 	/** Currency ID of the currency you are converting to. */
@@ -85,38 +85,42 @@ export interface APITransactionCreate extends Pick<APITransaction, 'user'> {
 
 /**
  * A currency object from the API.
- * @private
+ * @internal
  */
-export interface APICurrency extends Except<Currency, 'reserve' | 'wid'> {
+export interface ApiCurrency extends Except<Currency, 'reserve' | 'wid'> {
 	reserve: string;
 	wid: string;
 }
 
 /**
  * A bot object from the API.
- * @private
+ * @internal
  */
-export interface APIBot extends Except<Bot, 'currencies'> {
+export interface ApiBot extends Except<Bot, 'currencies'> {
 	/** The currencies that correspond to this bot. */
-	currencies: APICurrency[];
+	currencies: ApiCurrency[];
 }
 
 /**
  * An API error response body.
  * @example
+ * ```js
  * {
  * 	statusCode: 401,
  * 	error: "Unauthorized"
  * }
+ * ```
  * @example
+ * ```js
  * {
  * 	statusCode: 404,
  * 	error: "Not Found",
  * 	message: "Cannot GET /"
  * }
- * @private
+ * ```
+ * @internal
  */
-export interface APIErrorResponse {
+export interface ApiErrorResponse {
 	/** The HTTP status code of the response. */
 	statusCode: number;
 	/** HTTP status code error message */

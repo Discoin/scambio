@@ -1,18 +1,18 @@
-import test, {ExecutionContext} from 'ava';
+import test from 'ava';
 import nock from 'nock';
 import {API_URL} from '../util/constants';
-import {APICurrency, APIGetManyDTO} from '../types/api';
+import type {ApiCurrency, ApiGetManyDto} from '../types/api';
 import {apiCurrencyToCurrency} from '../util/data-transfer-object';
-import {Currency} from '../types/discoin';
+import type {Currency} from '../types/discoin';
 import {currencyStore} from './currencies';
 
-const testCurrency: APICurrency = {id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'};
+const testCurrency: ApiCurrency = {id: 'ABC', name: 'Currency name', reserve: '1000000', value: 0.1, wid: '10'};
 
 test.after(() => {
 	nock.restore();
 });
 
-test('Get one currency', async (t: ExecutionContext) => {
+test('Get one currency', async t => {
 	nock(API_URL).get(`/currencies/${testCurrency.id}`).reply(200, testCurrency);
 
 	const actualCurrency = await currencyStore.getOne(testCurrency.id);
@@ -23,7 +23,7 @@ test('Get one currency', async (t: ExecutionContext) => {
 const filteredQuery = 'filter=value||$gte||0.4';
 const paginatedQuery = 'page=1&limit=1';
 
-test('Get many currencies', async (t: ExecutionContext) => {
+test('Get many currencies', async t => {
 	nock(API_URL).get('/currencies').reply(200, [testCurrency]);
 
 	const actualCurrencies = await currencyStore.getMany();
@@ -47,8 +47,8 @@ test('Get many currencies', async (t: ExecutionContext) => {
 			data: [testCurrency],
 			page: 1,
 			pageCount: 1,
-			total: 1
-		} as APIGetManyDTO<APICurrency>);
+			total: 1,
+		} as ApiGetManyDto<ApiCurrency>);
 
 	const paginatedTransactions = await currencyStore.getMany(paginatedQuery);
 

@@ -8,7 +8,10 @@ export type Token = string;
  * A v4 UUID.
  * @example 04e00bae-f53d-429a-99c1-69de54d16d91
  */
-export type UUIDv4 = string;
+export type UuidV4 = string;
+/** @deprecated Renamed to `UuidV4`. */
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export type UUIDv4 = UuidV4;
 
 /**
  * A bot on the Discoin network.

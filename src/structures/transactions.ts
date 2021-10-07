@@ -1,9 +1,9 @@
 import ky from 'ky-universal';
-import {Except} from 'type-fest';
-import type {APIGetManyDTO, APITransaction, APITransactionCreate, PartialCurrency} from '../types/api';
-import {UUIDv4} from '../types/discoin';
+import type {Except} from 'type-fest';
+import type {ApiGetManyDto, ApiTransaction, ApiTransactionCreate, PartialCurrency} from '../types/api';
+import type {UuidV4} from '../types/discoin';
 import {API_URL, USER_AGENT, UUID_V4_REG_EXP} from '../util/constants';
-import {getManyResponseIsDTO} from '../util/data-transfer-object';
+import {getManyResponseIsDto} from '../util/data-transfer-object';
 import {invariant} from '../util/invariant';
 import type {Client} from './client';
 
@@ -46,12 +46,13 @@ export interface TransactionCreateOptions {
  * A transaction converts one currency to another, using Discoin tokens as an intermediary currency.
  */
 export class Transaction {
+	// eslint-disable-next-line @typescript-eslint/naming-convention
 	public static readonly API_URL = API_URL;
 	public readonly payout: number;
 	public readonly amount: number;
 	public readonly from: PartialCurrency;
 	public readonly to: PartialCurrency;
-	public readonly id: UUIDv4;
+	public readonly id: UuidV4;
 	public handled: boolean;
 	public readonly user: string;
 	public readonly timestamp: Date;
@@ -59,10 +60,10 @@ export class Transaction {
 
 	/**
 	 * Create a transaction or get one that already exists on Discoin.
-	 * @param client The Discoin client to use for updating this transaction
-	 * @param data The data for populating this transaction
+	 * @param client - The Discoin client to use for updating this transaction
+	 * @param data - The data for populating this transaction
 	 */
-	constructor(client: Client, data: APITransaction | Except<Transaction, 'update'>) {
+	constructor(client: Client, data: ApiTransaction | Except<Transaction, 'update'>) {
 		if (!UUID_V4_REG_EXP.test(data.id)) {
 			throw new RangeError(`Transaction ID ${data.id} does not appear to be a valid v4 UUID`);
 		}
@@ -80,7 +81,7 @@ export class Transaction {
 
 	/**
 	 * Update this transaction.
-	 * @param options Options to update this transaction
+	 * @param options - Options to update this transaction
 	 * @returns The transaction that was just updated
 	 */
 	async update(options: TransactionUpdateOptions): Promise<this> {
@@ -89,10 +90,11 @@ export class Transaction {
 		const request = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {
 			prefixUrl: API_URL,
 			headers: {
+				// eslint-disable-next-line @typescript-eslint/naming-convention
 				Authorization: `Bearer ${this._client.token}`,
-				'User-Agent': USER_AGENT
+				'User-Agent': USER_AGENT,
 			},
-			json: options
+			json: options,
 		});
 
 		await request;
@@ -110,38 +112,38 @@ export class TransactionStore {
 
 	/**
 	 * Get several transactions from the API by specifying a query.
-	 * @param query The query for finding transactions
+	 * @param query - The query for finding transactions
 	 * @returns An array of transactions that satisfy the query
 	 * @example
 	 * client.getMany('filter=handled||eq||false');
 	 */
-	async getMany(query?: string): Promise<Transaction[] | APIGetManyDTO<Transaction>> {
+	async getMany(query?: string): Promise<Transaction[] | ApiGetManyDto<Transaction>> {
 		const request = ky(`transactions`, {
 			prefixUrl: API_URL,
 			headers: {'User-Agent': USER_AGENT},
-			searchParams: query
+			searchParams: query,
 		});
 
 		const response = await request;
 
-		const getManyResponseJSON = (await response.json()) as APITransaction[] | APIGetManyDTO<APITransaction>;
+		const getManyResponseJson = (await response.json()) as ApiTransaction[] | ApiGetManyDto<ApiTransaction>;
 
-		if (getManyResponseIsDTO(getManyResponseJSON)) {
+		if (getManyResponseIsDto(getManyResponseJson)) {
 			return {
-				...getManyResponseJSON,
-				data: getManyResponseJSON.data.map(apiTransaction => new Transaction(this.client, apiTransaction))
+				...getManyResponseJson,
+				data: getManyResponseJson.data.map(apiTransaction => new Transaction(this.client, apiTransaction)),
 			};
 		}
 
-		return getManyResponseJSON.map(apiTransaction => new Transaction(this.client, apiTransaction));
+		return getManyResponseJson.map(apiTransaction => new Transaction(this.client, apiTransaction));
 	}
 
 	/**
 	 * Get one transaction by ID.
-	 * @param id The ID of the transaction to get
+	 * @param id - The ID of the transaction to get
 	 * @returns The transaction
 	 */
-	async getOne(id: UUIDv4): Promise<Transaction> {
+	async getOne(id: UuidV4): Promise<Transaction> {
 		invariant(typeof id === 'string', "id wasn't string type");
 
 		if (!UUID_V4_REG_EXP.test(id)) {
@@ -150,38 +152,39 @@ export class TransactionStore {
 
 		const request = ky(`transactions/${encodeURIComponent(id)}`, {
 			prefixUrl: API_URL,
-			headers: {'User-Agent': USER_AGENT}
+			headers: {'User-Agent': USER_AGENT},
 		});
 
 		const response = await request;
 
-		const apiTransaction = (await response.json()) as APITransaction;
+		const apiTransaction = (await response.json()) as ApiTransaction;
 
 		return new Transaction(this.client, apiTransaction);
 	}
 
 	/**
 	 * Create a new transaction.
-	 * @param options Options for creating the transaction
+	 * @param options - Options for creating the transaction
 	 * @returns The transaction that was created
 	 */
 	async create(options: TransactionCreateOptions): Promise<Transaction> {
-		const json: APITransactionCreate = {
+		const json: ApiTransactionCreate = {
 			amount: options.amount,
 			to: options.to,
 			from: options.from,
-			user: options.user
+			user: options.user,
 		};
 
 		const request = ky.post('transactions', {
 			prefixUrl: API_URL,
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			headers: {Authorization: `Bearer ${this.client.token}`},
-			json
+			json,
 		});
 
 		const response = await request;
 
-		const apiTransaction = (await response.json()) as APITransaction;
+		const apiTransaction = (await response.json()) as ApiTransaction;
 
 		return new Transaction(this.client, apiTransaction);
 	}
