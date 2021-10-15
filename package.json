@@ -69,8 +69,8 @@
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "1.0.1",
-		"@jonahsnider/prettier-config": "1.0.0",
-		"@jonahsnider/xo-config": "4.0.0",
+		"@jonahsnider/prettier-config": "1.1.0",
+		"@jonahsnider/xo-config": "4.1.0",
 		"@types/node": "14.17.27",
 		"ava": "3.15.0",
 		"eslint-plugin-prettier": "4.0.0",

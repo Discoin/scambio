@@ -6,7 +6,6 @@ import {API_URL} from '../util/constants';
 import {Client} from './client';
 import {Transaction} from './transactions';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const NOT_A_UUID = 'not a v4 UUID';
 
 const testTransaction: ApiTransaction = {
