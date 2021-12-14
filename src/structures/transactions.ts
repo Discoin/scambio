@@ -90,7 +90,6 @@ export class Transaction {
 		const request = ky.patch(`transactions/${encodeURIComponent(this.id)}`, {
 			prefixUrl: API_URL,
 			headers: {
-				// eslint-disable-next-line @typescript-eslint/naming-convention
 				Authorization: `Bearer ${this._client.token}`,
 				'User-Agent': USER_AGENT,
 			},
@@ -177,7 +176,6 @@ export class TransactionStore {
 
 		const request = ky.post('transactions', {
 			prefixUrl: API_URL,
-			// eslint-disable-next-line @typescript-eslint/naming-convention
 			headers: {Authorization: `Bearer ${this.client.token}`},
 			json,
 		});
