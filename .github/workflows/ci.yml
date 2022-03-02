@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install dependencies with Yarn
         run: yarn install --immutable
       - name: Compile TypeScript
@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install dependencies with Yarn
         run: yarn install --immutable
       - name: Lint with XO
@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install dependencies with Yarn
         run: yarn install --immutable
       - name: Check style with Prettier
@@ -51,7 +51,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install dependencies with Yarn
         run: yarn install --immutable
       - name: Run tests
@@ -69,7 +69,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install dependencies with Yarn
         run: yarn install --immutable
       - name: Generate documentation
@@ -88,7 +88,7 @@ jobs:
 
     steps:
       - name: Checkout git repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install dependencies with Yarn
         run: yarn install --immutable
       - name: Compile TypeScript for publishing
