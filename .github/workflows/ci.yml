@@ -16,7 +16,7 @@ jobs:
       - name: Compile TypeScript
         run: yarn run build
       - name: Upload compiler output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: tsc_output
           path: ./tsc_output
@@ -75,7 +75,7 @@ jobs:
       - name: Generate documentation
         run: yarn run docs
       - name: Upload documentation
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: typedoc
           path: ./docs_out
