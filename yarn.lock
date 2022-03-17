@@ -194,7 +194,7 @@ __metadata:
     ky-universal: ^0.8.0
     nock: 13.2.4
     nyc: 15.1.0
-    prettier: 2.5.1
+    prettier: 2.6.0
     rimraf: 3.0.2
     semantic-release: 18.0.1
     source-map-support: 0.5.21
@@ -7561,7 +7561,16 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.5.1, prettier@npm:^2.5.1":
+"prettier@npm:2.6.0":
+  version: 2.6.0
+  resolution: "prettier@npm:2.6.0"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 3e527ad62279676778a8404d18174d7ca2365ada4caba6eebbcdd9907d1187afd3bc6ade5b4e5f5d4549bb9fb71e45ca8930d71500017635524f8fc05bc52e93
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.5.1":
   version: 2.5.1
   resolution: "prettier@npm:2.5.1"
   bin:

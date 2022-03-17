@@ -76,7 +76,7 @@
 		"eslint-plugin-prettier": "4.0.0",
 		"nock": "13.2.4",
 		"nyc": "15.1.0",
-		"prettier": "2.5.1",
+		"prettier": "2.6.0",
 		"rimraf": "3.0.2",
 		"semantic-release": "18.0.1",
 		"source-map-support": "0.5.21",
