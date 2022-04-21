@@ -70,7 +70,7 @@
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "1.0.2",
 		"@jonahsnider/prettier-config": "1.1.1",
-		"@jonahsnider/xo-config": "5.0.4",
+		"@jonahsnider/xo-config": "5.1.0",
 		"@types/node": "14.18.13",
 		"ava": "3.15.0",
 		"eslint-plugin-prettier": "4.0.0",
