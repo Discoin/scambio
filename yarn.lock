@@ -187,7 +187,7 @@ __metadata:
     "@istanbuljs/nyc-config-typescript": 1.0.2
     "@jonahsnider/prettier-config": 1.1.1
     "@jonahsnider/xo-config": 5.1.0
-    "@types/node": 14.18.13
+    "@types/node": 14.18.15
     ava: 3.15.0
     eslint-plugin-prettier: 4.0.0
     ky: ^0.25.0
@@ -910,10 +910,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.18.13":
-  version: 14.18.13
-  resolution: "@types/node@npm:14.18.13"
-  checksum: 307cd26bd6b8135c4ab87c94182111f057e7e7232fd0ffcb2f5de9d3a0523d171bb9a97addfcc29f3ebed94f2a599af7c3622326eaa85907af265616775f0574
+"@types/node@npm:14.18.15":
+  version: 14.18.15
+  resolution: "@types/node@npm:14.18.15"
+  checksum: 7a349547c8d2578e3f0205f5486909449794cd95dfedb868cf470e83c01495dc55cd49ccb698cf11fb213aca7d08646dbc078cadaedb961287d9eeea417ac5f1
   languageName: node
   linkType: hard
 
@@ -6057,6 +6057,15 @@ fsevents@~2.1.2:
   peerDependencies:
     marked: ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
   checksum: 24ceb02ebd10e9c6c2fac2240a2cc019093c95029732779ea41ba7a81c45867e956d1f6f1ae7426d5247ab5185b9cdaea31a9663e4d624c17335660fa9474c3d
+  languageName: node
+  linkType: hard
+
+"marked@npm:^4.0.10":
+  version: 4.0.14
+  resolution: "marked@npm:4.0.14"
+  bin:
+    marked: bin/marked.js
+  checksum: 778bc2fc94c51ae4fbafe5a08bc1f3917799c4dd39e9fccd972a97df4e5bc5aa78664b7143d12d4b4969608fb90c6a2de3f19811a2f9ccf6b7f207022f2842ba
   languageName: node
   linkType: hard
 
