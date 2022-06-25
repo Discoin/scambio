@@ -82,7 +82,7 @@
 		"source-map-support": "0.5.21",
 		"ts-node": "10.8.1",
 		"type-fest": "2.14.0",
-		"typedoc": "0.22.17",
+		"typedoc": "0.22.18",
 		"typescript": "4.7.3",
 		"xo": "0.49.0"
 	},
