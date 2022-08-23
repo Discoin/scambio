@@ -180,7 +180,7 @@ __metadata:
     "@istanbuljs/nyc-config-typescript": 1.0.2
     "@jonahsnider/prettier-config": 1.1.1
     "@jonahsnider/xo-config": 5.1.0
-    "@types/node": 14.18.25
+    "@types/node": 14.18.26
     ava: 3.15.0
     eslint-plugin-prettier: 4.0.0
     ky: ^0.25.0
@@ -927,10 +927,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.18.25":
-  version: 14.18.25
-  resolution: "@types/node@npm:14.18.25"
-  checksum: 8d4e3fcf0e2c90d5a2da61f336b754455fa025a4705f55f8d1be1d19fcd32e7e3af9e04f08d497032cebc59f84ea8c0bb4431390100b1d799d4d0d2c5d501cca
+"@types/node@npm:14.18.26":
+  version: 14.18.26
+  resolution: "@types/node@npm:14.18.26"
+  checksum: c6ac3f9d4f6f77c0fa5ac17757779ad4d9835abfe3af5708b7552597cb5c7c1103e83499ccaf767a1cfa70040990bcf3f58761c547051dc8d5077f3c419091b1
   languageName: node
   linkType: hard
 
