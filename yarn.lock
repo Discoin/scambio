@@ -183,7 +183,7 @@ __metadata:
     "@types/node": 14.18.36
     ava: 3.15.0
     eslint-plugin-prettier: 4.0.0
-    ky: ^0.25.0
+    ky: ^0.33.0
     ky-universal: ^0.8.0
     nock: 13.3.0
     nyc: 15.1.0
@@ -5589,10 +5589,10 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"ky@npm:^0.25.0":
-  version: 0.25.0
-  resolution: "ky@npm:0.25.0"
-  checksum: 90ad881b5133e044c60f94c73c71f3ecb3365edaf9f9c43229318248633d6c3a63a436ec5839c01b55be59253e38f551cdb90450ced80db7ae512008986f0ea8
+"ky@npm:^0.33.0":
+  version: 0.33.2
+  resolution: "ky@npm:0.33.2"
+  checksum: bb5b1685b7d639dad5fc0a41a218f76c2400d2a9189bcf747f541633af13b68a7ef12bb8aa971bc1667087789ec5965cc3728e24b693897a2d0cc539d7593655
   languageName: node
   linkType: hard
 
