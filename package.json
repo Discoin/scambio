@@ -64,7 +64,7 @@
 		]
 	},
 	"dependencies": {
-		"ky": "^0.25.0",
+		"ky": "^1.0.0",
 		"ky-universal": "^0.8.0"
 	},
 	"devDependencies": {
