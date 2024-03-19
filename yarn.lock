@@ -180,7 +180,7 @@ __metadata:
     "@istanbuljs/nyc-config-typescript": 1.0.2
     "@jonahsnider/prettier-config": 1.1.1
     "@jonahsnider/xo-config": 5.1.0
-    "@types/node": 14.18.36
+    "@types/node": 20.11.30
     ava: 3.15.0
     eslint-plugin-prettier: 4.0.0
     ky: ^0.25.0
@@ -927,10 +927,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:14.18.36":
-  version: 14.18.36
-  resolution: "@types/node@npm:14.18.36"
-  checksum: da7f479b3fc996d585e60b8329987c6e310ddbf051e14f2d900ce04f7768f42fa7b760f0eb376008d3eca130ce9431018fb5c9e44027dcb7bb139c547e44b9c5
+"@types/node@npm:20.11.30":
+  version: 20.11.30
+  resolution: "@types/node@npm:20.11.30"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: 7597767aa3e44b0f1bf62efa522dd17741135f283c11de6a20ead8bb7016fb4999cc30adcd8f2bb29ebb216906c92894346ccd187de170927dc1e212d2c07c81
   languageName: node
   linkType: hard
 
@@ -9475,6 +9477,13 @@ resolve@~1.19.0:
   version: 0.1.2
   resolution: "unc-path-regex@npm:0.1.2"
   checksum: a05fa2006bf4606051c10fc7968f08ce7b28fa646befafa282813aeb1ac1a56f65cb1b577ca7851af2726198d59475bb49b11776036257b843eaacee2860a4ec
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: 3192ef6f3fd5df652f2dc1cd782b49d6ff14dc98e5dced492aa8a8c65425227da5da6aafe22523c67f035a272c599bb89cfe803c1db6311e44bed3042fc25487
   languageName: node
   linkType: hard
 
