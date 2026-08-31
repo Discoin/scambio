@@ -192,7 +192,7 @@ __metadata:
     semantic-release: 19.0.5
     source-map-support: 0.5.21
     ts-node: 10.9.1
-    type-fest: 2.19.0
+    type-fest: 5.9.0
     typedoc: 0.23.25
     typescript: 4.7.3
     xo: 0.49.0
@@ -8977,6 +8977,13 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
+"tagged-tag@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "tagged-tag@npm:1.0.0"
+  checksum: e37653df3e495daa7ea7790cb161b810b00075bba2e4d6c93fb06a709e747e3ae9da11a120d0489833203926511b39e038a2affbd9d279cfb7a2f3fcccd30b5d
+  languageName: node
+  linkType: hard
+
 "tapable@npm:^0.1.8":
   version: 0.1.10
   resolution: "tapable@npm:0.1.10"
@@ -9291,10 +9298,12 @@ resolve@~1.19.0:
   languageName: node
   linkType: hard
 
-"type-fest@npm:2.19.0":
-  version: 2.19.0
-  resolution: "type-fest@npm:2.19.0"
-  checksum: a4ef07ece297c9fba78fc1bd6d85dff4472fe043ede98bd4710d2615d15776902b595abf62bd78339ed6278f021235fb28a96361f8be86ed754f778973a0d278
+"type-fest@npm:5.9.0":
+  version: 5.9.0
+  resolution: "type-fest@npm:5.9.0"
+  dependencies:
+    tagged-tag: ^1.0.0
+  checksum: baf464cd769369ca9185396e2aeacdf6f78410b524f16377109d5d6c2c2a6be522f3e8ab3a6b0d8fc8ccfef50aa72c19c38f0bc1cbde5bd483d280315759fa1a
   languageName: node
   linkType: hard
 
